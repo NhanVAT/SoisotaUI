@@ -1,0 +1,28 @@
+@media screen and (max-width: 575px) {
+    .p-steps {
+        height: 300px;
+
+        > ul {
+            flex-direction: column;
+            height: 100%;
+
+            .p-steps-item {
+                flex-direction: column-reverse;
+                align-items: flex-start;
+                justify-content: center;
+
+                &:before {
+                    border-left: 1px solid var(--surface-d);
+                    border-top: 0 none;
+                    width: auto;
+                    height: 100%;
+                    margin-left: calc(1.714rem / 2);
+                }
+
+                .p-menuitem-link {
+                    padding: .5rem 0;
+                }
+            }
+        }
+    }
+}

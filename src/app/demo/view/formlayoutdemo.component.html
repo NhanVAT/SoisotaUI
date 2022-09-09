@@ -1,0 +1,116 @@
+<div class="grid">
+	<div class="col-12 md:col-6">
+		<div class="card">
+			<h5>Vertical</h5>
+            <div class="field">
+                <label for="firstname1">Name</label>
+                <input pInputText id="firstname1" type="text" class="w-full">
+            </div>
+            <div class="field">
+                <label for="lastname1">Email</label>
+                <input pInputText id="lastname1" type="text" class="w-full">
+            </div>
+            <div class="field">
+                <label for="age1">Age</label>
+                <input pInputText id="age1" type="text" class="w-full">
+            </div>
+		</div>
+
+		<div class="card">
+			<h5>Vertical Grid</h5>
+			<div class="formgrid grid">
+				<div class="field col">
+					<label for="firstname2">Name</label>
+					<input id="firstname2" type="text" class="w-full" pInputText>
+				</div>
+				<div class="field col">
+					<label for="lastname2">Email</label>
+					<input id="lastname2" type="text" class="w-full" pInputText>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-12 md:col-6">
+		<div class="card">
+			<h5>Horizontal</h5>
+            <div class="field grid">
+                <label for="firstname4" class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
+                <div class="col-12 md:col-10">
+                    <input id="firstname4" type="text" class="w-full" pInputText>
+                </div>
+            </div>
+            <div class="field grid">
+                <label for="lastname4" class="col-12 mb-2 md:col-2 md:mb-0">Email</label>
+                <div class="col-12 md:col-10">
+                    <input id="lastname4" type="text" class="w-full" pInputText>
+                </div>
+            </div>
+		</div>
+
+		<div class="card">
+			<h5>Inline</h5>
+			<div class="formgroup-inline">
+				<div class="field">
+                    <span class="p-float-label">
+					    <input id="firstname5" type="text" pInputText>
+                        <label for="firstname5">Firstname</label>
+                    </span>
+				</div>
+				<div class="field">
+                    <span class="p-float-label">
+                        <input id="lastname5" type="text" pInputText>
+                        <label for="lastname5">Lastname</label>
+                    </span>
+				</div>
+				<button pButton pRipple type="button" label="Submit"></button>
+			</div>
+		</div>
+
+		<div class="card">
+			<h5>Help Text</h5>
+			<div class="field">
+                <span class="p-float-label">
+                    <input id="username" type="username" pInputText class="w-full" aria-describedby="username-help">
+                    <label for="username">Username</label>
+                </span>
+				<small id="username-help">Enter your username to reset your password.</small>
+            </div>
+		</div>
+	</div>
+
+	<div class="col-12">
+		<div class="card">
+			<h5>Advanced</h5>
+			<div class="formgrid grid">
+				<div class="field col-12 md:col-6">
+					<label for="firstname6">Firstname</label>
+					<input id="firstname6" type="text" class="w-full" pInputText>
+				</div>
+				<div class="field col-12 md:col-6">
+					<label for="lastname6">Lastname</label>
+					<input id="lastname6" type="text" class="w-full" pInputText>
+				</div>
+				<div class="field col-12">
+					<label for="address">Address</label>
+					<textarea id="address" type="text" rows="4" class="w-full" pInputTextarea></textarea>
+				</div>
+				<div class="field col-12 md:col-6">
+					<label for="city">City</label>
+					<input id="city" type="text" class="w-full" pInputText>
+				</div>
+				<div class="field col-12 md:col-3">
+                    <label for="state">State</label>
+                    <span class="p-float-label">
+                        <p-dropdown inputId="state" [options]="states" [(ngModel)]="selectedState" optionLabel="name" [autoDisplayFirst]="false" styleClass="w-full"></p-dropdown>
+                        <label>Choose</label>
+                    </span>
+				</div>
+				<div class="field col-12 md:col-3">
+					<label for="zip">Zip</label>
+					<input id="zip" type="text" class="w-full" pInputText>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

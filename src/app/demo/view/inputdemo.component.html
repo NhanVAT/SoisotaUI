@@ -1,0 +1,243 @@
+<div class="grid p-fluid">
+    <div class="col-12 md:col-6">
+        <div class="card">
+            <h5>InputText</h5>
+            <div class="grid formgrid">
+                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                    <span class="p-float-label">
+                        <input type="text" class="w-full" pInputText>
+                        <label>Default</label>
+                    </span>
+                </div>
+                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                    <span class="p-float-label">
+                        <input type="text" class="w-full" pInputText [disabled]="true"/>
+                        <label>Disabled</label>
+                    </span>
+                </div>
+                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                    <span class="p-float-label">
+                        <input type="text" pInputText class="ng-invalid ng-dirty w-full"/>
+                        <label>Invalid*</label>
+                    </span>
+                </div>
+            </div>
+
+            <h5>Icons</h5>
+            <div class="grid formgrid">
+                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					<span class="p-input-icon-left p-float-label">
+						<i class="pi pi-user"></i>
+                        <input type="text" class="w-full" pInputText/>
+                        <label>Username</label>
+					</span>
+                </div>
+                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					<span class="p-input-icon-right p-float-label">
+                        <input type="text" class="w-full" pInputText/>
+                        <label>Search</label>
+						<i class="pi pi-search"></i>
+					</span>
+                </div>
+                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					<span class="p-input-icon-left p-input-icon-right p-float-label">
+						<i class="pi pi-user"></i>
+                        <input type="text" class="w-full" pInputText/>
+                        <label>Search</label>
+						<i class="pi pi-search"></i>
+					</span>
+                </div>
+            </div>
+
+            <h5>Placeholder</h5>
+            <input type="text" pInputText class="w-full" placeholder="Username">
+
+            <h5>Textarea</h5>
+            <span class="p-float-label">
+                <textarea rows="5" cols="30" class="w-full" pInputTextarea></textarea>
+                <label>Your Message</label>
+            </span>
+
+            <h5>AutoComplete</h5>
+            <span class="p-float-label">
+                <p-autoComplete [(ngModel)]="selectedCountryAdvanced" [suggestions]="filteredCountries" styleClass="w-full"
+                                (completeMethod)="filterCountry($event)" field="name" [dropdown]="true">
+                </p-autoComplete>
+                <label>Choose a country</label>
+            </span>
+
+            <h5>Calendar</h5>
+            <span class="p-float-label">
+                <p-calendar [showIcon]="true" inputId="icon" styleClass="w-full"></p-calendar>
+                <label>Choose a date</label>
+            </span>
+
+            <h5>InputNumber</h5>
+            <span class="p-float-label">
+                <p-inputNumber mode="decimal" styleClass="w-full" [showButtons]="true" [min]="0" [max]="100">
+                </p-inputNumber>
+                <label>Enter a number</label>
+            </span>
+
+            <h5>Chips</h5>
+            <span class="p-float-label">
+                <p-chips styleClass="w-full"></p-chips>
+                <label>Enter a text</label>
+            </span>
+        </div>
+
+        <div class="card">
+            <div class="grid">
+                <div class="col-12">
+                    <h5>Slider</h5>
+                    <input type="text" pInputText [(ngModel)]="valSlider" readonly/>
+                    <p-slider [(ngModel)]="valSlider"></p-slider>
+                </div>
+                <div class="col-12 md:col-6">
+                    <h5>Rating</h5>
+                    <p-rating></p-rating>
+                </div>
+                <div class="col-12 md:col-6">
+                    <h5>ColorPicker</h5>
+                    <p-colorPicker [(ngModel)]="valColor"></p-colorPicker>
+                </div>
+                <div class="col-12">
+                    <h5>Knob</h5>
+                    <p-knob [(ngModel)]="valueKnob" valueTemplate="{value}%" [step]="10" [min]="-50"
+                            [max]="50"></p-knob>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 md:col-6">
+        <div class="card">
+            <h5>RadioButton</h5>
+            <div class="grid">
+                <div class="col-12 md:col-4">
+                    <div class="field-radiobutton">
+                        <p-radioButton name="city" value="Chicago" [(ngModel)]="valRadio" id="city1"></p-radioButton>
+                        <label for="city1">Chicago</label>
+                    </div>
+                </div>
+                <div class="col-12 md:col-4">
+                    <div class="field-radiobutton">
+                        <p-radioButton name="city" value="Los Angeles" [(ngModel)]="valRadio"
+                                       id="city2"></p-radioButton>
+                        <label for="city2">Los Angeles</label>
+                    </div>
+                </div>
+                <div class="col-12 md:col-4">
+                    <div class="field-radiobutton">
+                        <p-radioButton name="city" value="New York" [(ngModel)]="valRadio" id="city3"></p-radioButton>
+                        <label for="city3">New York</label>
+                    </div>
+                </div>
+            </div>
+
+            <h5>Checkbox</h5>
+            <div class="grid">
+                <div class="col-12 md:col-4">
+                    <div class="field-checkbox">
+                        <p-checkbox name="group1" value="New York" [(ngModel)]="valCheck" id="ny"></p-checkbox>
+                        <label for="ny">New York</label>
+                    </div>
+                </div>
+                <div class="col-12 md:col-4">
+                    <div class="field-checkbox">
+                        <p-checkbox name="group1" value="San Francisco" [(ngModel)]="valCheck" id="sf"></p-checkbox>
+                        <label for="sf">San Francisco</label>
+                    </div>
+                </div>
+                <div class="col-12 md:col-4">
+                    <div class="field-checkbox">
+                        <p-checkbox name="group1" value="Los Angeles" [(ngModel)]="valCheck" id="la"></p-checkbox>
+                        <label for="la">Los Angeles</label>
+                    </div>
+                </div>
+            </div>
+
+            <h5>Input Switch</h5>
+            <p-inputSwitch [(ngModel)]="valSwitch"></p-inputSwitch>
+        </div>
+
+        <div class="card p-fluid">
+            <h5>Listbox</h5>
+            <p-listbox [options]="cities" [(ngModel)]="selectedList" [filter]="true"></p-listbox>
+
+            <h5>Dropdown</h5>
+            <span class="p-float-label">
+                <p-dropdown [options]="cities" [(ngModel)]="selectedDrop" [showClear]="true"
+                            [autoDisplayFirst]="false"></p-dropdown>
+                <label>Select a city</label>
+            </span>
+
+            <h5>Multiselect</h5>
+            <span class="p-float-label">
+                <p-multiSelect [options]="countries" [(ngModel)]="selectedMulti" optionLabel="name"
+                               [filter]="false"></p-multiSelect>
+                <label>Select a country</label>
+            </span>
+        </div>
+
+        <div class="card">
+            <h5>ToggleButton</h5>
+            <p-toggleButton [(ngModel)]="valToggle" onLabel="Yes" offLabel="No"
+                            [style]="{'width': '10em'}"></p-toggleButton>
+
+            <h5>SelectOneButton</h5>
+            <p-selectButton [options]="paymentOptions" [(ngModel)]="valSelect1" optionLabel="name"></p-selectButton>
+
+            <h5>SelectManyButton</h5>
+            <p-selectButton [options]="paymentOptions" [(ngModel)]="valSelect2" multiple="multiple"
+                            optionLabel="name"></p-selectButton>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <h5>InputGroup</h5>
+            <div class="grid p-fluid">
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                        <span class="p-float-label">
+                            <input type="text" pInputText/>
+                            <label>Username</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tags" style="line-height: 1.25;"></i></span>
+                        <span class="p-inputgroup-addon"><i class="pi pi-shopping-cart" style="line-height: 1.25;"></i></span>
+                        <span class="p-float-label">
+                            <input type="text" pInputText/>
+                            <label>Price</label>
+                        </span>
+                        <span class="p-inputgroup-addon">$</span>
+                        <span class="p-inputgroup-addon">.00</span>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <button pButton pRipple type="button" label="Search"></button>
+                        <span class="p-float-label">
+                            <input type="text" pInputText/>
+                            <label>Keyword</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><p-checkbox></p-checkbox></span>
+                        <span class="p-float-label">
+                            <input type="text" pInputText/>
+                            <label>Username</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

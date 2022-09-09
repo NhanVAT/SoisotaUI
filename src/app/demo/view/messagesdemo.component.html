@@ -1,0 +1,61 @@
+<div class="grid">
+    <div class="col-12 lg:col-6">
+        <div class="card">
+            <h5>Toast</h5>
+            <p-toast key="tst"></p-toast>
+
+            <button pButton pRipple type="button" (click)="showSuccessViaToast()" label="Success" class="p-button-success mr-2 mb-2"></button>
+            <button pButton pRipple type="button" (click)="showInfoViaToast()" label="Info" class="p-button-info mr-2 mb-2"></button>
+            <button pButton pRipple type="button" (click)="showWarnViaToast()" label="Warn" class="p-button-warning mr-2 mb-2"></button>
+            <button pButton pRipple type="button" (click)="showErrorViaToast()" label="Error" class="p-button-danger mb-2"></button>
+        </div>
+    </div>
+
+    <div class="col-12 lg:col-6">
+        <div class="card">
+            <h5>Messages</h5>
+            <button pButton pRipple type="button" (click)="showSuccessViaMessages()" label="Success" class="p-button-success mr-2 mb-2"></button>
+            <button pButton pRipple type="button" (click)="showInfoViaMessages()" label="Info" class="p-button-info mr-2 mb-2"></button>
+            <button pButton pRipple type="button" (click)="showWarnViaMessages()" label="Warn" class="p-button-warning mr-2 mb-2"></button>
+            <button pButton pRipple type="button" (click)="showErrorViaMessages()" label="Error" class="p-button-danger mb-2"></button>
+
+            <p-messages [value]="msgs"></p-messages>
+        </div>
+    </div>
+
+    <div class="col-12 lg:col-8">
+        <div class="card">
+            <h5>Inline Message</h5>
+            <div class="mt-4">
+                <span class="p-float-label inline-block">
+                    <input type="text" pInputText class="ng-dirty ng-invalid p-invalid mr-2">
+                    <label>Username*</label>
+                </span>
+                <p-message severity="error" text="Field is required"></p-message>
+            </div>
+
+            <div class="mt-4">
+                <span class="p-float-label inline-block">
+                    <input type="text" pInputText class="ng-dirty ng-invalid p-invalid mr-2">
+                    <label>Email*</label>
+                </span>
+                <p-message severity="error"></p-message>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 lg:col-4">
+        <div class="card">
+            <h5>Help Text</h5>
+            <div class="field p-fluid">
+                <span class="p-float-label">
+                    <input id="username" type="username" aria-describedby="username-help" class="ng-invalid ng-dirty" pInputText />
+                    <label for="username">Username*</label>
+                </span>
+                <small id="username-help" class="p-error">Username is not available.</small>
+            </div>
+        </div>
+    </div>
+
+
+</div>
