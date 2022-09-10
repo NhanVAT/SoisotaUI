@@ -1,0 +1,19 @@
+{
+    "APIGATEWAY": "http://10.0.40.33:4443",
+    "CMIS3URL": "http://10.0.40.27:7002/CMIS30/#/Home",
+    "CMIS4URL": "http://10.0.40.27:7002/CMIS40/#/Home",
+    "APIKEY": "rww+3Ub1WNreSykalAiVTFxuqVEKjvfHSSgsUOQVOEo=",
+    "APISERVICE": "http://10.0.40.27:7002",
+    "IP_UI": "http://10.0.40.27:7002/CMIS30",
+    "PROJECT_NAME": "CMIS 4.0",
+    "SocketUri": "http://10.1.4.176:9000",
+    "Report": "http://10.0.40.27:7003",
+    "Version": "15.06.2018",
+    "SiteKey": "6LcHRYUUAAAAAGXkfCKCLYjo-mpwjhWHJJMXRY77",
+    "CSBT": "http://10.1.117.177:4700",
+    "EVNHUB": "http://10.1.117.177:8080",
+    "UIConfig": {
+        "IP_UI": "http://10.0.40.27:7002/CMIS30",
+        "PROJECT_NAME": "CMIS 3.0"
+    }
+}

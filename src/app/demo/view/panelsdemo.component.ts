@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
-import {AppBreadcrumbService} from '../../app.breadcrumb.service';
+import {AppBreadcrumbService} from '../../app-systems/app.breadcrumb.service';
 
 @Component({
     templateUrl: './panelsdemo.component.html',

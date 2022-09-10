@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { trigger, state, transition, style, animate } from '@angular/animations';
-import { AppMainComponent } from './app.main.component';
-import { AppComponent } from './app.component';
+import { AppMainComponent } from '../app.main.component';
+import { AppComponent } from '../app.component';
 
 @Component({
     selector: 'app-inline-menu',

@@ -1,7 +1,7 @@
 <div [ngClass]="{'layout-inline-menu': true, 'layout-inline-menu-active':appMain.inlineMenuActive[key]}" [ngStyle]="style" [class]="styleClass">
     <a class="layout-inline-menu-action flex flex-row align-items-center" [ngClass]="appMain.isHorizontal() ? 'p-3 lg:col-1 py-3' : 'p-3'" (click)="onClick($event)"
         pTooltip="Amy Elsner" [tooltipDisabled]="isTooltipDisabled">
-        <img src="assets/demo/images/avatar/amyelsner.png" alt="avatar" style="width: 32px; height: 32px;">
+        <img src="../../assets/demo/images/avatar/amyelsner.png" alt="avatar" style="width: 32px; height: 32px;">
         <span class="flex flex-column" [ngClass]="{'ml-2': !app.isRTL, 'mr-2': app.isRTL}">
             <span class="font-bold">Amy Elsner</span>
             <small>Webmaster</small>

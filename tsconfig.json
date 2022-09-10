@@ -3,7 +3,7 @@
     "compileOnSave": false,
     "compilerOptions": {
         "baseUrl": "./",
-        "outDir": "./dist/out-tsc",
+        "outDir": "./dist/soisota",
         "forceConsistentCasingInFileNames": true,
         "strict": false,
         "noImplicitReturns": true,

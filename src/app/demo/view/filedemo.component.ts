@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {MessageService} from 'primeng/api';
-import {AppBreadcrumbService} from '../../app.breadcrumb.service';
+import {AppBreadcrumbService} from '../../app-systems/app.breadcrumb.service';
 
 @Component({
     templateUrl: './filedemo.component.html',

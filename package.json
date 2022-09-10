@@ -1,12 +1,14 @@
 {
-    "name": "ultima",
-    "version": "12.2.0-SNAPSHOT",
+    "name": "soisota",
+    "version": "1.0.0",
     "license": "COMMERCIAL",
     "angular-cli": {},
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
-        "build": "ng build",
+        "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve",
+        "start-prod": "ng serve --configuration production",
+        "build-dev": "ng build",
+        "build": "ng build --configuration production",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"
@@ -31,7 +33,7 @@
         "primeflex": "3.0.1",
         "primeicons": "4.1.0",
         "primeng": "12.2.1",
-        "prismjs": "1.9.0",
+        "prismjs": "^1.29.0",
         "rxjs": "~6.6.0",
         "tslib": "^2.0.0",
         "web-animations-js": "^2.3.2",

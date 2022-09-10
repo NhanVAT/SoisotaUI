@@ -3,7 +3,7 @@ import { EventService } from '../service/eventservice';
 import { SelectItem } from 'primeng/api';
 import { Product } from '../domain/product';
 import { ProductService } from '../service/productservice';
-import { AppBreadcrumbService } from '../../app.breadcrumb.service';
+import { AppBreadcrumbService } from '../../app-systems/app.breadcrumb.service';
 import { UIChart } from 'primeng/chart';
 import { AppComponent } from 'src/app/app.component';
 import { AppMainComponent } from 'src/app/app.main.component';

@@ -1,7 +1,7 @@
 <div class="layout-topbar shadow-4">
     <div class="layout-topbar-left">
         <a class="layout-topbar-logo" routerLink="/">
-            <img id="app-logo" src="assets/layout/images/logo-light.svg" alt="ultima-layout" style="height: 2.25rem">
+            <img id="app-logo" src="../../assets/layout/images/logo-light.svg" alt="ultima-layout" style="height: 2.25rem">
         </a>
 
         <a class="layout-menu-button shadow-6" (click)="appMain.onMenuButtonClick($event)" pRipple>
@@ -46,7 +46,7 @@
                         </li>
                         <li class="layout-topbar-action-item">
                             <div class="flex flex-row align-items-center">
-                                <img src="assets/demo/images/avatar/avatar-1.png"/>
+                                <img src="../../assets/demo/images/avatar/avatar-1.png"/>
                                 <div class="flex flex-column" [ngClass]="{'ml-3': !app.isRTL, 'mr-3': app.isRTL}" style="flex-grow: 1;">
                                     <div class="flex align-items-center justify-content-between mb-1">
                                         <span class="fs-small font-bold">Jerome Bell</span>
@@ -58,7 +58,7 @@
                         </li>
                         <li class="layout-topbar-action-item">
                             <div class="flex flex-row align-items-center">
-                                <img src="assets/demo/images/avatar/avatar-2.png"/>
+                                <img src="../../assets/demo/images/avatar/avatar-2.png"/>
                                 <div class="flex flex-column" [ngClass]="{'ml-3': !app.isRTL, 'mr-3': app.isRTL}" style="flex-grow: 1;">
                                     <div class="flex align-items-center justify-content-between mb-1">
                                         <span class="fs-small font-bold">Cameron Williamson</span>
@@ -70,7 +70,7 @@
                         </li>
                         <li class="layout-topbar-action-item">
                             <div class="flex flex-row align-items-center">
-                                <img src="assets/demo/images/avatar/avatar-3.png"/>
+                                <img src="../../assets/demo/images/avatar/avatar-3.png"/>
                                 <div class="flex flex-column" [ngClass]="{'ml-3': !app.isRTL, 'mr-3': app.isRTL}" style="flex-grow: 1;">
                                     <div class="flex align-items-center justify-content-between mb-1">
                                         <span class="fs-small font-bold">Anna Miles</span>
@@ -82,7 +82,7 @@
                         </li>
                         <li class="layout-topbar-action-item">
                             <div class="flex flex-row align-items-center">
-                                <img src="assets/demo/images/avatar/avatar-4.png"/>
+                                <img src="../../assets/demo/images/avatar/avatar-4.png"/>
                                 <div class="flex flex-column" [ngClass]="{'ml-3': !app.isRTL, 'mr-3': app.isRTL}" style="flex-grow: 1;">
                                     <div class="flex align-items-center justify-content-between mb-1">
                                         <span class="fs-small font-bold">Arlene Mccoy</span>
@@ -142,7 +142,7 @@
                 </li>
                 <li class="layout-topbar-item">
                     <a class="layout-topbar-action flex flex-row justify-content-center align-items-center px-2 rounded-circle" (click)="appMain.onTopbarItemClick($event, 'profile')" pRipple>
-                        <img src="assets/demo/images/avatar/amyelsner.png" alt="avatar" style="width: 32px; height: 32px;">
+                        <img src="../../assets/demo/images/avatar/amyelsner.png" alt="avatar" style="width: 32px; height: 32px;">
                     </a>
 
                     <ul class="layout-topbar-action-panel shadow-6" [@topbarActionPanelAnimation]="'visible'" *ngIf="appMain.activeTopbarItem === 'profile'">

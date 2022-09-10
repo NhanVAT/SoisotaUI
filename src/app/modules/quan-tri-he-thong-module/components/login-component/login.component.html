@@ -1,0 +1,58 @@
+<div class="pages-body login-page flex flex-column" filter-color="orange">
+    <div *ngIf="false" class="topbar p-p-3 p-d-flex p-jc-between p-flex-row p-ai-center">
+        <!-- <div class="topbar-left p-ml-3 p-d-flex" routerLink="/">
+        <div class="logo">
+        <img src="assets/layout/images/logocmi4.png" alt="" />
+        </div>
+        </div>
+        <div class="p-mr-3 p-d-flex">
+        <div class="logo">
+        <img src="assets/layout/images/logocmi4.png" alt="" />
+        </div>
+        </div>
+        <div class="topbar-right p-mr-3 p-d-flex">
+        </div> -->
+    </div>
+
+    <div class="align-self-center mt-auto mb-auto">
+        <div class="pages-panel card flex flex-column"
+             style="border-radius: 30px; border: none; background-color:#ffffff00; box-shadow: none; min-width: 330px;">
+            <div class="pages-header px-3 py-1"
+                 style="border-radius: 9px; border: none; background-color:#ffffff00">
+                <div class="logo">
+                    <img src="assets/layout/images/LOGO-EVN-2.png" style="width: 108px; height: 159px"/>
+                </div>
+            </div>
+
+            <h1 style="color: #ffffff; font-family: sans-serif;">CMIS 4.0</h1>
+
+            <div class="input-panel flex flex-column px-3">
+                <div class="p-inputgroup">
+<span class="p-inputgroup-addon"
+      style="border-radius: 20px 0px 0px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;">
+<i class="pi pi-user"></i>
+</span>
+                    <input type="text" class="username"
+                           style="border-radius: 0px 20px 20px 0px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
+                           [(ngModel)]="userName" id="email" pInputText placeholder="Tên đăng nhập">
+                </div>
+
+                <div class="p-inputgroup mt-3 mb-6">
+<span class="p-inputgroup-addon"
+      style="border-radius: 20px 0px 0px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;">
+<i class="pi pi-lock"></i>
+</span>
+                    <input type="password" (keydown)="onEnterTKiemMaKHang($event)"
+                           style="border-radius: 0px 20px 20px 0px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
+                           [(ngModel)]="password" id="password" pInputText placeholder="Mật khẩu">
+                </div>
+
+            </div>
+            <p-button class="login-button mb-6 px-3" (onClick)="onSubmit()"
+                      [style]="{'border-radius': '20px', 'background-color': 'white', 'color': 'black'}"
+                      label="Đăng nhập">
+            </p-button>
+        </div>
+    </div>
+</div>
+<p-toast baseZIndex='99999' key="cmis-login"></p-toast>

@@ -1,0 +1,7 @@
+.demo-container {
+    border: 1px solid var(--surface-d);
+}
+
+:host ::ng-deep .p-password input {
+    width: 100%
+}
