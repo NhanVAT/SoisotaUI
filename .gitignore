@@ -44,7 +44,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-theme.css
-src/assets/theme/*/theme-*.css
-src/assets/layout/css/*.css
-src/assets/sass/theme/designer
+#theme.css
+#src/assets/theme/*/theme-*.css
+#src/assets/layout/css/*.css
+#src/assets/sass/theme/designer
