@@ -14,11 +14,11 @@ export class AppComponent implements OnInit{
 
     layoutMode = 'light';
 
-    menuMode = 'static';
+    menuMode = 'slim';
 
     inlineMenuPosition = 'bottom';
 
-    inputStyle = 'filled';
+    inputStyle = 'outlined';
 
     ripple = true;
 

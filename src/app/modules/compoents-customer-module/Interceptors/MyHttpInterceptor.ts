@@ -10,7 +10,7 @@ export class MyHttpInterceptor implements HttpInterceptor {
 
         request = request.clone({
             setHeaders: {
-                apikey: localStorage.getItem("APIKEY")
+                // apikey: localStorage.getItem("APIKEY")
             },
         });
 

@@ -165,7 +165,7 @@
                             </a>
                         </li>
                         <li class="layout-topbar-action-item">
-                            <a class="flex flex-row align-items-center" pRipple>
+                            <a class="flex flex-row align-items-center" (click)="logOut($event)"  pRipple>
                                 <i class="pi pi-power-off" [ngClass]="{'mr-2': !app.isRTL, 'ml-2': app.isRTL}"></i>
                                 <span>Logout</span>
                             </a>

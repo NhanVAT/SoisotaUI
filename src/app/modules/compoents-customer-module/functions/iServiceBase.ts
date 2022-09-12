@@ -10,49 +10,22 @@ import IPService from '/src/assets/config/IPService.json';
 
 @Injectable()
 export class iServiceBase {
-    strIP = '';
+    strIP_Service = '';
     strIP_GateWay = '';
-    strCSBT = '';
-    strEVNHUB = '';
-    strIP_Report = '';
-    strIPSocket = '';
     strVersion = '';
     strProjectName = '';
-    strCMIS3URL = '';
-    strCMIS4URL = '';
-    apiKey = '';
 
     constructor(public httpClient: HttpClient, public loadingService: LoadingService) {
-
-        this.strIPSocket = IPService.SocketUri;
+        this.strIP_Service = IPService.APISERVICE;
+        this.strIP_GateWay = IPService.APIGATEWAY;
         this.strVersion = IPService.Version;
         this.strProjectName = IPService.PROJECT_NAME;
 
-        // IP của service đây nhé
-        this.strIP = IPService.APISERVICE;
-        this.strIP_GateWay = IPService.APIGATEWAY;
-
-        this.strCMIS3URL = IPService.CMIS3URL;
-        this.strCMIS4URL = IPService.CMIS4URL;
-        this.apiKey = IPService.APIKEY;
-
-        // Lấy IP riêng vì phần này xây dựng service riêng  với CMIS 3.0
-        this.strCSBT = IPService.CSBT;
-        this.strEVNHUB = IPService.EVNHUB;
-        this.strIP_Report = IPService.Report;
-
         // Set IP các service vào localStorage để dùng
-        localStorage.setItem('IP_API_SERVICE', this.strIP);
-        localStorage.setItem('IP_API_SERVICE_CSBT', this.strCSBT);
-        localStorage.setItem('IP_API_SERVICE_EVNHUB', this.strEVNHUB);
-        localStorage.setItem('IP_API_SERVICE_REPORT', this.strIP_Report);
-        localStorage.setItem('IP_API_SERVICE_SOCKET', this.strIPSocket);
+        localStorage.setItem('APISERVICE', this.strIP_Service);
+        localStorage.setItem('APIGATEWAY', this.strIP_GateWay);
         localStorage.setItem('VERSION', this.strVersion);
         localStorage.setItem('PROJECT_NAME', this.strProjectName);
-        localStorage.setItem('IP_API_GATEWAY', this.strIP_GateWay);
-        localStorage.setItem('CMIS3URL', this.strCMIS3URL);
-        localStorage.setItem('CMIS4URL', this.strCMIS4URL);
-        localStorage.setItem('APIKEY', this.apiKey);
 
     }
 
@@ -427,13 +400,13 @@ export class iServiceBase {
 
             switch (phanhe) {
                 case API.PHAN_HE.DANHMUC: {
-                    return localStorage.getItem('IP_API_GATEWAY') + '/api/cmis/serviceCMIS/' + API.SERVICE_GATEWAY.DANHMUC;
+                    return localStorage.getItem('APISERVICE') + '/danhmuc/';
                 }
                 case API.PHAN_HE.USER: {
-                    return localStorage.getItem('IP_API_GATEWAY') + '/api/cmis/serviceCMIS/' + API.SERVICE_GATEWAY.DANHMUC;
+                    return localStorage.getItem('APISERVICE') + '/users/';
                 }
                 case API.PHAN_HE.ROLE: {
-                    return localStorage.getItem('IP_API_GATEWAY') + '/api/cmis/serviceCMIS/' + API.SERVICE_GATEWAY.DANHMUC;
+                    return localStorage.getItem('APISERVICE') + '/roles/';
                 }
                 default: {
                     return '';

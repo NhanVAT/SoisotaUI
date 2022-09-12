@@ -8,7 +8,7 @@ export class PHAN_HE {
 
 // Service User
 export class API_USER {
-    public static GET_DVI_QLY = "getDviqly";
+    public static SIGNIN = "signin";
 }
 
 // Service Role
