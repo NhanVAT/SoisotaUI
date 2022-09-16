@@ -8,11 +8,15 @@ export class MyHttpInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        request = request.clone({
-            setHeaders: {
-                // apikey: localStorage.getItem("APIKEY")
-            },
-        });
+        const jwt = sessionStorage.getItem('JWT');
+
+        if (!!jwt) {
+            request = request.clone({
+                setHeaders: {
+                    Authorization: `Bearer ${jwt}`
+                },
+            });
+        }
 
         return next.handle(request).pipe(
             catchError((err: any) => {
