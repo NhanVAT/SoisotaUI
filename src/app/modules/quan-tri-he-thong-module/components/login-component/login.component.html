@@ -37,7 +37,6 @@
                            style="border-radius: 0px 20px 20px 0px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
                            [(ngModel)]="userName" id="email" pInputText placeholder="Tên đăng nhập">
                 </div>
-
                 <div class="p-inputgroup mt-3 mb-6">
                     <span class="p-inputgroup-addon"
                           style="border-radius: 20px 0px 0px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;">
@@ -49,9 +48,14 @@
                 </div>
 
             </div>
-            <p-button class="login-button mb-6 px-3" (onClick)="onSubmit()"
-                      [style]="{'border-radius': '20px', 'background-color': 'white', 'color': 'black'}"
+            <p-button class="login-button  px-3" (onClick)="onSubmit()"
+                      [style]="{'border-radius': '20px', 'background-color': 'white', 'color': 'black','margin-bottom':'1rem'}"
                       label="Đăng nhập">
+            </p-button>
+            <div class="px-3" style="align-items: center;border-bottom: 1px solid #dadde1;display: flex;margin: 20px 16px;text-align: center;"></div>
+            <p-button  class="register-button  px-3" (onClick)="onClickRegister()"
+                      [style]="{'border-radius': '20px', 'background-color': 'white', 'color': 'black','margin-top':'1rem','width': '160px' }"
+                      label="Đăng kí">
             </p-button>
         </div>
     </div>

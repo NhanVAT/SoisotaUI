@@ -1,0 +1,62 @@
+<div class="pages-body login-page flex flex-column" filter-color="orange">
+
+    <div class="align-self-center mt-auto mb-auto">
+        <div class="pages-panel card flex flex-column"
+             style="border-radius: 30px; border: none; background-color:#ffffff00; box-shadow: none; min-width: 330px;">
+            <div class="pages-header px-3 py-1"
+                 style="border-radius: 9px; border: none; background-color:#ffffff00">
+                <div class="logo">
+                    <img src="assets/layout/images/wolf_login_4.png"
+                         style="width: 250px; height: 170px"/>
+                </div>
+            </div>
+
+            <h1 style="color: #ffffff; font-family: sans-serif;">Đăng kí</h1>
+
+            <div class="input-panel flex flex-column px-3">
+
+                <div class="p-inputgroup flex space-x-4" style="width: 264px">
+                    <div class="">
+                        <input type="text" class="username"
+                                 style="border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none; margin-right:10px"
+                                 id="fistName" pInputText placeholder="Họ">
+                    </div>
+                   <div class="">
+                       <input type="text" class="username"
+                              style="border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none; margin-left: 10px"
+                              id="lastName" pInputText placeholder="Tên">
+                   </div>
+
+                </div>
+                <div class="p-inputgroup mt-3 ">
+                    <input type="text" class="username"
+                           style="border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
+                          id="email" pInputText placeholder="Email">
+                </div>
+                <div class="p-inputgroup mt-3">
+                    <input type="password"
+                           style="border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
+                          id="password" pInputText placeholder="Mật khẩu">
+                </div>
+                <div class="p-inputgroup mt-3 ">
+                    <input type="password"
+                           style="border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
+                           id="confirm-password" pInputText placeholder="Xác nhận mật khẩu">
+                </div>
+                <div class=" mt-3 mb-6">
+                    <label class="container">
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                        I accept <a style="color:#ceb017">Terms of Use</a>
+                    </label>
+                </div>
+
+            </div>
+            <p-button class="register-button mb-6 px-3"
+                      [style]="{'border-radius': '20px','width': '160px', 'background-color': 'white', 'color': 'black'}"
+                      label="Đăng kí">
+            </p-button>
+        </div>
+    </div>
+</div>
+<p-toast baseZIndex='99999' key="app-register"></p-toast>

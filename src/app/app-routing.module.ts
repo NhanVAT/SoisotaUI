@@ -41,7 +41,8 @@ import {AppCalendarComponent} from './pages/app.calendar.component';
 import {AppInvoiceComponent} from './pages/app.invoice.component';
 import {AppHelpComponent} from './pages/app.help.component';
 import {AppWizardComponent} from './pages/app.wizard.component';
-import {LoginComponent, SettingUserComponent} from "./modules/quan-tri-he-thong-module/quan-tri-he-thong";
+import {LoginComponent, SettingUserComponent} from './modules/quan-tri-he-thong-module/quan-tri-he-thong';
+import {RegisterComponent} from './modules/quan-tri-he-thong-module/components/register-component/register.component';
 
 const routes: Routes = [
     {
@@ -54,8 +55,18 @@ const routes: Routes = [
         component: LoginComponent
     },
     {
+        path: '',
+        redirectTo: '/register',
+        pathMatch: 'full'
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
+    },
+    {
         path: 'Home', component: AppMainComponent,
         children: [
+
             {path: '', component: DashboardComponent},
             {path: 'favorites/dashboardanalytics', component: DashboardAnalyticsComponent},
             {path: 'uikit/formlayout', component: FormLayoutDemoComponent},

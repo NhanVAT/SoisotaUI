@@ -108,7 +108,9 @@ export class LoginComponent extends iComponentBase implements OnInit {
             this.showMessage(mType.error, "Thông báo", "Đăng nhập không thành công. Vui lòng kiểm tra lại", 'app-login');
         }
     }
-
+    async onClickRegister(){
+        this.router.navigate(['/register']);
+    }
     onEnter(event) {
         if (event.keyCode == 13) {
             this.onSubmit();

@@ -5,6 +5,8 @@ import { ComponentCustomerModule } from '../compoents-customer-module/component-
 import { ComponentModule } from '../components-module/component.modules';
 import { LoginComponent } from './components/login-component/login.component';
 import { SettingUserComponent } from './components/setting-user-component/setting-user.component';
+import { RegisterComponent } from './components/register-component/register.component';
+
 
 @NgModule({
     imports: [
@@ -14,7 +16,8 @@ import { SettingUserComponent } from './components/setting-user-component/settin
     ],
     declarations: [
         LoginComponent,
-        SettingUserComponent
+        SettingUserComponent,
+        RegisterComponent,
     ],
     exports: [
         LoginComponent,

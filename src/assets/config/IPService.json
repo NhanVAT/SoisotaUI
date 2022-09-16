@@ -1,6 +1,6 @@
 {
     "APIGATEWAY": "http://10.0.40.33:4443",
-    "APISERVICE": "http://10.1.117.181:8088",
+    "APISERVICE": "http://127.0.0.1:8088",
     "IP_UI": "",
     "PROJECT_NAME": "SoiSoTa",
     "SocketUri": "http://10.1.4.176:9000",
