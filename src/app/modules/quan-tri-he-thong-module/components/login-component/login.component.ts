@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MessageService} from 'primeng/api';
 import {Router} from "@angular/router";
 import {HttpClient} from '@angular/common/http';
-import {User} from '../../models/user.model';
+import {AppUser} from '../../models/user.model';
 import * as API from 'src/app/services/apiURL';
 import {DatePipe} from '@angular/common';
 import {
@@ -48,7 +48,7 @@ export class LoginComponent extends iComponentBase implements OnInit {
         return Promise.resolve(false);
     }
 
-    logout(user: User) {
+    logout(user: AppUser) {
         localStorage.removeItem(user.username)
     }
 

@@ -1,4 +1,4 @@
-export interface User {
-    username: string,
-    password: string
+export interface AppUser {
+    username: string;
+    password: string;
 }

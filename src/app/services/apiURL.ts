@@ -9,6 +9,7 @@ export class PHAN_HE {
 // Service User
 export class API_USER {
     public static SIGNIN = "signin";
+    public static GET_INFO_CURRENT_USER = "getInfoCurrentUser";
 }
 
 // Service Role

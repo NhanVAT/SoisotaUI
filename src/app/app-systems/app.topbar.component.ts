@@ -1,9 +1,15 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {animate, AnimationEvent, style, transition, trigger} from '@angular/animations';
-import {MegaMenuItem} from 'primeng/api';
+import {MegaMenuItem, MessageService} from 'primeng/api';
 import {AppComponent} from '../app.component';
 import {AppMainComponent} from '../app.main.component';
 import {Router} from "@angular/router";
+import {
+    iComponentBase,
+    iServiceBase,
+    ShareData
+} from 'src/app/modules/compoents-customer-module/components-customer';
+import * as API from 'src/app/services/apiURL';
 
 @Component({
     selector: 'app-topbar',
@@ -20,10 +26,16 @@ import {Router} from "@angular/router";
         ])
     ]
 })
-export class AppTopBarComponent {
+export class AppTopBarComponent extends iComponentBase implements OnInit {
 
-    constructor(public appMain: AppMainComponent, public app: AppComponent, private router: Router,
+    constructor(public appMain: AppMainComponent,
+                public app: AppComponent,
+                private router: Router,
+                private iServiceBase: iServiceBase,
+                private shareData: ShareData,
+                public messageService: MessageService
     ) {
+        super(messageService);
     }
 
     activeItem: number;
@@ -216,14 +228,14 @@ export class AppTopBarComponent {
         sessionStorage.clear();
 
         //Xóa hết đi các thứ linh tinh chỉ gán lại các thứ cấn thiết trong localstorage
-        this.ClearLocalStorage();
+        this.clearLocalStorage();
 
         event.preventDefault();
 
         this.router.navigate(['/login']);
     }
 
-    ClearLocalStorage() {
+    clearLocalStorage() {
         //get ra các biến không cần xóa
         let IP_API_SERVICE = localStorage.getItem('APISERVICE');
         let IP_API_GATEWAY = localStorage.getItem('APIGATEWAY');
@@ -238,5 +250,11 @@ export class AppTopBarComponent {
         localStorage.setItem("APIGATEWAY", IP_API_GATEWAY);
         localStorage.setItem("VERSION", VERSION);
         localStorage.setItem("PROJECT_NAME", PROJECT_NAME);
+    }
+
+
+
+    ngOnInit() {
+
     }
 }
