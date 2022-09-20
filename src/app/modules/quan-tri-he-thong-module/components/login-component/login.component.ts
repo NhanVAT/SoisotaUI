@@ -74,10 +74,14 @@ export class LoginComponent extends iComponentBase implements OnInit {
         }
 
         this.siteKey = IPService.SiteKey;
+
+        this.loadInfoSys();
     }
 
     public loadInfoSys(): void {
-
+        if (sessionStorage.getItem('USER_NAME') != null){
+            this.userName = sessionStorage.getItem('USER_NAME');
+        }
     }
 
     async onSubmit() {

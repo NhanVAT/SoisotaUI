@@ -84,6 +84,7 @@ export class iServiceBase {
     }
 
     async getDataAsyncByPostRequest(service, api, inputData, ignoreLoading?: boolean): Promise<any> {
+
         try {
             // Get IP và URL
             service = await this.getURLService(service);
