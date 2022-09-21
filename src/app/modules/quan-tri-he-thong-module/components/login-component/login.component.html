@@ -24,7 +24,7 @@
                          style="width: 250px; height: 170px"/>
                 </div>
             </div>
-
+<div style="padding: 15px; background: #ececec29;border-radius: 20px;">
             <h1 style="color: #ffffff; font-family: sans-serif;">Đăng nhập</h1>
 
             <div class="input-panel flex flex-column px-3">
@@ -50,14 +50,14 @@
 
             </div>
             <p-button class="login-button  px-3" (onClick)="onSubmit()"
-                      [style]="{'border-radius': '20px', 'background-color': 'white', 'color': 'black','margin-bottom':'1rem'}"
+                      [style]="{'border-radius': '20px', 'background-color': 'white', 'color': 'black','margin-bottom':'0rem','width':'50%'}"
                       label="Đăng nhập">
             </p-button>
-            <div class="px-3" style="align-items: center;border-bottom: 1px solid #dadde1;display: flex;margin: 20px 16px;text-align: center;"></div>
-            <p-button  class="register-button  px-3" (onClick)="onClickRegister()"
-                      [style]="{'border-radius': '20px', 'background-color': 'white', 'color': 'black','margin-top':'1rem','width': '160px' }"
-                      label="Đăng kí">
-            </p-button>
+            <div class="px-3" style="align-items: center;border-bottom: 1px solid #dadde1;display: flex;margin: 20px 28px;text-align: center;width:80%;"></div>
+            <button  pButton class="px-3" (click)="onClickRegister()" style="background: #ffffff00 !important;"
+                       label="Đăng kí">
+            </button>
+        </div>
         </div>
     </div>
 </div>
