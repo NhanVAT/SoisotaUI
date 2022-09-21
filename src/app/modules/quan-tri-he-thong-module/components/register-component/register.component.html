@@ -22,56 +22,56 @@
                 <div class="input-panel flex flex-column px-3">
                     <div class="p-inputgroup flex space-x-4" style="max-width: 234px">
                         <div class="">
-                            <input type="text" class="ng-valid ng-dirty border-none"
+                            <input type="text" class="ng-valid ng-dirty border-none" [(ngModel)]="firstName"
                                    style="padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; margin-right:10px"
                                    id="fistName" pInputText  placeholder="Họ">
                         </div>
                         <div class="">
-                            <input type="text" class=""
+                            <input type="text" class=""  [(ngModel)]="lastName"
                                    style="padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none; margin-left: 10px"
                                    id="lastName" pInputText placeholder="Tên">
                         </div>
                     </div>
 
                     <div class="p-inputgroup mt-3 ">
-                        <input type="text" class="email"
+                        <input type="text" class="email"  [(ngModel)]="userName"
                                style=" padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
                                id="usename" pInputText placeholder="Tên đăng nhập">
                     </div>
                     <div class="p-inputgroup mt-3">
-                        <input type="password"
+                        <input type="password" [(ngModel)]="password"
                                style="padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
                                id="password" pInputText placeholder="Mật khẩu">
                     </div>
                     <div class="p-inputgroup mt-3 ">
-                        <input type="password"
+                        <input type="password"  [(ngModel)]="confirmPassword"
                                style="padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF ; border: none;"
                                id="confirm-password" pInputText placeholder="Xác nhận mật khẩu">
                     </div>
                     <div class="p-inputgroup mt-3 ">
-                        <input type="text" class="email"
+                        <input type="text" class="email"  [(ngModel)]="email"
                                style=" padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
                                id="email" pInputText placeholder="Email">
                     </div>
                     <div class="p-inputgroup mt-3 ">
-                        <input type="text" class=""
+                        <input type="text" class=""  [(ngModel)]="phone"
                                style=" padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
                                id="phone-number" pInputText placeholder="Số điện thoại">
                     </div>
                     <div class="p-inputgroup mt-3 ">
-                        <input type="text" class=""
+                        <input type="text" class=""  [(ngModel)]="address"
                                style=" padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
                                id="address" pInputText placeholder="Địa chỉ">
                     </div>
                     <div class=" mt-3 mb-6">
                         <label class="container">
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" checked="checked"  [(ngModel)]="acceptTerm" >
                             <span class="checkmark"></span>
                             I accept <a style="color:#ceb017">Terms of Use</a>
                         </label>
                     </div>
                 </div>
-                <p-button class="register-button mb-6 px-3 "
+                <p-button class="register-button mb-6 px-3 " (onClick)="onSubmit()"
                           [style]="{'border-radius': '20px','width': '160px', 'background-color': 'white', 'color': 'black'}"
                           label="Đăng kí">
                 </p-button>
