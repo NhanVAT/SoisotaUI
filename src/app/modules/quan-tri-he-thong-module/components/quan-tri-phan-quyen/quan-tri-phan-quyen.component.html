@@ -1,1 +1,127 @@
-<p>quan-tri-phan-quyen works!</p>
+<div class="grid table-demo">
+    <div class="col-12">
+        <div class="card">
+            <h5>Quản trị phân quyền</h5>
+            <p>Quản trị các quyền truy cập của người dùng trong hệ thống</p>
+            <p-table #dt [value]="lstAppRole" [(selection)]="selectedRoles" dataKey="id"
+                     styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
+                     [paginator]="true" [filterDelay]="0"
+                     [globalFilterFields]="['roleId','roleName']">
+                <ng-template pTemplate="caption">
+                    <div class="grid">
+                        <div class="col-6">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                       (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                       placeholder="Tìm kiếm phân quyền"/>
+                            </span>
+                        </div>
+
+                        <div class="col-4">&nbsp;</div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Thêm mới" icon="pi pi-plus"
+                                    style="width: 100%;"></button>
+                        </div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Xóa" icon="pi pi-trash"
+                                    style="width: 100%;"
+                                    class="p-button-danger"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="roleId">
+                            <div class="flex justify-content-between align-items-center">
+                                ID phân quyền
+                                <p-sortIcon field="roleId"></p-sortIcon>
+                                <p-columnFilter type="text" field="roleId" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="roleName">
+                            <div class="flex justify-content-between align-items-center">
+                                Tên phân quyền
+                                <p-sortIcon field="roleName"></p-sortIcon>
+                                <p-columnFilter type="text" field="roleName" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdBy">
+                            <div class="flex justify-content-between align-items-center">
+                                Người tạo
+                                <p-sortIcon field="createdBy"></p-sortIcon>
+                                <p-columnFilter type="text" field="createdBy" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdDate">
+                            <div class="flex justify-content-between align-items-center">
+                                Ngày tạo
+                                <p-sortIcon field="createdDate"></p-sortIcon>
+                                <p-columnFilter type="text" field="createdDate" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Trạng thái
+                            </div>
+                        </th>
+                        <th style="width: 8rem">
+                            <div class="flex justify-content-between align-items-center">
+                                Tác vụ
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-role>
+                    <tr class="p-selectable-row">
+                        <td>
+                            <p-tableCheckbox [value]="role"></p-tableCheckbox>
+                        </td>
+                        <td>
+                            <span class="p-column-title">ID phân quyền</span>
+                            {{role.roleId}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Tên phân quyền</span>
+                            {{role.roleName}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Người tạo</span>
+                            {{role.createdBy}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Ngày tạo</span>
+                            {{role.createdDate| date: 'MM/dd/yyyy'}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Trạng thái</span>
+                            <button *ngIf="role.active" pButton pRipple type="button"
+                                    label="Hoạt động"
+                                    class="p-button-rounded p-button-secondary mr-2 mb-2"></button>
+                            <button *ngIf="!role.active" pButton pRipple type="button"
+                                    label="Không hoạt động"
+                                    class="p-button-rounded p-button-danger mr-2 mb-2"></button>
+                        </td>
+                        <td style="text-align: center">
+                            <button pButton type="button" class="p-button-secondary"
+                                    icon="pi pi-cog"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">Không có quyền nào.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+

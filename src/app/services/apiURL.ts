@@ -4,6 +4,7 @@ export class PHAN_HE {
     public static USER = "User";
     public static ROLE = "Role";
     public static DANHMUC = "DanhMuc";
+    public static QTHT = "QTHT";
 }
 
 // Service User
@@ -21,6 +22,11 @@ export class API_ROLE {
 // Service Danh Mục
 export class API_DANH_MUC {
     public static GET_DVI_QLY = "getDviqly";
+}
+
+// Service QTHT
+export class API_QTHT {
+    public static GET_ALL_ROLE = "getAllRole";
 }
 
 export class SERVICE_GATEWAY {

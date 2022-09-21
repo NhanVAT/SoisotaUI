@@ -5,4 +5,9 @@ export interface AppRole extends AbstractAuditing {
     id: number;
     roleName: string;
     menus: any;
+    active: boolean;
+    createdBy: string;
+    createdDate: any;
+    lastModifiedBy: string;
+    lastModifiedDate: any;
 }

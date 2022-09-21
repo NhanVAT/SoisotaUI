@@ -400,6 +400,9 @@ export class iServiceBase {
         try {
 
             switch (phanhe) {
+                case API.PHAN_HE.QTHT: {
+                    return localStorage.getItem('APISERVICE') + '/quanTriHeThong/';
+                }
                 case API.PHAN_HE.DANHMUC: {
                     return localStorage.getItem('APISERVICE') + '/danhmuc/';
                 }

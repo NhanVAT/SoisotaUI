@@ -51,24 +51,24 @@ export class AppTopBarComponent extends iComponentBase implements OnInit {
                             {
                                 label: 'Form Layout',
                                 icon: 'pi pi-fw pi-id-card',
-                                routerLink: ['/uikit/formlayout']
+                                routerLink: ['/Home/uikit/formlayout']
                             },
                             {
                                 label: 'Input',
                                 icon: 'pi pi-fw pi-check-square',
-                                routerLink: ['/uikit/input']
+                                routerLink: ['/Home/uikit/input']
                             },
                             {
                                 label: 'Float Label',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/uikit/floatlabel']
+                                routerLink: ['/Home/uikit/floatlabel']
                             },
                             {
                                 label: 'Button',
                                 icon: 'pi pi-fw pi-mobile',
-                                routerLink: ['/uikit/button']
+                                routerLink: ['/Home/uikit/button']
                             },
-                            {label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file']}
+                            {label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/Home/uikit/file']}
                         ]
                     }
                 ],
@@ -79,23 +79,23 @@ export class AppTopBarComponent extends iComponentBase implements OnInit {
                             {
                                 label: 'Table',
                                 icon: 'pi pi-fw pi-table',
-                                routerLink: ['/uikit/table']
+                                routerLink: ['/Home/uikit/table']
                             },
-                            {label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list']},
+                            {label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/Home/uikit/list']},
                             {
                                 label: 'Tree',
                                 icon: 'pi pi-fw pi-share-alt',
-                                routerLink: ['/uikit/tree']
+                                routerLink: ['/Home/uikit/tree']
                             },
                             {
                                 label: 'Panel',
                                 icon: 'pi pi-fw pi-tablet',
-                                routerLink: ['/uikit/panel']
+                                routerLink: ['/Home/uikit/panel']
                             },
                             {
                                 label: 'Chart',
                                 icon: 'pi pi-fw pi-chart-bar',
-                                routerLink: ['/uikit/charts']
+                                routerLink: ['/Home/uikit/charts']
                             }
                         ]
                     }
@@ -107,23 +107,23 @@ export class AppTopBarComponent extends iComponentBase implements OnInit {
                             {
                                 label: 'Overlay',
                                 icon: 'pi pi-fw pi-clone',
-                                routerLink: ['/uikit/overlay']
+                                routerLink: ['/Home/uikit/overlay']
                             },
                             {
                                 label: 'Media',
                                 icon: 'pi pi-fw pi-image',
-                                routerLink: ['/uikit/media']
+                                routerLink: ['/Home/uikit/media']
                             },
-                            {label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/uikit/menu']},
+                            {label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/Home/uikit/menu']},
                             {
                                 label: 'Message',
                                 icon: 'pi pi-fw pi-comment',
-                                routerLink: ['/uikit/message']
+                                routerLink: ['/Home/uikit/message']
                             },
                             {
                                 label: 'Misc',
                                 icon: 'pi pi-fw pi-circle-off',
-                                routerLink: ['/uikit/misc']
+                                routerLink: ['/Home/uikit/misc']
                             }
                         ]
                     }
@@ -131,80 +131,80 @@ export class AppTopBarComponent extends iComponentBase implements OnInit {
             ]
         },
         {
-            label: 'UTILITIES',
+            label: 'Home/utilities',
             items: [
                 [
                     {
-                        label: 'UTILITIES 1',
+                        label: 'Home/utilities 1',
                         items: [
                             {
                                 label: 'Display',
                                 icon: 'pi pi-fw pi-desktop',
-                                routerLink: ['utilities/display']
+                                routerLink: ['Home/utilities/display']
                             },
                             {
                                 label: 'Elevation',
                                 icon: 'pi pi-fw pi-external-link',
-                                routerLink: ['utilities/elevation']
+                                routerLink: ['Home/utilities/elevation']
                             }
                         ]
                     },
                     {
-                        label: 'UTILITIES 2',
+                        label: 'Home/utilities 2',
                         items: [
                             {
                                 label: 'FlexBox',
                                 icon: 'pi pi-fw pi-directions',
-                                routerLink: ['utilities/flexbox']
+                                routerLink: ['Home/utilities/flexbox']
                             }
                         ]
                     }
                 ],
                 [
                     {
-                        label: 'UTILITIES 3',
+                        label: 'Home/utilities 3',
                         items: [
                             {
                                 label: 'Icons',
                                 icon: 'pi pi-fw pi-search',
-                                routerLink: ['utilities/icons']
+                                routerLink: ['Home/utilities/icons']
                             }
                         ]
                     },
                     {
-                        label: 'UTILITIES 4',
+                        label: 'Home/utilities 4',
                         items: [
                             {
                                 label: 'Text',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['utilities/text']
+                                routerLink: ['Home/utilities/text']
                             },
                             {
                                 label: 'Widgets',
                                 icon: 'pi pi-fw pi-star-o',
-                                routerLink: ['utilities/widgets']
+                                routerLink: ['Home/utilities/widgets']
                             }
                         ]
                     }
                 ],
                 [
                     {
-                        label: 'UTILITIES 5',
+                        label: 'Home/utilities 5',
                         items: [
                             {
                                 label: 'Grid System',
                                 icon: 'pi pi-fw pi-th-large',
-                                routerLink: ['utilities/grid']
+                                routerLink: ['Home/utilities/grid']
                             },
                             {
                                 label: 'Spacing',
                                 icon: 'pi pi-fw pi-arrow-right',
-                                routerLink: ['utilities/spacing']
+                                routerLink: ['Home/utilities/spacing']
                             },
                             {
                                 label: 'Typography',
                                 icon: 'pi pi-fw pi-align-center',
-                                routerLink: ['utilities/typography']
+                                routerLink: ['Home/utilities/typography']
                             }
                         ]
                     }
