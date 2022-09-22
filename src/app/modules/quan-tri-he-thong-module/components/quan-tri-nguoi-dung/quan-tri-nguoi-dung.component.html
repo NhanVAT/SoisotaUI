@@ -4,8 +4,14 @@
 <div class="card">
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-            <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+            <button pButton pRipple label="New"
+                    icon="pi pi-plus" class="p-button-success mr-2"
+                    (click)="openNew()">
+            </button>
+            <button pButton pRipple icon="pi pi-trash"
+                    class="p-button-danger" (click)="deleteSelectedUsers()"
+                    [disabled]="!selectedUsers || !selectedUsers.length">
+            </button>
         </ng-template>
 
         <ng-template pTemplate="right">
@@ -14,15 +20,23 @@
         </ng-template>
     </p-toolbar>
 
-    <p-table #dt [value]="products" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll"
-             [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <p-table #dt [value]="listAppUser" [(selection)]="selectedUsers" dataKey="id"
+             styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
+             [showCurrentPageReport]="true"
+             [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
+             currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} người dùng"
+             [globalFilterFields]="['username','fullname']"
+             responsiveLayout="scroll"
+             [loading]="loading"
+    >
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
-                <h5 class="m-0">Manage Products</h5>
+                <h5 class="m-0">Manage Users</h5>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                    <input pInputText type="text"
+                           (input)="dt.filterGlobal($event.target.value, 'contains')"
+                           placeholder="Search..." />
                 </span>
             </div>
         </ng-template>
@@ -31,113 +45,136 @@
                 <th style="width: 3rem">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th pSortableColumn="fistName">Họ <p-sortIcon field="fistName"></p-sortIcon></th>
-                <th pSortableColumn="lastName">Tên <p-sortIcon field="lastName"></p-sortIcon></th>
-                <th pSortableColumn="usename">Tên đăng nhập <p-sortIcon field="usename"></p-sortIcon></th>
+                <th pSortableColumn="fullname">Họ và tên<p-sortIcon field="fullname"></p-sortIcon></th>
+                <th>Avatar</th>
+                <th pSortableColumn="username">Tên đăng nhập <p-sortIcon field="username"></p-sortIcon></th>
                 <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
                 <th pSortableColumn="phonenumber">Số điện thoại <p-sortIcon field="phonenumber"></p-sortIcon></th>
                 <th pSortableColumn="address">Địa chỉ <p-sortIcon field="address"></p-sortIcon></th>
-                <th pSortableColumn="password">Active <p-sortIcon field="password"></p-sortIcon></th>
-                <th pSortableColumn="password">Mật khẩu <p-sortIcon field="password"></p-sortIcon></th>
-
-                <th></th>
+                <th pSortableColumn="role">Vai trò<p-sortIcon field="role"></p-sortIcon></th>
+                <th pSortableColumn="createdby">Được tạo bởi<p-sortIcon field="createdby"></p-sortIcon></th>
+                <th pSortableColumn="active">Kích hoạt<p-sortIcon field="active"></p-sortIcon></th>
+                <th class="justify-content-between align-items-center" >Tác vụ</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product>
-            <tr>
+        <ng-template pTemplate="body" let-user>
+            <tr class="p-selectable-row">
                 <td>
-                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                    <p-tableCheckbox [value]="user"></p-tableCheckbox>
                 </td>
-                <td>{{product.name}}</td>
-                <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" /></td>
-                <td>{{product.price | currency:'USD'}}</td>
-                <td>{{product.category}}</td>
-                <td>{{product.category}}</td>
-                <td><span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span></td>
+                <td>
+                    <span class="p-column-title">Họ và tên</span>
+                    {{user.fullName}}
+                </td>
+                <td>
+<!--                    <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" /></td>-->
+                    <img [src]="'/assets/demo/images/avatar/amyelsner.png' " width="100" class="shadow-4" /></td>
+                <td >
+                    <span class="p-column-title">Tên đăng nhập</span>
+                    {{user.userName}}
+                </td>
+                <td >
+                    <span class="p-column-title">Email</span>
+                    {{user.email}}
+                </td>
+                <td>
+                    <span class="p-column-title">Số điện thoại</span>
+                    {{user.phone}}
+                </td>
+                <td>
+                    <span class="p-column-title">Địa chỉ</span>
+                    {{user.address}}
+                </td>
+                <td>
+                    <span class="p-column-title">Vai trò</span>
+                    {{user.appRoles[0].roleName}}
+                </td>
+                <td>
+                    <span class="p-column-title">Được tạo bởi</span>
+                    {{user.createdBy}}
+                </td>
+
                 <td class="text-center">
-                    <i class="pi true-icon pi-check-circle"></i>
+                    <span class="p-column-title">Kích hoạt</span>
+                    <i class="pi" [ngClass]="{'true-icon pi-check-circle': user.active, 'false-icon pi-times-circle': !user.active}"></i>
                 </td>
-
-<!--                <td class="text-center">-->
-<!--                    <i class="pi" [ngClass]="{'true-icon pi-check-circle': customer.verified, 'false-icon pi-times-circle': !customer.verified}"></i>-->
-<!--                </td>-->
-
-                <td>{{product.category}}</td>
                 <td>
-                    <select  id="{{product.id}}" (change)="onChange(product.id, $event.target.value)"  >
-                        <option *ngFor="let option of arrayAction" [value]="option.value" [selected]="option.value==selectedDeviceObj" >{{option.name}} </option>
-                    </select>
-<!--                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>-->
-<!--                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>-->
+                    <p-dropdown [options]="arrayAction"
+                                optionLabel="name" [showClear]="true"
+                                (onChange)="onChangeAction(user, $event.value)" ></p-dropdown>
                 </td>
             </tr>
         </ng-template>
-        <ng-template pTemplate="summary">
-            <div class="flex align-items-center justify-content-between">
-                In total there are  products.
-            </div>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">Không có người dùng nào.</td>
+            </tr>
         </ng-template>
     </p-table>
 </div>
-
-<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="Thêm Người Dùng" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
-        <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image">
-        <div class="field">
-            <label for="name">Name</label>
-            <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
-            <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small>
-        </div>
-        <div class="field">
-            <label for="description">Description</label>
-            <textarea id="description" pInputTextarea [(ngModel)]="product.description" required rows="3" cols="20"></textarea>
-        </div>
-        <div class="field">
-            <label for="inventoryStatus">Inventory Status</label>
-            <p-dropdown [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses" placeholder="Select">
-                <ng-template let-option pTemplate="item">
-                    <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
-                </ng-template>
-            </p-dropdown>
-        </div>
-
-        <div class="field">
-            <label class="mb-3">Category</label>
-            <div class="formgrid grid">
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="product.category"></p-radioButton>
-                    <label for="category1">Accessories</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.category"></p-radioButton>
-                    <label for="category2">Clothing</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="product.category"></p-radioButton>
-                    <label for="category3">Electronics</label>
-                </div>
-                <div class="field-radiobutton col-6">
-                    <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="product.category"></p-radioButton>
-                    <label for="category4">Fitness</label>
-                </div>
+        <!--        <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image">-->
+        <img [src]="'/assets/demo/images/avatar/amyelsner.png'" class="product-image">
+        <div class="grid">
+            <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                <span class="p-float-label" >
+                    <input type="text" pInputText id="fistName" [(ngModel)]="userModel.firstName" required autofocus/>
+                    <label for="fistName">Họ</label>
+                </span>
+            </div>
+            <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                <span class="p-float-label">
+                    <input type="text" pInputText id="lastName" [(ngModel)]="userModel.lastName" required autofocus />
+                    <label for="lastName">Tên</label>
+                </span>
             </div>
         </div>
-
-        <div class="formgrid grid">
-            <div class="field col">
-                <label for="price">Price</label>
-                <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
-            </div>
-            <div class="field col">
-                <label for="quantity">Quantity</label>
-                <p-inputNumber id="quantity" [(ngModel)]="product.quantity"></p-inputNumber>
-            </div>
+        <div class="field">
+              <span class="p-float-label">
+                <input type="text" pInputText id="username" [(ngModel)]="userModel.userName"  required autofocus />
+                <small class="p-error" *ngIf="submitted && !
+                appUser.userName
+                ">username is required.</small>
+                <label for="lastName">Tên đăng nhập</label>
+            </span>
+        </div>
+        <div class="field">
+            <span class="p-float-label">
+                <input type="text" pInputText id="password"  [(ngModel)]="userModel.password" required autofocus />
+                <label for="lastName">Mật khẩu</label>
+            </span>
+        </div>
+        <div class="field">
+            <span class="p-float-label">
+                <input type="text" pInputText id="email"  [(ngModel)]="userModel.email" required autofocus />
+                 <label for="lastName">Email</label>
+            </span>
+        </div>
+        <div class="field">
+             <span class="p-float-label">
+                <input type="text" pInputText id="phone" [(ngModel)]="userModel.phone" required autofocus />
+                 <label for="lastName">Số điện thoại </label>
+            </span>
+        </div>
+        <div class="field">
+             <span class="p-float-label">
+                <input type="text" pInputText id="address"  [(ngModel)]="userModel.address" required autofocus />
+                 <label for="lastName">Địa chỉ </label>
+            </span>
+        </div>
+        <div>
+            <p-multiSelect [options]="listAppRole" [(ngModel)]="selectedRoles"
+                           defaultLabel="Chọn quyền" optionLabel="roleName"
+                           selectedItemsLabel="{0} quyền đã chọn"
+                           defaultValue="true" >
+            </p-multiSelect>
         </div>
     </ng-template>
 
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"(click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
     </ng-template>
 
 </p-dialog>
