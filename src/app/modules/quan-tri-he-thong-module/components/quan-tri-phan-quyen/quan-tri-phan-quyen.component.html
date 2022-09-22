@@ -5,8 +5,12 @@
             <p>Quản trị các quyền truy cập của người dùng trong hệ thống</p>
             <p-table #dt [value]="lstAppRole" [(selection)]="selectedRoles" dataKey="id"
                      styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
-                     [paginator]="true" [filterDelay]="0"
-                     [globalFilterFields]="['roleId','roleName']">
+                     [showCurrentPageReport]="true"
+                     [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
+                     currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} phân quyền"
+                     [globalFilterFields]="['roleId','roleName']" responsiveLayout="scroll"
+                     [loading]="loading"
+            >
                 <ng-template pTemplate="caption">
                     <div class="grid">
                         <div class="col-6">
@@ -21,11 +25,13 @@
                         <div class="col-4">&nbsp;</div>
                         <div class="col-1" style="text-align: center">
                             <button pButton type="button" label="Thêm mới" icon="pi pi-plus"
+                                    (click)="onCreateRole()"
                                     style="width: 100%;"></button>
                         </div>
                         <div class="col-1" style="text-align: center">
                             <button pButton type="button" label="Xóa" icon="pi pi-trash"
-                                    style="width: 100%;"
+                                    style="width: 100%;" (click)="onDeleteListRole()"
+                                    [disabled]="!selectedRoles || selectedRoles.length == 0"
                                     class="p-button-danger"></button>
                         </div>
                     </div>
@@ -35,9 +41,17 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
+                        <th pSortableColumn="roleKey">
+                            <div class="flex justify-content-between align-items-center">
+                                Mã phân quyền
+                                <p-sortIcon field="roleId"></p-sortIcon>
+                                <p-columnFilter type="text" field="roleId" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
                         <th pSortableColumn="roleId">
                             <div class="flex justify-content-between align-items-center">
-                                ID phân quyền
+                                Mã nhóm phân quyền
                                 <p-sortIcon field="roleId"></p-sortIcon>
                                 <p-columnFilter type="text" field="roleId" display="menu"
                                                 class="ml-auto"></p-columnFilter>
@@ -49,6 +63,11 @@
                                 <p-sortIcon field="roleName"></p-sortIcon>
                                 <p-columnFilter type="text" field="roleName" display="menu"
                                                 class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="roleName">
+                            <div class="flex justify-content-between align-items-center">
+                                Mô tả
                             </div>
                         </th>
                         <th pSortableColumn="createdBy">
@@ -68,12 +87,14 @@
                             </div>
                         </th>
                         <th>
-                            <div class="flex justify-content-between align-items-center">
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
                                 Trạng thái
                             </div>
                         </th>
                         <th style="width: 8rem">
-                            <div class="flex justify-content-between align-items-center">
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
                                 Tác vụ
                             </div>
                         </th>
@@ -85,12 +106,20 @@
                             <p-tableCheckbox [value]="role"></p-tableCheckbox>
                         </td>
                         <td>
-                            <span class="p-column-title">ID phân quyền</span>
+                            <span class="p-column-title">Mã phân quyền</span>
+                            {{role.roleKey}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Mã nhóm phân quyền</span>
                             {{role.roleId}}
                         </td>
                         <td>
                             <span class="p-column-title">Tên phân quyền</span>
                             {{role.roleName}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Mô tả</span>
+                            {{role.roleDescribe}}
                         </td>
                         <td>
                             <span class="p-column-title">Người tạo</span>
@@ -100,7 +129,7 @@
                             <span class="p-column-title">Ngày tạo</span>
                             {{role.createdDate| date: 'MM/dd/yyyy'}}
                         </td>
-                        <td>
+                        <td style="text-align: center;">
                             <span class="p-column-title">Trạng thái</span>
                             <button *ngIf="role.active" pButton pRipple type="button"
                                     label="Hoạt động"
@@ -110,14 +139,24 @@
                                     class="p-button-rounded p-button-danger mr-2 mb-2"></button>
                         </td>
                         <td style="text-align: center">
-                            <button pButton type="button" class="p-button-secondary"
-                                    icon="pi pi-cog"></button>
+                            <div class="grid">
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                            (click)="onUpdateRole(role)"
+                                            class="p-button-rounded p-mr-2"></button>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-trash"
+                                            (click)="onDeleteRole(role, $event)"
+                                            class="p-button-rounded p-button-danger"></button>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="8">Không có quyền nào.</td>
+                        <td colspan="8">Không có phân quyền nào.</td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -125,3 +164,96 @@
     </div>
 </div>
 
+<p-dialog [header]="headerDialog" [(visible)]="displayDialogCreateRole"
+          [breakpoints]="{'960px': '75vw'}"
+          [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false" [maximizable]="true">
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-12">
+            <div class="card">
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                        <b>Thông tin phân quyền</b>
+                    </div>
+                </p-divider>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-input-icon-left p-float-label" style="width: 100%">
+						    <i class="pi pi-key"></i>
+                            <input type="text" class="w-full" [(ngModel)]="roleModel.roleKey"
+                                   [disabled]="roleModel.id != null" pInputText/>
+                            <label>Mã phân quyền*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-input-icon-left p-float-label" style="width: 100%">
+						    <i class="pi pi-user"></i>
+                            <input type="text" class="w-full" [(ngModel)]="roleModel.roleName"
+                                   pInputText/>
+                            <label>Tên phân quyền*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					    <span class="p-input-icon-left p-float-label" style="width: 100%">
+                            <i class="pi pi-align-justify"></i>
+                            <input type="text" class="w-full" [(ngModel)]="roleModel.roleDescribe"
+                                   pInputText/>
+                            <label>Mô tả</label>
+					    </span>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="lstNhomRole" [(ngModel)]="roleModel.roleId"
+                                        [showClear]="true"
+                                        [autoDisplayFirst]="false"></p-dropdown>
+                            <label>Chọn nhóm phân quyền*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <p-inputSwitch [(ngModel)]="roleModel.active"></p-inputSwitch>
+                        <h6> Hiệu lực</h6>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                    </div>
+                </div>
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                    </div>
+                </p-divider>
+                <p-fieldset legend="Menu theo phân quyền" [toggleable]="true">
+                    <div class="grid">
+                        <div class="col-12 mb-2 lg:col-12 mb-lg-0">
+                            <p-tree [value]="lstTreeMenu" selectionMode="checkbox"
+                                    [propagateSelectionUp]="false" [propagateSelectionDown]="true"
+                                    [(selection)]="roleModel.menus"></p-tree>
+                        </div>
+                    </div>
+                </p-fieldset>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="grid" style="text-align: center">
+            <div class="col-5">&nbsp;</div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Lưu" icon="pi pi-save"
+                        (click)="onSaveRole()"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
+                        (click)="onCancelRole()" class="p-button-danger"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-5">&nbsp;</div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-toast baseZIndex='99999' key="notify"></p-toast>
+
+<p-confirmPopup></p-confirmPopup>
+
+<p-confirmDialog key="deleteList" header="Xóa phân quyền" icon="pi pi-exclamation-triangle"></p-confirmDialog>

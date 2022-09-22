@@ -1,6 +1,6 @@
 import {AbstractAuditing} from "../../compoents-customer-module/models/abstract-auditing.model";
 
-export interface AppMenu extends AbstractAuditing {
+export class AppMenu implements AbstractAuditing {
     id: number;
     menuBadge: string;
     menuBadgeClass: string;
@@ -13,4 +13,9 @@ export interface AppMenu extends AbstractAuditing {
     menuRouterLink: string;
     menuTarget: string;
     menuUrl: string;
+    active: boolean;
+    createdBy: string;
+    createdDate: any;
+    lastModifiedBy: string;
+    lastModifiedDate: any;
 }
