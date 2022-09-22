@@ -22,6 +22,10 @@ export class RegisterComponent extends iComponentBase implements OnInit {
     password: any;
     confirmPassword: any;
     acceptTerm: any;
+    userName: any;
+    phone: any;
+    address: any;
+
     responseModel: ResponseModel;
 
     constructor(public iServiceBase: iServiceBase,
@@ -43,15 +47,19 @@ export class RegisterComponent extends iComponentBase implements OnInit {
             password: this.password,
             confirmPassword: this.confirmPassword,
             acceptTerm: this.acceptTerm,
+            phone: this.phone,
+            userName: this.userName,
+            address: this.address
         };
         this.responseModel = await this.iServiceBase.getDataAsyncByPostRequest(API.PHAN_HE.USER, API.API_USER.REGISTER, params);
         console.log(this.responseModel);
-        if (this.responseModel.success){
+        if (this.responseModel && this.responseModel.success){
             sessionStorage.setItem('USER_NAME', this.responseModel.data);
             await this.router.navigate(['/login']);
         }else{
             // đoạn này lúc getdata, service trả về api error nên nó k lấy response dc...
-            this.showMessage(mType.error, "Thông báo", this.responseModel.message, 'app-register');
+            // this.showMessage(mType.error, "Thông báo", this.responseModel.message, 'app-register');
+            this.showMessage(mType.error, "Thông báo", "Đăng ký thất bại", 'app-register');
         }
     }
 
