@@ -35,7 +35,8 @@ export class API_QTHT {
     public static DELETE_LIST_APP_ROLE = "deleteListAppRole";
     public static GET_ALL_USER = "getAllUser";
     public static INSERT_APP_USER = "insertAppUser";
-    public static UPDATE_APP_USER = "updateAppUser"
+    public static UPDATE_APP_USER = "updateAppUser";
+    public static DELETE_APP_USER = "deleteAppUser";
 
 }
 

@@ -20,10 +20,10 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
 
     userDialog: boolean;
     listAppUser: AppUser[] = [];
-    listAppRole: AppRole[];
+    listAppRole: AppRole[] = [];
     appUser: AppUser;
-    selectedUsers: AppUser[];
-    selectedRoles: AppRole[];
+    selectedUsers: AppUser[] = [];
+    selectedRoles: AppRole[] = [];
     loading: boolean;
     submitted: boolean;
     statuses: any[];
@@ -56,14 +56,16 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             case 'deleteUser':
                 this.onDeleteUser(user);
                 break;
+            default:
+                break;
         }
-        // console.log(valueOption +"-" + deviceValue );
-
     }
 
     openNew() {
         this.submitted = false;
-        this.userDialog = true;
+        this.selectedRoles = [];
+        this.userModel = new AppUser();
+        this.openDialog("Thêm người dùng mới");
     }
 
     deleteSelectedUsers() {
@@ -81,14 +83,16 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
 
      onEditUser(user: AppUser) {
         const headerDialog = `Cập nhật người dùng: ${user.fullName}`;
-        this.userModel = user;
-        this.selectedRoles = user.appRoles;
-        console.log(this.selectedRoles);
+        this.userModel = Object.assign({}, user);
+        this.selectedRoles = [];
+        for (let i = 0; i < user.appRoles.length; i++){
+            this.selectedRoles.push(this.listAppRole.filter(val => val.id === user.appRoles[i].id)[0]);
+        }
+        //console.log(this.selectedRoles);
         this.openDialog(headerDialog);
-
     }
     async editUser(user){
-        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.UPDATE_APP_USER, user);
+        const response = await this.iServiceBase.putDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.UPDATE_APP_USER, user);
         if (response && response.success) {
             this.showMessage(mType.success, 'Thông báo', 'Cập nhật người dùng thành công!', 'notify');
 
@@ -110,17 +114,38 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             }
         });
     }
-    deleteUser(user: AppUser){
+    async deleteUser(user: AppUser){
+        try {
+            let param = user.userName;
+
+            let response = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.DELETE_APP_USER, param);
+
+            if (response && response.success) {
+                this.showMessage(mType.success, "Thông báo", "Xóa người dùng thành công!", 'notify');
+
+                //lấy lại danh sách All Role
+                this.loadAllUser();
+
+            } else {
+                this.showMessage(mType.error, "Thông báo", "Xóa người không thành công. Vui lòng xem lại!", 'notify');
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
     async loadAllUser() {
+        this.listAppUser = [];
+        this.selectedRoles = [];
         try {
+            this.loading = true;
+
             const response = await this.iServiceBase.getDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.GET_ALL_USER);
+
             if (response && response.length) {
-                this.loading = true;
                 this.listAppUser = response;
-                console.log(this.listAppUser);
-                this.loading = false;
             }
+
+            this.loading = false;
         }catch (e){
             console.log(e);
             this.loading = false;
@@ -133,6 +158,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             const response = await this.iServiceBase.getDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.GET_ALL_ROLE);
             if (response && response.length) {
                 this.listAppRole = response;
+                //console.log(this.listAppRole);
             }
             this.loading = false;
         } catch (e) {
@@ -144,6 +170,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
         const result = new AppUser();
         if (this.shareData && this.shareData.userInfo){
             if (this.userModel.id && this.userModel.id > 0){
+                result.id = this.userModel.id;
                 result.userId = this.userModel.userId;
                 result.fullName = this.userModel.firstName + ' ' + this.userModel.lastName;
                 result.userName = this.userModel.userName;
@@ -152,9 +179,13 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 result.phone = this.userModel.phone;
                 result.address = this.userModel.address;
                 result.appRoles = this.selectedRoles;
+                result.createdBy = this.userModel.createdBy;
+                result.createdDate = this.userModel.createdDate;
+                result.active = this.userModel.active;
+                result.lastModifiedBy = this.shareData.userInfo.userName;
+                result.lastModifiedDate = new Date();
             }
             else{
-                result.userId = this.userModel.userId;
                 result.fullName = this.userModel.firstName + ' ' + this.userModel.lastName;
                 result.userName = this.userModel.userName;
                 result.email = this.userModel.email;
@@ -162,35 +193,48 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 result.phone = this.userModel.phone;
                 result.address = this.userModel.address;
                 result.appRoles = this.selectedRoles;
+                result.active = true;
+                result.userId = result.userName;
+                result.createdBy = this.shareData.userInfo.userName;
+                result.createdDate = new Date();
         }}
         return result;
     }
-    // async createUser(userEnity){
-    //     try{
-    //     let param = userEnity;
-    //     let respone = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.INSERT_APP_USER, param, true);
-    //     if (respone && respone.success){
-    //         this.showMessage(mType.success,"Thông báo", "Thêm mới người dùng thành công!",'notify' );
-    //         this.userDialog = false;
-    //         this.loadAllUser();
-    //         this.userModel = new AppUser();
-    //     }else {
-    //         this.showMessage(mType.error, "Thông báo", "Thêm mới nggưi dùng không thành công. Vui lòng xem lại!", 'notify');
-    //         }
-    //     } catch (e) {
-    //     console.log(e);
-    // }
-    // }
+    async createUser(userEnity){
+        try{
+            let param = userEnity;
+            let respone = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.INSERT_APP_USER, param, true);
+            if (respone && respone.success){
+                this.showMessage(mType.success,"Thông báo", "Thêm mới người dùng thành công!",'notify' );
+                this.userDialog = false;
+
+                this.loadAllUser();
+
+            }else {
+                this.showMessage(mType.error, "Thông báo", "Thêm mới nggưi dùng không thành công. Vui lòng xem lại!", 'notify');
+            }
+        } catch (e) {
+            console.log(e);
+        }
+        this.userModel = new AppUser();
+    }
     saveUser(){
         console.log(this.selectedRoles);
         const userEnity = this.bindingDataUserModel();
-        this.editUser(userEnity);
-        console.log('aaaaa');
+        console.log(userEnity.id);
+        if (userEnity && userEnity.id && userEnity.id > 0) {
+            console.log('vao up');
+            this.editUser(userEnity);
+
+        }else{
+            this.createUser(userEnity);
+        }
         console.log(userEnity);
+        this.hideDialog();
     }
     onCreateUser(){
-    this.openDialog('Tạo người dùng mới');
-}
+        this.openDialog('Tạo người dùng mới');
+    }
     openDialog(header: string) {
         this.headerDialog = header;
         this.submitted = false;

@@ -172,6 +172,7 @@ export class QuanTriPhanQuyenComponent extends iComponentBase implements OnInit 
         this.roleModel.roleId = 'ROLE_ADMIN';
         this.roleModel.active = true;
         this.roleModel.lstMenuId = [];
+        this.roleModel = new AppRole();
 
         this.displayDialogCreateRole = true;
     }
@@ -325,7 +326,7 @@ export class QuanTriPhanQuyenComponent extends iComponentBase implements OnInit 
 
             let response = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.DELETE_LIST_APP_ROLE, param, true);
 
-            if (response && response.success) {
+            if (response) {
                 this.showMessage(mType.success, "Thông báo", "Xóa phân quyền thành công!", 'notify');
 
                 //lấy lại danh sách All Role

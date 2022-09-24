@@ -112,7 +112,7 @@
         </ng-template>
     </p-table>
 </div>
-<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="Thêm Người Dùng" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" [header]="headerDialog"  [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <!--        <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image">-->
         <img [src]="'/assets/demo/images/avatar/amyelsner.png'" class="product-image">
@@ -141,7 +141,7 @@
         </div>
         <div class="field">
             <span class="p-float-label">
-                <input type="text" pInputText id="password"  [(ngModel)]="userModel.password" required autofocus />
+                <input type="password" pInputText id="password"  [(ngModel)]="userModel.password" required autofocus />
                 <label for="lastName">Mật khẩu</label>
             </span>
         </div>
