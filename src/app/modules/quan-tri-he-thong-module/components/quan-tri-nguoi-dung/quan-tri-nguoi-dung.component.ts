@@ -120,7 +120,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
 
             let response = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.DELETE_APP_USER, param);
 
-            if (response && response.success) {
+            if (response) {
                 this.showMessage(mType.success, "Thông báo", "Xóa người dùng thành công!", 'notify');
 
                 //lấy lại danh sách All Role
@@ -132,6 +132,31 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
         } catch (e) {
             console.log(e);
         }
+    }
+    async deleteListUser(){
+        try{
+            let param = this.selectedUsers.map(o => o.id);
+            let response = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.DELETE_LIST_APP_USER, param, true );
+            if (response){
+                this.showMessage(mType.success, "Thông báo", "Xóa người dùng thành công!", 'notify');
+                this.loadAllUser();
+            } else{
+                this.showMessage(mType.success, "Thông báo", "Xóa người dùng không thành công. Vui lòng xem lại!", 'notify');
+            }
+        } catch (e){
+                console.log(e);
+        }
+    }
+    onDeleteListUser(){
+        console.log(123);
+        this.confirmationService.confirm({
+            message: 'Bạn có chắc chắn xóa những người dùng đã chọn ?',
+            header: 'Confirm',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.deleteListUser();
+            }
+        });
     }
     async loadAllUser() {
         this.listAppUser = [];

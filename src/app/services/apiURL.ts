@@ -37,6 +37,7 @@ export class API_QTHT {
     public static INSERT_APP_USER = "insertAppUser";
     public static UPDATE_APP_USER = "updateAppUser";
     public static DELETE_APP_USER = "deleteAppUser";
+    public static DELETE_LIST_APP_USER = "deleteListAppUser";
 
 }
 
