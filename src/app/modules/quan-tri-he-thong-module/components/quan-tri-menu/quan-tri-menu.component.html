@@ -1,1 +1,254 @@
-<p>quan-tri-menu works!</p>
+<div class="grid table-demo">
+    <div class="col-12">
+        <div class="card">
+            <h5>Quản trị menu</h5>
+            <p>Quản trị các menu chức năng của người dùng trong hệ thống</p>
+            <p-treeTable #dt [value]="lstAppMenu" [(selection)]="selectedMenus" dataKey="id"
+                         [showCurrentPageReport]="true" [paginator]="true" [rowHover]="true"
+                         [rows]="10"
+                         currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} menu"
+                         [globalFilterFields]="['menuName']" responsiveLayout="scroll">
+                <ng-template pTemplate="caption">
+                    <div class="grid">
+                        <div class="col-6">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                       (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                       placeholder="Tìm kiếm menu"/>
+                            </span>
+                        </div>
+
+                        <div class="col-4">&nbsp;</div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Thêm mới" icon="pi pi-plus"
+                                    (click)="onCreateMenu()"
+                                    style="width: 100%;"></button>
+                        </div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Xóa" icon="pi pi-trash"
+                                    style="width: 100%;"
+                                    [disabled]="!selectedMenus || selectedMenus.length == 0"
+                                    (click)="onDeleteListMenu()"
+                                    class="p-button-danger"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Tên menu</th>
+                        <th>Tên icon</th>
+                        <th>Badge</th>
+                        <th>Badge Class</th>
+                        <th>Router Link</th>
+                        <th>Phân hệ</th>
+                        <th>Người tạo</th>
+                        <th>Ngày tạo</th>
+                        <th style="text-align: center;">Trạng thái</th>
+                        <th style="width: 8rem">
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Tác vụ
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                    <tr>
+                        <td>
+                            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                            <p-treeTableCheckbox [value]="rowNode"></p-treeTableCheckbox>
+                            <i class="pi {{rowData.icon}}"></i>
+                            {{rowData.label}}
+                        </td>
+                        <td><i class="pi {{rowData.icon}}"></i> {{rowData.icon}}</td>
+                        <td>{{rowData.badge}}</td>
+                        <td>{{rowData.badgeClass}}</td>
+                        <td>{{rowData.routerLink}}</td>
+                        <td>{{rowData.prjName}}</td>
+                        <td>
+                            {{rowData.createdBy}}
+                        </td>
+                        <td>
+                            {{rowData.createdDate| date: 'MM/dd/yyyy'}}
+                        </td>
+                        <td style="text-align: center;">
+                            <button *ngIf="rowData.active" pButton pRipple type="button"
+                                    label="Hoạt động"
+                                    class="p-button-rounded p-button-secondary mr-2 mb-2"></button>
+                            <button *ngIf="!rowData.active" pButton pRipple type="button"
+                                    label="Không hoạt động"
+                                    class="p-button-rounded p-button-danger mr-2 mb-2"></button>
+                        </td>
+                        <td style="text-align: center">
+                            <div class="grid">
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                            (click)="onUpdateMenu(rowData)"
+                                            class="p-button-rounded p-mr-2"></button>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-trash"
+                                            (click)="onDeleteMenu(rowData, $event)"
+                                            class="p-button-rounded p-button-danger"></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-treeTable>
+        </div>
+    </div>
+</div>
+
+<p-dialog [header]="headerDialog" [(visible)]="displayDialogCreateMenu"
+          [breakpoints]="{'960px': '75vw'}"
+          [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false" [maximizable]="true">
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-12">
+            <div class="card">
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                        <b>Thông tin menu</b>
+                    </div>
+                </p-divider>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label" style="width: 100%">
+                            <input type="text" class="w-full" [(ngModel)]="menuModel.menuName"
+                                   pInputText/>
+                            <label>Tên Menu*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label" style="width: 100%">
+                            <input type="text" class="w-full" [(ngModel)]="menuModel.menuBadge"
+                                   pInputText/>
+                            <label>Badge</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					    <span class="p-float-label" style="width: 100%">
+                            <input type="text" class="w-full" [(ngModel)]="menuModel.menuBadgeClass"
+                                   pInputText/>
+                            <label>Badge Class</label>
+					    </span>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label" style="width: 100%">
+                            <p-inputNumber inputId="integeronly"
+                                           [(ngModel)]="menuModel.menuOrder"> </p-inputNumber>
+                                <label>Thứ tự Menu*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label" style="width: 100%">
+                            <input type="text" class="w-full" [(ngModel)]="menuModel.menuRouterLink"
+                                   pInputText/>
+                            <label>Router Link*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					    <span class="p-float-label" style="width: 100%">
+                            <input type="text" class="w-full" [(ngModel)]="menuModel.menuTarget"
+                                   pInputText/>
+                            <label>Target</label>
+					    </span>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label" style="width: 100%">
+                            <input type="text" class="w-full" [(ngModel)]="menuModel.menuUrl"
+                                   pInputText/>
+                            <label>URL</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="lstMenuParent" [(ngModel)]="menuModel.menuParent"
+                                        [showClear]="true"
+                                        [autoDisplayFirst]="false"></p-dropdown>
+                            <label>Chọn Menu cha*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					    <span class="p-float-label">
+                            <p-dropdown [options]="lstModule" [(ngModel)]="menuModel.menuPrjName"
+                                        [showClear]="true"
+                                        [autoDisplayFirst]="false"></p-dropdown>
+                            <label>Chọn module*</label>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <p-inputSwitch [(ngModel)]="menuModel.active"></p-inputSwitch>
+                        <h6> Hiệu lực</h6>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-8 mb-lg-0">
+                    </div>
+                </div>
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                    </div>
+                </p-divider>
+                <p-fieldset legend="Chọn Icon cho menu" [toggleable]="true">
+                    <div class="grid">
+                        <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                            <span class="p-float-label" style="width: 100%">
+                                <input type="text" class="w-full"
+                                       (input)="onFilterIcon($event)" pInputText/>
+                                <label>Tìm kiếm icon</label>
+                            </span>
+                        </div>
+                        <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                            <span class="p-float-label" style="width: 100%">
+                                <input type="text" class="w-full" [(ngModel)]="menuModel.menuIcon"
+                                       [disabled]="true" pInputText/>
+                                <label>Icon Menu đã chọn*</label>
+                            </span>
+                        </div>
+                    </div>
+                    <p-scrollPanel [style]="{width: '100%', height: '500px'}">
+                        <div class="grid icons-list">
+                            <div class="col-12 my-3 md:col-2" *ngFor="let icon of filteredIcons"
+                                 (click)="onSelectIcon(icon)"
+                                 [style.background-color]="icon.properties.color">
+                                <i class="pi pi-{{icon.properties.name}}"></i>
+                                <div>pi-{{icon.properties.name}}</div>
+                            </div>
+                        </div>
+                    </p-scrollPanel>
+                </p-fieldset>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="grid" style="text-align: center">
+            <div class="col-5">&nbsp;</div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Lưu" icon="pi pi-save"
+                        (click)="onSaveMenu()"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
+                        (click)="onCancelMenu()" class="p-button-danger"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-5">&nbsp;</div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-toast baseZIndex='99999' key="notify"></p-toast>
+
+<p-confirmPopup></p-confirmPopup>
+
+<p-confirmDialog key="deleteList" header="Xóa phân quyền"
+                 icon="pi pi-exclamation-triangle"></p-confirmDialog>
