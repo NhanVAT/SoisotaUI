@@ -11,6 +11,7 @@ import {
 import {AppBreadcrumbService} from '../../../../app-systems/app-breadcrumb/app.breadcrumb.service';
 import {ShareData} from '../../../compoents-customer-module/shared-data-services/sharedata.service';
 import {AppRole} from '../../models/approle.model';
+import {isEmpty} from 'rxjs/operators';
 
 
 @Component({
@@ -32,11 +33,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
     statuses: any[];
     userModel: AppUser = new AppUser();
     headerDialog: string;
-    arrayAction: any[] = [
-        {name: 'Action', value: 'action'},
-        {name: 'Edit', value: 'editUser'},
-        {name: 'Delete', value: 'deleteUser'}
-    ];
+    arrayAction: any[];
 
     @ViewChild('dt') table: Table;
 
@@ -50,10 +47,17 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
     }
 
     ngOnInit() {
+        this.initlistActionDefault();
         this.loadAllUser();
         this.getAllRole();
     }
-
+    initlistActionDefault(){
+        this.arrayAction = [
+            {name: 'Tác vụ', value: 'action'},
+            {name: 'Sửa', value: 'editUser'},
+            {name: 'Xóa', value: 'deleteUser'}
+        ];
+    }
     onChangeAction(user: AppUser, selectValue: any) {
         switch (selectValue.value) {
             case 'editUser':
@@ -73,28 +77,14 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
         this.userModel = new AppUser();
         this.openDialog("Thêm người dùng mới");
     }
-
-    deleteSelectedUsers() {
-        this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected products?',
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-                this.listAppUser = this.listAppUser.filter(val => !this.selectedUsers.includes(val));
-                this.selectedUsers = null;
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Products Deleted',
-                    life: 3000
-                });
-            }
-        });
-    }
-
     onEditUser(user: AppUser) {
         const headerDialog = `Cập nhật người dùng: ${user.fullName}`;
         this.userModel = Object.assign({}, user);
+        let fullname = this.userModel.fullName;
+        let firstName = fullname.split(' ')[0];
+        this.userModel.firstName = firstName;
+        let lastName = fullname.split(' ').slice(1, fullname.length).join(' ');
+        this.userModel.lastName = lastName;
         this.selectedRoles = [];
         for (let i = 0; i < user.appRoles.length; i++) {
             this.selectedRoles.push(this.listAppRole.filter(val => val.id === user.appRoles[i].id)[0]);
@@ -212,6 +202,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
     bindingDataUserModel(): AppUser {
         const result = new AppUser();
         if (this.shareData && this.shareData.userInfo) {
+            // update
             if (this.userModel.id && this.userModel.id > 0) {
                 result.id = this.userModel.id;
                 result.userId = this.userModel.userId;
@@ -219,6 +210,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 result.userName = this.userModel.userName;
                 result.email = this.userModel.email;
                 result.password = this.userModel.password;
+                result.confirmPassword = this.userModel.confirmPassword;
                 result.phone = this.userModel.phone;
                 result.address = this.userModel.address;
                 result.appRoles = this.selectedRoles;
@@ -232,6 +224,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 result.userName = this.userModel.userName;
                 result.email = this.userModel.email;
                 result.password = this.userModel.password;
+                result.confirmPassword = this.userModel.confirmPassword;
                 result.phone = this.userModel.phone;
                 result.address = this.userModel.address;
                 result.appRoles = this.selectedRoles;
@@ -267,15 +260,18 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
         console.log(this.selectedRoles);
         const userEnity = this.bindingDataUserModel();
         console.log(userEnity.id);
-        if (userEnity && userEnity.id && userEnity.id > 0) {
-            console.log('vao up');
-            this.editUser(userEnity);
+        if (this.validateUserModel()){
+            if (userEnity && userEnity.id && userEnity.id > 0) {
+                console.log('vao up');
+                this.editUser(userEnity);
 
-        } else {
-            this.createUser(userEnity);
+            } else {
+                this.createUser(userEnity);
+            }
+            console.log(userEnity);
+            this.hideDialog();
         }
-        console.log(userEnity);
-        this.hideDialog();
+
     }
 
     onCreateUser() {
@@ -291,6 +287,55 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
     hideDialog() {
         this.userDialog = false;
         this.submitted = false;
+    }
+    validateUserModel(): boolean{
+        if (!this.userModel.firstName || this.userModel.firstName == ''){
+            this.showMessage(mType.warn, "Thông báo", "Bạn chưa nhập họ!", 'notify');
+            return false;
+        }
+        if (!this.userModel.lastName || this.userModel.lastName == '') {
+            this.showMessage(mType.warn, "Thông báo", "Bạn chưa nhập tên!", 'notify');
+            return false;
+        }
+        if (!this.userModel.userName || this.userModel.userName == '') {
+            this.showMessage(mType.warn, "Thông báo", "Bạn chưa nhập tên đăng nhập!", 'notify');
+            return false;
+        }
+        if (!this.userModel.password || this.userModel.password == '') {
+            this.showMessage(mType.warn, "Thông báo", "Bạn chưa nhập mật khẩu!", 'notify');
+            return false;
+        }
+        if (!this.userModel.confirmPassword || this.userModel.confirmPassword == '') {
+            this.showMessage(mType.warn, "Thông báo", "Bạn chưa nhập lại mật khẩu!", 'notify');
+            return false;
+        }
+        if (this.userModel.password !== this.userModel.confirmPassword) {
+            this.showMessage(mType.warn, "Thông báo", "Mật khẩu không giống nhau! ", 'notify');
+            return false;
+        }
+        if (!this.userModel.phone || this.userModel.phone =='') {
+            this.showMessage(mType.warn, "Thông báo", "Bạn chưa nhập số điện thoại! ", 'notify');
+            return false;
+        }
+        if(!this.userModel.email || this.userModel.email ==''){
+            this.showMessage(mType.warn, "Thông báo", "Bạn chưa nhập emai! ", 'notify');
+            return false;
+        }
+        const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if(re.test(this.userModel.email) == false){
+            this.showMessage(mType.warn, "Thông báo", "Bạn nhập email chưa đúng! ", 'notify');
+            return false;
+        }
+        var reg = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        if(reg.test(this.userModel.phone) == false){
+            this.showMessage(mType.warn, "Thông báo", "Số điện thoại bạn nhập không đúng! ", 'notify');
+            return false;
+        }
+        if (!this.selectedRoles || this.selectedRoles === null )  {
+            this.showMessage(mType.warn, "Thông báo", "Bạn chưa chọn phân quyền! ", 'notify');
+            return false;
+        }
+        return true;
     }
 }
 

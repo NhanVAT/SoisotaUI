@@ -10,6 +10,7 @@ export class AppUser implements AbstractAuditing {
     lastName: string;
     fullName: string;
     password: string;
+    confirmPassword: string;
     address: string;
     phone: string;
     userId: any;
