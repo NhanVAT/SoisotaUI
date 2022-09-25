@@ -71,12 +71,23 @@ import {AppBreadcrumbService} from './app-systems/app.breadcrumb.service';
 import {AppContactusComponent} from './pages/app.contactus.component';
 
 import {ComponentModule} from './modules/components-module/component.modules';
-import {ComponentCustomerModule} from './modules/compoents-customer-module/component-customer.modules';
+import {
+    ComponentCustomerModule
+} from './modules/compoents-customer-module/component-customer.modules';
 import {QuanTriHeThongModule} from './modules/quan-tri-he-thong-module/quan-tri-he-thong.module';
 import {ShareData} from "./modules/compoents-customer-module/components-customer";
-import {CacheData} from "./modules/compoents-customer-module/shared-data-services/cachedata.service";
-import {LoadingInterceptor} from "./modules/compoents-customer-module/Interceptors/LoadingInterceptor";
-import {MyHttpInterceptor} from "./modules/compoents-customer-module/Interceptors/MyHttpInterceptor";
+import {
+    CacheData
+} from "./modules/compoents-customer-module/shared-data-services/cachedata.service";
+import {
+    LoadingInterceptor
+} from "./modules/compoents-customer-module/Interceptors/LoadingInterceptor";
+import {
+    MyHttpInterceptor
+} from "./modules/compoents-customer-module/Interceptors/MyHttpInterceptor";
+import {QuanTriDoiTacModule} from "./modules/quan-tri-doi-tac-module/quan-tri-doi-tac.module";
+import {QuanTriDanhMucModule} from "./modules/quan-tri-danh-muc-module/quan-tri-danh-muc.module";
+import {QuanTriCuaHangModule} from "./modules/quan-tri-cua-hang-module/quan-tri-cua-hang.module";
 
 @NgModule({
     imports: [
@@ -88,7 +99,10 @@ import {MyHttpInterceptor} from "./modules/compoents-customer-module/Interceptor
         AppCodeModule,
         ComponentModule,
         ComponentCustomerModule,
-        QuanTriHeThongModule
+        QuanTriHeThongModule,
+        QuanTriDoiTacModule,
+        QuanTriDanhMucModule,
+        QuanTriCuaHangModule
     ],
     declarations: [
         AppComponent,

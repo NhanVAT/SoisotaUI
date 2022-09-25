@@ -20,44 +20,48 @@
             <div class="pages-header px-3 py-1"
                  style="border-radius: 9px; border: none; background-color:#ffffff00">
                 <div class="logo">
-                    <img src="assets/layout/images/wolf_login_4.png"
-                         style="width: 250px; height: 170px"/>
+                    <img src="assets/layout/images/logoSoi3.png"
+                         style="width: 100%; height: 100%"/>
                 </div>
             </div>
-<div style="padding: 15px; background: #ececec29;border-radius: 20px;">
-            <h1 style="color: #ffffff; font-family: sans-serif;">Đăng nhập</h1>
+            <div style="padding: 15px; background: #ececec29;border-radius: 20px;">
+                <h1 style="color: #ffffff; font-family: sans-serif;">Đăng nhập</h1>
 
-            <div class="input-panel flex flex-column px-3">
-                <div class="p-inputgroup">
+                <div class="input-panel flex flex-column px-3">
+                    <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"
                           style="border-radius: 20px 0px 0px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;">
                         <i class="pi pi-user"></i>
                     </span>
-                    <input type="text" class="username"
-                           style="border-radius: 0px 20px 20px 0px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
-                           [(ngModel)]="userName" id="email" pInputText placeholder="Tên đăng nhập">
-                </div>
-                <div class="p-inputgroup mt-3 mb-6">
+                        <input type="text" class="username"
+                               style="border-radius: 0px 20px 20px 0px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
+                               [(ngModel)]="userName" id="email" pInputText
+                               placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="p-inputgroup mt-3 mb-6">
                     <span class="p-inputgroup-addon"
                           style="border-radius: 20px 0px 0px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;">
                         <i class="pi pi-lock"></i>
                     </span>
-                    <input type="password" (keydown)="onEnter($event)"
-                           style="border-radius: 0px 20px 20px 0px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
-                           [(ngModel)]="password" id="password" pInputText placeholder="Mật khẩu">
+                        <input type="password" (keydown)="onEnter($event)"
+                               style="border-radius: 0px 20px 20px 0px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
+                               [(ngModel)]="password" id="password" pInputText
+                               placeholder="Mật khẩu">
+
+                    </div>
 
                 </div>
-
+                <p-button class="login-button  px-3" (onClick)="onSubmit()"
+                          [style]="{'border-radius': '20px', 'background-color': 'white', 'color': 'black','margin-bottom':'0rem','width':'50%'}"
+                          label="Đăng nhập">
+                </p-button>
+                <div class="px-3"
+                     style="align-items: center;border-bottom: 1px solid #dadde1;display: flex;margin: 20px 28px;text-align: center;width:80%;"></div>
+                <button pButton class="px-3" (click)="onClickRegister()"
+                        style="background: #ffffff00 !important;"
+                        label="Đăng kí">
+                </button>
             </div>
-            <p-button class="login-button  px-3" (onClick)="onSubmit()"
-                      [style]="{'border-radius': '20px', 'background-color': 'white', 'color': 'black','margin-bottom':'0rem','width':'50%'}"
-                      label="Đăng nhập">
-            </p-button>
-            <div class="px-3" style="align-items: center;border-bottom: 1px solid #dadde1;display: flex;margin: 20px 28px;text-align: center;width:80%;"></div>
-            <button  pButton class="px-3" (click)="onClickRegister()" style="background: #ffffff00 !important;"
-                       label="Đăng kí">
-            </button>
-        </div>
         </div>
     </div>
 </div>

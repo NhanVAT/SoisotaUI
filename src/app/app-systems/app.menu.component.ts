@@ -326,8 +326,8 @@ export class AppMenuComponent implements OnInit {
             }
         }
 
-        this.model = roots;
+        this.modelAll = roots;
 
-        this.modelAll.push({ label: 'Menu chính', icon: 'pi pi-fw pi-home', items: this.model });
+        //this.modelAll.push({ label: 'Menu chính', icon: 'pi pi-fw pi-home', items: this.model });
     }
 }

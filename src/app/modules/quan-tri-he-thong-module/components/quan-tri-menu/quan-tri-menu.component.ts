@@ -109,6 +109,9 @@ export class QuanTriMenuComponent extends iComponentBase implements OnInit {
     onInitListModule() {
         this.lstModule = [
             {label: 'Quản trị Hệ thống', value: "QTriHThong"},
+            {label: 'Quản trị Đối tác', value: "QTriDoiTac"},
+            {label: 'Quản trị Cửa hàng', value: "QTriCuaHang"},
+            {label: 'Quản trị Danh mục', value: "QTriDanhMuc"},
             {label: 'Khám phá', value: "KhamPha"},
             {label: 'Đặt giao hàng', value: "DatGiaoHang"}
         ]

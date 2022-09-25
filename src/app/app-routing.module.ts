@@ -41,8 +41,13 @@ import {AppCalendarComponent} from './pages/app.calendar.component';
 import {AppInvoiceComponent} from './pages/app.invoice.component';
 import {AppHelpComponent} from './pages/app.help.component';
 import {AppWizardComponent} from './pages/app.wizard.component';
-import {LoginComponent, SettingUserComponent} from './modules/quan-tri-he-thong-module/quan-tri-he-thong';
-import {RegisterComponent} from './modules/quan-tri-he-thong-module/components/register-component/register.component';
+import {
+    LoginComponent,
+    SettingUserComponent
+} from './modules/quan-tri-he-thong-module/quan-tri-he-thong';
+import {
+    RegisterComponent
+} from './modules/quan-tri-he-thong-module/components/register-component/register.component';
 
 const routes: Routes = [
     {
@@ -112,6 +117,22 @@ const routes: Routes = [
                 path: 'QTriHThong',
                 loadChildren: () => import('./modules/quan-tri-he-thong-module/quan-tri-he-thong.module').then(m => m.QuanTriHeThongModule),
             },
+            // Quản trị đối tác module
+            {
+                path: 'QTriDoiTac',
+                loadChildren: () => import('./modules/quan-tri-doi-tac-module/quan-tri-doi-tac.module').then(m => m.QuanTriDoiTacModule),
+            },
+            // Quản trị danh mục module
+            {
+                path: 'QTriDanhMuc',
+                loadChildren: () => import('./modules/quan-tri-danh-muc-module/quan-tri-danh-muc.module').then(m => m.QuanTriDanhMucModule),
+            },
+            // Quản trị cửa hàng module
+            {
+                path: 'QTriDanhMuc',
+                loadChildren: () => import('./modules/quan-tri-cua-hang-module/quan-tri-cua-hang.module').then(m => m.QuanTriCuaHangModule),
+            },
+
 
             {path: 'SettingUser', component: SettingUserComponent}
         ]

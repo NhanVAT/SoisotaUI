@@ -7,7 +7,8 @@
         'layout-menu-mobile-active': mobileMenuActive,
         'layout-topbar-mobile-active': mobileTopbarActive,
         'layout-rightmenu-active': rightMenuActive,
-        'layout-rtl': app.isRTL}" [class]="'layout-menu-' + app.menuTheme + ' layout-topbar-' + app.topbarTheme">
+        'layout-rtl': app.isRTL}"
+     [class]="'layout-menu-' + app.menuTheme + ' layout-topbar-' + app.topbarTheme">
 
     <app-topbar></app-topbar>
 
@@ -15,14 +16,17 @@
 
     <div class="menu-wrapper" (click)="onMenuClick($event)">
         <div class="layout-menu-container">
-            <app-inline-menu *ngIf="app.inlineMenuPosition=='top' || app.inlineMenuPosition=='both'" key="top"></app-inline-menu>
+            <!--            <app-inline-menu *ngIf="app.inlineMenuPosition=='top' || app.inlineMenuPosition=='both'"-->
+            <!--                             key="top"></app-inline-menu>-->
             <app-menu></app-menu>
-            <app-inline-menu *ngIf="app.inlineMenuPosition=='bottom' || app.inlineMenuPosition=='both'" key="bottom"></app-inline-menu>
+            <!--            <app-inline-menu-->
+            <!--                *ngIf="app.inlineMenuPosition=='bottom' || app.inlineMenuPosition=='both'"-->
+            <!--                key="bottom"></app-inline-menu>-->
         </div>
     </div>
 
     <div class="layout-main">
-        <app-breadcrumb></app-breadcrumb>
+        <!--        <app-breadcrumb></app-breadcrumb>-->
 
         <div class="layout-content">
             <router-outlet></router-outlet>

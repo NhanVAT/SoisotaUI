@@ -4,16 +4,19 @@ import {AppUser} from '../../models/appuser.model';
 import {iServiceBase} from '../../../compoents-customer-module/functions/iServiceBase';
 import * as API from '../../../../services/apiURL';
 import {Table} from 'primeng/table';
-import {iComponentBase, mType} from '../../../compoents-customer-module/functions/iComponentBase.component';
+import {
+    iComponentBase,
+    mType
+} from '../../../compoents-customer-module/functions/iComponentBase.component';
 import {AppBreadcrumbService} from '../../../../app-systems/app.breadcrumb.service';
 import {ShareData} from '../../../compoents-customer-module/shared-data-services/sharedata.service';
 import {AppRole} from '../../models/approle.model';
 
 
 @Component({
-  selector: 'app-quan-tri-nguoi-dung',
-  templateUrl: './quan-tri-nguoi-dung.component.html',
-  styleUrls: ['./quan-tri-nguoi-dung.component.scss'],
+    selector: 'app-quan-tri-nguoi-dung',
+    templateUrl: './quan-tri-nguoi-dung.component.html',
+    styleUrls: ['./quan-tri-nguoi-dung.component.scss'],
 })
 
 export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit {
@@ -36,20 +39,23 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
     ];
 
     @ViewChild('dt') table: Table;
+
     constructor(public breadcrumbService: AppBreadcrumbService,
                 private shareData: ShareData,
                 public messageService: MessageService,
                 private confirmationService: ConfirmationService,
                 private iServiceBase: iServiceBase,
-    ) { super(messageService, breadcrumbService);
+    ) {
+        super(messageService, breadcrumbService);
     }
+
     ngOnInit() {
         this.loadAllUser();
         this.getAllRole();
     }
 
     onChangeAction(user: AppUser, selectValue: any) {
-        switch (selectValue.value){
+        switch (selectValue.value) {
             case 'editUser':
                 this.onEditUser(user);
                 break;
@@ -76,22 +82,28 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             accept: () => {
                 this.listAppUser = this.listAppUser.filter(val => !this.selectedUsers.includes(val));
                 this.selectedUsers = null;
-                this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Successful',
+                    detail: 'Products Deleted',
+                    life: 3000
+                });
             }
         });
     }
 
-     onEditUser(user: AppUser) {
+    onEditUser(user: AppUser) {
         const headerDialog = `Cập nhật người dùng: ${user.fullName}`;
         this.userModel = Object.assign({}, user);
         this.selectedRoles = [];
-        for (let i = 0; i < user.appRoles.length; i++){
+        for (let i = 0; i < user.appRoles.length; i++) {
             this.selectedRoles.push(this.listAppRole.filter(val => val.id === user.appRoles[i].id)[0]);
         }
         //console.log(this.selectedRoles);
         this.openDialog(headerDialog);
     }
-    async editUser(user){
+
+    async editUser(user) {
         const response = await this.iServiceBase.putDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.UPDATE_APP_USER, user);
         if (response && response.success) {
             this.showMessage(mType.success, 'Thông báo', 'Cập nhật người dùng thành công!', 'notify');
@@ -114,7 +126,8 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             }
         });
     }
-    async deleteUser(user: AppUser){
+
+    async deleteUser(user: AppUser) {
         try {
             let param = user.userName;
 
@@ -133,21 +146,23 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             console.log(e);
         }
     }
-    async deleteListUser(){
-        try{
+
+    async deleteListUser() {
+        try {
             let param = this.selectedUsers.map(o => o.id);
-            let response = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.DELETE_LIST_APP_USER, param, true );
-            if (response){
+            let response = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.DELETE_LIST_APP_USER, param, true);
+            if (response) {
                 this.showMessage(mType.success, "Thông báo", "Xóa người dùng thành công!", 'notify');
                 this.loadAllUser();
-            } else{
+            } else {
                 this.showMessage(mType.success, "Thông báo", "Xóa người dùng không thành công. Vui lòng xem lại!", 'notify');
             }
-        } catch (e){
-                console.log(e);
+        } catch (e) {
+            console.log(e);
         }
     }
-    onDeleteListUser(){
+
+    onDeleteListUser() {
         console.log(123);
         this.confirmationService.confirm({
             message: 'Bạn có chắc chắn xóa những người dùng đã chọn ?',
@@ -158,6 +173,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             }
         });
     }
+
     async loadAllUser() {
         this.listAppUser = [];
         this.selectedRoles = [];
@@ -171,11 +187,12 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             }
 
             this.loading = false;
-        }catch (e){
+        } catch (e) {
             console.log(e);
             this.loading = false;
         }
     }
+
     async getAllRole() {
         this.listAppRole = [];
         try {
@@ -191,10 +208,11 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             this.loading = false;
         }
     }
-    bindingDataUserModel(): AppUser{
+
+    bindingDataUserModel(): AppUser {
         const result = new AppUser();
-        if (this.shareData && this.shareData.userInfo){
-            if (this.userModel.id && this.userModel.id > 0){
+        if (this.shareData && this.shareData.userInfo) {
+            if (this.userModel.id && this.userModel.id > 0) {
                 result.id = this.userModel.id;
                 result.userId = this.userModel.userId;
                 result.fullName = this.userModel.firstName + ' ' + this.userModel.lastName;
@@ -209,8 +227,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 result.active = this.userModel.active;
                 result.lastModifiedBy = this.shareData.userInfo.userName;
                 result.lastModifiedDate = new Date();
-            }
-            else{
+            } else {
                 result.fullName = this.userModel.firstName + ' ' + this.userModel.lastName;
                 result.userName = this.userModel.userName;
                 result.email = this.userModel.email;
@@ -222,20 +239,22 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 result.userId = result.userName;
                 result.createdBy = this.shareData.userInfo.userName;
                 result.createdDate = new Date();
-        }}
+            }
+        }
         return result;
     }
-    async createUser(userEnity){
-        try{
+
+    async createUser(userEnity) {
+        try {
             let param = userEnity;
             let respone = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.INSERT_APP_USER, param, true);
-            if (respone && respone.success){
-                this.showMessage(mType.success,"Thông báo", "Thêm mới người dùng thành công!",'notify' );
+            if (respone && respone.success) {
+                this.showMessage(mType.success, "Thông báo", "Thêm mới người dùng thành công!", 'notify');
                 this.userDialog = false;
 
                 this.loadAllUser();
 
-            }else {
+            } else {
                 this.showMessage(mType.error, "Thông báo", "Thêm mới nggưi dùng không thành công. Vui lòng xem lại!", 'notify');
             }
         } catch (e) {
@@ -243,7 +262,8 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
         }
         this.userModel = new AppUser();
     }
-    saveUser(){
+
+    saveUser() {
         console.log(this.selectedRoles);
         const userEnity = this.bindingDataUserModel();
         console.log(userEnity.id);
@@ -251,15 +271,17 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             console.log('vao up');
             this.editUser(userEnity);
 
-        }else{
+        } else {
             this.createUser(userEnity);
         }
         console.log(userEnity);
         this.hideDialog();
     }
-    onCreateUser(){
+
+    onCreateUser() {
         this.openDialog('Tạo người dùng mới');
     }
+
     openDialog(header: string) {
         this.headerDialog = header;
         this.submitted = false;
