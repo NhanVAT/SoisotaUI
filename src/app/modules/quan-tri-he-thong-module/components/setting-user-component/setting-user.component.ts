@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {MessageService} from 'primeng/api';
-import {AppBreadcrumbService} from 'src/app/app-systems/app.breadcrumb.service';
+import {AppBreadcrumbService} from 'src/app/app-systems/app-breadcrumb/app.breadcrumb.service';
 import {iComponentBase} from 'src/app/modules/compoents-customer-module/components-customer';
 
 @Component({

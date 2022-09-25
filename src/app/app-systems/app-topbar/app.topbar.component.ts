@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {animate, AnimationEvent, style, transition, trigger} from '@angular/animations';
 import {MegaMenuItem, MessageService} from 'primeng/api';
-import {AppComponent} from '../app.component';
-import {AppMainComponent} from '../app.main.component';
+import {AppComponent} from '../../app.component';
+import {AppMainComponent} from '../../app.main.component';
 import {Router} from "@angular/router";
 import {
     iComponentBase,

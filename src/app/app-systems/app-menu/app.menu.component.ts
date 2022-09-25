@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AppComponent} from '../app.component';
+import {AppComponent} from '../../app.component';
 import {
     iServiceBase,
     ShareData
 } from 'src/app/modules/compoents-customer-module/components-customer';
-import * as API from "../services/apiURL";
+import * as API from "../../services/apiURL";
 
 @Component({
     selector: 'app-menu',

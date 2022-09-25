@@ -6,17 +6,17 @@ import {DatePipe, HashLocationStrategy, LocationStrategy} from '@angular/common'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 
-import {AppCodeModule} from './app-systems/app.code.component';
+import {AppCodeModule} from './app-systems/app-code/app.code.component';
 import {AppComponent} from './app.component';
 import {AppMainComponent} from './app.main.component';
-import {AppConfigComponent} from './app-systems/app.config.component';
-import {AppMenuComponent} from './app-systems/app.menu.component';
-import {AppMenuitemComponent} from './app-systems/app.menuitem.component';
-import {AppInlineMenuComponent} from './app-systems/app.inlinemenu.component';
-import {AppRightMenuComponent} from './app-systems/app.rightmenu.component';
-import {AppBreadcrumbComponent} from './app-systems/app.breadcrumb.component';
-import {AppTopBarComponent} from './app-systems/app.topbar.component';
-import {AppFooterComponent} from './app-systems/app.footer.component';
+import {AppConfigComponent} from './app-systems/app-config/app.config.component';
+import {AppMenuComponent} from './app-systems/app-menu/app.menu.component';
+import {AppMenuitemComponent} from './app-systems/app-menuitem/app.menuitem.component';
+import {AppInlineMenuComponent} from './app-systems/app-inline-menu/app.inlinemenu.component';
+import {AppRightMenuComponent} from './app-systems/app-rightmenu/app.rightmenu.component';
+import {AppBreadcrumbComponent} from './app-systems/app-breadcrumb/app.breadcrumb.component';
+import {AppTopBarComponent} from './app-systems/app-topbar/app.topbar.component';
+import {AppFooterComponent} from './app-systems/app-footer/app.footer.component';
 import {DashboardComponent} from './demo/view/dashboard.component';
 import {DashboardAnalyticsComponent} from './demo/view/dashboardanalytics.component';
 import {FormLayoutDemoComponent} from './demo/view/formlayoutdemo.component';
@@ -66,8 +66,8 @@ import {NodeService} from './demo/service/nodeservice';
 import {PhotoService} from './demo/service/photoservice';
 import {ProductService} from './demo/service/productservice';
 
-import {MenuService} from './app-systems/app.menu.service';
-import {AppBreadcrumbService} from './app-systems/app.breadcrumb.service';
+import {MenuService} from './app-systems/app-menu/app.menu.service';
+import {AppBreadcrumbService} from './app-systems/app-breadcrumb/app.breadcrumb.service';
 import {AppContactusComponent} from './pages/app.contactus.component';
 
 import {ComponentModule} from './modules/components-module/component.modules';

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {Product} from '../domain/product';
 import {ProductService} from '../service/productservice';
-import {AppBreadcrumbService} from '../../app-systems/app.breadcrumb.service';
+import {AppBreadcrumbService} from '../../app-systems/app-breadcrumb/app.breadcrumb.service';
 
 @Component({
     templateUrl: './overlaysdemo.component.html',

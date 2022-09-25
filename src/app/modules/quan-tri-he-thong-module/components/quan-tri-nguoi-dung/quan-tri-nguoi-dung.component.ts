@@ -8,7 +8,7 @@ import {
     iComponentBase,
     mType
 } from '../../../compoents-customer-module/functions/iComponentBase.component';
-import {AppBreadcrumbService} from '../../../../app-systems/app.breadcrumb.service';
+import {AppBreadcrumbService} from '../../../../app-systems/app-breadcrumb/app.breadcrumb.service';
 import {ShareData} from '../../../compoents-customer-module/shared-data-services/sharedata.service';
 import {AppRole} from '../../models/approle.model';
 

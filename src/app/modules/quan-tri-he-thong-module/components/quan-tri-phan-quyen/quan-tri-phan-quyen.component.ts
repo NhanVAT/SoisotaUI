@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Table} from "primeng/table";
-import {AppBreadcrumbService} from "../../../../app-systems/app.breadcrumb.service";
+import {AppBreadcrumbService} from "../../../../app-systems/app-breadcrumb/app.breadcrumb.service";
 import {AppRole} from "../../models/approle.model";
 import {
     iComponentBase,

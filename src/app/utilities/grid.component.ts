@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {trigger, state, style, transition, animate} from '@angular/animations';
-import {AppBreadcrumbService} from '../app-systems/app.breadcrumb.service';
+import {AppBreadcrumbService} from '../app-systems/app-breadcrumb/app.breadcrumb.service';
 
 @Component({
     templateUrl: './grid.component.html',

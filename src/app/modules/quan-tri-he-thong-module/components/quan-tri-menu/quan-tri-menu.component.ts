@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AppBreadcrumbService} from "../../../../app-systems/app.breadcrumb.service";
+import {AppBreadcrumbService} from "../../../../app-systems/app-breadcrumb/app.breadcrumb.service";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {
     iComponentBase,

@@ -1,7 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AppCodeModule} from 'src/app/app-systems/app.code.component';
+import {AppCodeModule} from 'src/app/app-systems/app-code/app.code.component';
 import {LoadingComponent} from './components/loading-component/loading.component';
 import {iComponentBase} from './functions/iComponentBase.component';
 import {iServiceBase} from './functions/iServiceBase';

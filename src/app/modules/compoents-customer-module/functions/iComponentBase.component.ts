@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {iFunction} from './iFunction';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {Title} from '@angular/platform-browser';
-import {AppBreadcrumbService} from '../../../app-systems/app.breadcrumb.service';
+import {AppBreadcrumbService} from '../../../app-systems/app-breadcrumb/app.breadcrumb.service';
 import {IStaticModuleComponent} from '../components/static-module/iStaticModule';
 
 export const enum cType {
