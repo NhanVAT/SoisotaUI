@@ -123,7 +123,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
 
             let response = await this.iServiceBase.postDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.DELETE_APP_USER, param);
 
-            if (response) {
+            if (response != '') {
                 this.showMessage(mType.success, "Thông báo", "Xóa người dùng thành công!", 'notify');
 
                 //lấy lại danh sách All Role
@@ -231,7 +231,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 result.confirmPassword = this.userModel.confirmPassword;
                 result.phone = this.userModel.phone;
                 result.address = this.userModel.address;
-                result.active = true;
+                result.active = this.userModel.active;
                 result.userId = result.userName;
                 result.createdBy = this.shareData.userInfo.userName;
                 result.createdDate = new Date();
@@ -334,7 +334,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             this.showMessage(mType.warn, "Thông báo", "Số điện thoại bạn nhập không đúng! ", 'notify');
             return false;
         }
-        if (!this.selectedRoles || this.selectedRoles === null )  {
+        if (!this.selectedRoles || this.selectedRoles.length === 0 )  {
             this.showMessage(mType.warn, "Thông báo", "Bạn chưa chọn phân quyền! ", 'notify');
             return false;
         }
