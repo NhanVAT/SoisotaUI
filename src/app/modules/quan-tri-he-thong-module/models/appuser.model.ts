@@ -21,4 +21,5 @@ export class AppUser implements AbstractAuditing {
     createdDate: any;
     lastModifiedBy: string;
     lastModifiedDate: any;
+    lstRoleId: any[];
 }

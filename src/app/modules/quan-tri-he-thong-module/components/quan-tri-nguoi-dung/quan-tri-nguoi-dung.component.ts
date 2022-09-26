@@ -202,6 +202,11 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
     bindingDataUserModel(): AppUser {
         const result = new AppUser();
         if (this.shareData && this.shareData.userInfo) {
+            result.lstRoleId = [];
+            this.selectedRoles.forEach(each => {
+                result.lstRoleId.push(each.id);
+            });
+
             // update
             if (this.userModel.id && this.userModel.id > 0) {
                 result.id = this.userModel.id;
@@ -213,7 +218,6 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 result.confirmPassword = this.userModel.confirmPassword;
                 result.phone = this.userModel.phone;
                 result.address = this.userModel.address;
-                result.appRoles = this.selectedRoles;
                 result.createdBy = this.userModel.createdBy;
                 result.createdDate = this.userModel.createdDate;
                 result.active = this.userModel.active;
@@ -227,7 +231,6 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 result.confirmPassword = this.userModel.confirmPassword;
                 result.phone = this.userModel.phone;
                 result.address = this.userModel.address;
-                result.appRoles = this.selectedRoles;
                 result.active = true;
                 result.userId = result.userName;
                 result.createdBy = this.shareData.userInfo.userName;
