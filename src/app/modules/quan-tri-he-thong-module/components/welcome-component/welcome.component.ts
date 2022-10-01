@@ -12,7 +12,7 @@ export class WelcomeComponent implements OnInit {
     activeItem: MenuItem;
     selectsItem: any[] = [];
     selectedItem: any;
-
+    displayModal: boolean;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -51,4 +51,8 @@ export class WelcomeComponent implements OnInit {
         }
         document.getElementById(idMenu).style.borderBottom = '4px red solid';
     }
+    showModalDialog() {
+        this.displayModal = true;
+    }
+
 }

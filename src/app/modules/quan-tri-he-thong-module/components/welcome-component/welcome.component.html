@@ -31,7 +31,7 @@
         </div>
         <div class="field col-12 md:col-2">
             <div class="p-fluid grid col-12" [style]="{'padding-top': '5px'}">
-                <p-dropdown [options]="selectsItem" [(ngModel)]="selectedItem" optionLabel="label"></p-dropdown>
+                <p-dropdown [style]="{'min-width': '119px'}" [options]="selectsItem" [(ngModel)]="selectedItem" optionLabel="label"></p-dropdown>
             </div>
         </div>
         <div class="field col-12 md:col-5 main-nav" >
@@ -53,8 +53,104 @@
     </div>
 </header>
 <section>
+    <div class="banner">
+        <div class="container">
+            <div class="now-search">
+                <div>
+                    <h1>  Đặt đồ ăn, giao hàng từ 20'...</h1>
+                    <div> có 12345 địa điểm ở Quảng Bình từ 00:00 - 23:59</div>
+                </div>
+                <div class="form-search">
+                    <div class="p-inputgroup">
+                        <input type="text" pInputText placeholder="Tìm kiếm">
+                        <button type="button" pButton pRipple>
+                            <span class="pi pi-search"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="category-list-filter">
+                    <a href=""></a>
+                    <span class="category-item "> Tất cả</span>
+                    <a href=""></a>
+                    <span class="category-item ">Đồ ăn</span>
+                    <a href=""></a>
+                    <span class="category-item ">Đồ uống</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-main-home">
+        <div class="container">
+            <div class="main-right-home">
+                <div class="user-get-local">
+                    <div class="row pointer p-inputgroup" (click)="showModalDialog()">
+                        <div class="col-auto">
+                            <span class="">Thực phẩm</span>
+                            <i class="pi pi-arrow-right" style=" margin-left: 0.5rem!important;"></i>
+                        </div>
+                        <div class="col pl-2 pr-2">
+                            Chọn địa chỉ giao hàng
+                        </div>
+                        <div class="col-auto">
+                            <span class="pl-2 pr-2 "></span>
+                            <i class="pi pi-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="now-list-restaurant">
+                    <div class="title-wrapper">
+                        <h2>Ưu đãi</h2>
+                        <a class="view-all-deal"href="">
+                            <span class="pi pi-microsoft"></span>
+                            Xem tất cả
+                        </a>
+                    </div>
+                    <div class="list-restaurant">
+                        <div class="item-restaurant">
+                            <a target="_blank" class="item-content" href="">
+                                <div class="img-restaurant">
+                                    <img src="/assets/demo/images/product/bamboo-watch.jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item-restaurant">
+                            <a target="_blank" class="item-content" href="">
+                                <div class="img-restaurant">
+                                    <img src="/assets/demo/images/product/bamboo-watch.jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item-restaurant">
+                            <a target="_blank" class="item-content" href="">
+                                <div class="img-restaurant">
+                                    <img src="/assets/demo/images/product/bamboo-watch.jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item-restaurant">
+                            <a target="_blank" class="item-content" href="">
+                                <div class="img-restaurant">
+                                    <img src="/assets/demo/images/product/bamboo-watch.jpg" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <footer>
 
 </footer>
+<p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false">
+    <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
