@@ -154,7 +154,7 @@
 </div>
 <p-dialog [header]="headerDialog" [(visible)]="userDialog"
           [breakpoints]="{'960px': '75vw'}"
-          [style]="{width: '30vw'}"
+          [style]="{width: '30vw' }"
           [modal]="true" styleClass="p-fluid"
           [draggable]="false" [resizable]="false" [maximizable]="true">
     <ng-template pTemplate="content">
@@ -227,11 +227,16 @@
             </p-divider>
             <p-fieldset legend="Chọn nhóm quyền" [toggleable]="true">
                 <div class="field">
-                    <p-multiSelect [options]="listAppRole" [(ngModel)]="selectedRoles"  defaultLabel="Chọn quyền" optionLabel="roleName"
+                    <p-inputSwitch [(ngModel)]="userModel.active"></p-inputSwitch>
+                    <h6> Kích hoạt</h6>
+                </div>
+                <div class="field">
+                    <p-multiSelect [options]="listAppRole" [(ngModel)]="selectedRoles" appendTo="body" defaultLabel="Chọn quyền" optionLabel="roleName"
                                    selectedItemsLabel="{0} quyền đã chọn"
                                    defaultValue="true" display="chip">
                     </p-multiSelect>
                 </div>
+
             </p-fieldset>
 
             </div>
