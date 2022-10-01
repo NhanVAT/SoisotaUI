@@ -1,3 +1,4 @@
+@import '~primeicons/primeicons.css';
 *{
     margin: 0;
     padding: 0;
@@ -11,6 +12,7 @@ header{
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 1;
 }
 
 .logo{
@@ -65,9 +67,7 @@ button{
         margin-left: 5px;
     }
 }
-section{
-    padding-top: 74px
-}
+
 .banner{
     height: 100vh;
     z-index: 0;
@@ -111,6 +111,7 @@ section{
 .container-main-home{
     position: relative;
     z-index: auto;
+    padding-top: 75px;
 
 }
 
