@@ -48,6 +48,7 @@ import {
 import {
     RegisterComponent
 } from './modules/quan-tri-he-thong-module/components/register-component/register.component';
+import {WelcomeComponent} from './modules/quan-tri-he-thong-module/components/welcome-component/welcome.component';
 
 const routes: Routes = [
     {
@@ -60,13 +61,22 @@ const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: '',
+        path: 'register',
         redirectTo: '/register',
         pathMatch: 'full'
     },
     {
         path: 'register',
         component: RegisterComponent
+    },
+    {
+        path: 'welcome',
+        redirectTo: '/welcome',
+        pathMatch: 'full'
+    },
+    {
+        path: 'welcome',
+        component: WelcomeComponent
     },
     {
         path: 'Home', component: AppMainComponent,
