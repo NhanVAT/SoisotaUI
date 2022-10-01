@@ -21,10 +21,10 @@
     <div class="p-fluid grid" [style]="{'background-color': 'white', 'padding': '10px'}">
         <div class="field col-12 md:col-2">
             <div class="p-fluid grid col-12">
-                <div class="logo" style="max-width: 80px">
+                <div class="logo" >
                     <a href="">
                         <img src="assets/layout/images/wolf_login_3.svg" alt="Soisota"
-                             style="width: 100%; height: 100%"/>
+                             style="width: 100%; height: 100%; margin-left: 4em"/>
                     </a>
                 </div>
             </div>
@@ -36,18 +36,17 @@
         </div>
         <div class="field col-12 md:col-5 main-nav" >
 <!--            <p-tabMenu [model]="items" [activeItem]="activeItem" [style]="{'margin-top' : '20px'}"></p-tabMenu>-->
-            <a class="nav-item" *ngFor="let item of items" href="{{item.url}}">{{item.label}}</a>
+            <a class="nav-item" *ngFor="let item of items" href="{{item.url}}" id="{{item.id}}" (click)="onClickTabMenu($event, item.id)">{{item.label}}</a>
         </div>
         <div class="field col-12 md:col-3">
-            <div class="p-fluid grid" [style]="{'padding-top': '5px'}">
+            <div class="p-fluid grid " [style]="{'padding-top': '5px'}">
                 <div class="field col-12 md:col-3"></div>
-                <div class="field col-12 md:col-3">
+                <div class="field col-12 md:col-3 button-search" >
                     <button pButton pRipple type="button" class="p-button-rounded p-button-text" icon="pi pi-search"></button>
                 </div>
-                <div class="field col-12 md:col-4">
+                <div class="field col-12 md:col-4 button-login">
                     <button (click)="onLogin()" pButton pRipple type="button"  label="Đăng nhập" class="p-button-outlined p-button-info"></button>
                 </div>
-
                 <div class="field col-12 md:col-2"></div>
             </div>
         </div>

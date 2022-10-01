@@ -22,24 +22,14 @@ export class WelcomeComponent implements OnInit {
 
     private initTabMenu() {
         this.items = [
-            {label: 'Đồ ăn', styleClass : 'p-menuitem-active'},
-            {label: 'Thực phẩm' , url: '/login'},
-            {label: 'Siêu thi', url: '/register'},
-            {label: 'Quán ăn', url: ''},
-            {label: 'Quán nước', url: ''}
+            {label: 'Đồ ăn', url: '/', id: 'menu1'},
+            {label: 'Thực phẩm' , url: '/login', id: 'menu2'},
+            {label: 'Siêu thi', url: '/register', id: 'menu3'},
+            {label: 'Quán ăn', url: '', id: 'menu4'},
+            {label: 'Quán nước', url: '', id: 'menu5'}
         ];
 
         this.activeItem = this.items[0];
-    }
-
-    activeMenu(event) {
-        let node = event.target.parentNode;
-
-        let menuitem = document.getElementsByClassName("p-menuitem");
-        for (let i = 0; i < menuitem.length; i++) {
-            menuitem[i].classList.remove("active");
-        }
-        node.classList.add("active");
     }
 
     private initSelectList() {
@@ -51,5 +41,14 @@ export class WelcomeComponent implements OnInit {
 
     onLogin() {
         this.router.navigate(['/login']);
+    }
+
+    onClickTabMenu(event, idMenu) {
+        //console.log(idMenu);
+        event.preventDefault();
+        for (let i = 0; i < this.items.length; i++) {
+            document.getElementById(this.items[i].id).style.borderBottom = 'none';
+        }
+        document.getElementById(idMenu).style.borderBottom = '4px red solid';
     }
 }

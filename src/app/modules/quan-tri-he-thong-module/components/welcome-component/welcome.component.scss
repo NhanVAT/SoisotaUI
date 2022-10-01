@@ -4,6 +4,20 @@
     border: 0;
     font-size: 100%;
     box-sizing: border-box;
+    font-family: inherit;
+}
+
+header{
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.logo{
+    position: fixed;
+    max-width: 95px;
+    top: 0;
+    margin-top: 3px;
 }
 
 button{
@@ -15,10 +29,28 @@ button{
 }
 
 .main-nav > .nav-item{
-    padding: 20px;
+    padding: 10px 10px 19px 10px;
     text-overflow: ellipsis;
+}
+
+.main-nav > .nav-item:first-child{
+    border-bottom: 4px red solid;
 }
 
 .main-nav > .nav-item:hover{
     color: red;
+}
+
+@media screen and (max-width: 400px) {
+
+    .logo{
+        display: none;
+    }
+
+    .button-search{
+        margin-top: 30px;
+    }
+    .button-login{
+        width: 100px;
+    }
 }
