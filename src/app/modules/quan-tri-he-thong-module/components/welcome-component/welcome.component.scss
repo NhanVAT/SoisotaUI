@@ -20,6 +20,10 @@ header{
     margin-top: 3px;
 }
 
+.logo > a > img {
+    margin-left: 4em
+}
+
 button{
     padding: 10px;
 }
@@ -41,7 +45,7 @@ button{
     color: red;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
 
     .logo{
         display: none;
@@ -52,5 +56,12 @@ button{
     }
     .button-login{
         width: 100px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .logo > a > img{
+        margin-top: 8px;
+        margin-left: 5px;
     }
 }
