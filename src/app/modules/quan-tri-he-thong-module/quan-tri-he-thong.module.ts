@@ -11,6 +11,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {QuanTriPhanQuyenComponent} from './components/quan-tri-phan-quyen/quan-tri-phan-quyen.component';
 import {QuanTriNguoiDungComponent} from './components/quan-tri-nguoi-dung/quan-tri-nguoi-dung.component';
 import { WelcomeComponent } from './components/welcome-component/welcome.component';
+import {AppComponent} from '../../app.component';
 
 const routes: Routes = [
     {path: 'QuanTriMenu', component: QuanTriMenuComponent},
@@ -36,13 +37,13 @@ const routes: Routes = [
     ],
     exports: [
         LoginComponent,
-        SettingUserComponent
+        SettingUserComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
     entryComponents: [],
-    bootstrap: []
+    bootstrap: [AppComponent]
 })
 export class QuanTriHeThongModule {
     constructor(private injector: Injector) {

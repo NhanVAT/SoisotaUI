@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    box-sizing: border-box;
+}
+
+button{
+    padding: 10px;
+}
+
+.main-nav{
+    margin-top: 15px;
+}
+
+.main-nav > .nav-item{
+    padding: 20px;
+    text-overflow: ellipsis;
+}
+
+.main-nav > .nav-item:hover{
+    color: red;
+}
