@@ -30,6 +30,14 @@ button{
     padding: 10px;
 }
 
+.btn-login, .btn-search{
+    min-width: 0 !important;
+}
+
+.button-search{
+    max-width: 50px;
+}
+
 .main-nav{
     margin-top: 15px;
 }
