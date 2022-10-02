@@ -124,6 +124,7 @@ section{
     position: relative;
     width: 700px;
     margin-top: 50px;
+    min-height: calc(100vh - 123px);
 }
 .container-main-home .main-right-home .user-get-local{
     background-color: #ffffff;
@@ -147,47 +148,63 @@ section{
 
 .container-main-home .main-right-home .now-list-restaurant{
     background-color: #ffffff;
-    padding: 15px 20px 15px 40px ;
+    padding: 15px 20px 15px;
     border-radius: 5px;
     margin-bottom: 20px;
+}
+.now-list-restaurant{
+    border-radius: 6px;
+    margin-bottom: 20px;
+    background-color: #FFFFFF;
     position: relative;
 }
-//.now-list-restaurant{
-//    border-radius: 6px;
-//    margin-bottom: 20px;
-//    position: relative;
-//    background-color: #FFFFFF;
-//}
 
-//.main-right-home .now-list-restaurant{
-//    padding: 13px 40px 10px;
-//    border: 1px solid #d7d7d7;
-//    background-color: #fff;
-//}
-//
-.main-right-home > .now-list-restaurant > .list-restaurant > .item-restaurant {
-    width: 33.33333%;
-    margin-right: 23px;
-    display: inline;
-    margin-bottom: 20px;
+.now-list-restaurant .item-restaurant{
+    float: left;
 }
-.main-right-home > .now-list-restaurant > .list-restaurant > .item-restaurant:nth-child(3n+0){
-    margin-right: 0;
+.list-restaurant{
+    background-color: #1B5E20;
+    display: inline-block;
 }
+.item-restaurant {
+     width: 33.333333%;
+    padding: 8px;
+    background-color: #FFFFFF;
+ }
 
 .main-right-home > .now-list-restaurant > .list-restaurant > .item-restaurant > a > .img-restaurant{
-    max-width: 33.33333%;
+    height: 120px;
 }
-
-
-.main-right-home > .now-list-restaurant > .list-restaurant > .item-restaurant > item-content > .img-restaurant > img{
+.main-right-home > .now-list-restaurant > .list-restaurant > .item-restaurant > a > .img-restaurant > img{
     width: 100%;
     height: 100%;
-    object-fit: contain
+    position: relative;
+    border-radius: 6px 6px 0 0;
+
 }
-//.list-restaurant{
-//    position: relative;
-//}
+.info-restaurant{
+    border: 1px solid #d7d7d7;
+    border-radius: 0 0 6px 6px;
+    height: 84px;
+}
+.now-list-restaurant .info-restaurant .name-res {
+    font-size: 14px;
+    font-weight: 700;
+    color: #252525;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 1px;
+    padding-top: 5px;
+}
+.now-list-restaurant .info-restaurant .address-res {
+    font-size: 12px;
+    color: #959595;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;}
+/////////////////////
+
 //.now-list-restaurant .item-restaurant{
 //    float: left
 //}
