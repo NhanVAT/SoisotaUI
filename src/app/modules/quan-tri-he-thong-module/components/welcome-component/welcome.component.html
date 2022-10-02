@@ -143,7 +143,34 @@
     </div>
 </section>
 <footer>
-
+    <div class="container">
+        <div class="container-inner">
+            <div class="block-footer block-left">
+                <h2 style="font-size: 16px; font-weight: bold; margin-bottom: 23px">Thông tin</h2>
+                <ul>
+                    <li *ngFor="let link of listLinkFooter">
+                        <a  href="{{link.url}}">{{link.name}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="block-footer block-middle">
+                <a href="">
+                    <img src="assets/layout/images/wolf_login_3.svg" alt="Soisota"
+                         style="width: 100%; height: auto; margin: 0 auto"
+                    />
+                    <p style="color:  #7c7303; font-weight: bold">Soisota Page</p>
+                </a>
+            </div>
+            <div class="block-right">
+                <h2 style="font-size: 16px; font-weight: bold; margin-bottom: 23px">Địa chỉ</h2>
+                <address>{{address.content}}<br>
+                    <a href="tel:{{address.phone}}" style="color:  #0088FF">{{address.phone}}</a><br>
+                    <a href="mailto:{{address.email}}" style="color:  #0088FF">{{address.email}}</a>
+                </address>
+            </div>
+        </div>
+        <div id="footer-bottom"></div>
+    </div>
 </footer>
 <p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
           [draggable]="false" [resizable]="false">
