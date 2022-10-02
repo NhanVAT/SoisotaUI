@@ -245,8 +245,8 @@ section{
 p.solid {border-style: solid;}
 .opentime-status {
     position: absolute;
-    top: 7px;
-    left: 7px;
+    top: -4px;
+    left: -4px;
     z-index: 1;
 }
 .opentime-status .stt {
@@ -258,22 +258,15 @@ p.solid {border-style: solid;}
     position: relative;
     z-index: 2;
 }
-/////////////////////
+.info-basic-res{
+    padding: 5px 8px;
+    border: none;
+}
+.item-content:hover{
+    box-shadow: 0px 10px 5px #888, 0px -10px 5px #888;
 
-//.now-list-restaurant .item-restaurant{
-//    float: left
-//}
-//.now-list-restaurant{
-//    border-radius: 6px;
-//    margin-bottom: 20px;
-//    position: relative;
-//}
-//
-//.item-content{
-//    border-radius: 6px;
-//    background-color: #ffffff;
-//    display: block;
-//}
+}
+
 //popup
 :host ::ng-deep .p-button {
     margin: 0 .5rem 0 0;

@@ -13,6 +13,7 @@ export class WelcomeComponent implements OnInit {
     selectsItem: any[] = [];
     selectedItem: any;
     displayModal: boolean;
+    displaymodalSearch: boolean;
     listLinkFooter: any[] = [];
     address: any;
     y: any = 0;
@@ -75,6 +76,9 @@ export class WelcomeComponent implements OnInit {
     }
     showModalDialog() {
         this.displayModal = true;
+    }
+    showModalDialogSearch(){
+        this.displaymodalSearch = true;
     }
 
     private onInitListLinkFooter() {
