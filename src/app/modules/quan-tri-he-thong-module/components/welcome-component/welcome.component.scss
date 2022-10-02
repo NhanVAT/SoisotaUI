@@ -12,7 +12,7 @@ header{
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1;
+    z-index: 2;
 }
 
 .logo{
@@ -80,7 +80,7 @@ section{
     background-size: cover;
     background-image: url('/assets/demo/images/product/main-welcome.jpg');
     overflow: hidden;
-    position: fixed;
+    position: absolute;
 }
 .container{
     width: 1200px;
@@ -170,6 +170,7 @@ section{
      width: 33.333333%;
     padding: 8px;
     background-color: #FFFFFF;
+    position: relative;
  }
 
 .main-right-home > .now-list-restaurant > .list-restaurant > .item-restaurant > a > .img-restaurant{
@@ -184,8 +185,6 @@ section{
 }
 .info-restaurant{
     border: 1px solid #d7d7d7;
-    border-radius: 0 0 6px 6px;
-    height: 84px;
 }
 .now-list-restaurant .info-restaurant .name-res {
     font-size: 14px;
@@ -196,6 +195,8 @@ section{
     overflow: hidden;
     margin-bottom: 1px;
     padding-top: 5px;
+    text-align: center;
+
 }
 .now-list-restaurant .info-restaurant .address-res {
     font-size: 12px;
@@ -203,6 +204,33 @@ section{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;}
+.now-list-restaurant .content-promotion {
+    font-size: 13px;
+    color: #187caa;
+    font-weight: 700;
+    padding: 8px 8px 5px;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid #d7d7d7;
+    border-radius: 0 0 6px 6px;
+    text-overflow: ellipsis;
+    white-space: nowrap;}
+p.solid {border-style: solid;}
+.opentime-status {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    z-index: 1;
+}
+.opentime-status .stt {
+    border-radius: 50%;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
 /////////////////////
 
 //.now-list-restaurant .item-restaurant{
@@ -245,7 +273,7 @@ footer{
     background-color: #F2F2F2;
     position: relative;
     z-index: 1;
-    width: 100vw;
+    width: 100%;
     box-sizing: border-box;
 }
 
