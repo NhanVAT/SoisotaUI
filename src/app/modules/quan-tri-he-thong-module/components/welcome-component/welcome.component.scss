@@ -129,6 +129,12 @@ section{
 
 }
 
+.clearfix:after{
+    display: block;
+    clear: both;
+    content: "";
+}
+
 .container-main-home .main-right-home{
     float: right;
     position: relative;
