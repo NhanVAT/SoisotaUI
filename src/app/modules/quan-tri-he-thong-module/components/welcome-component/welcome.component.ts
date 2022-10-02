@@ -35,8 +35,8 @@ export class WelcomeComponent implements OnInit {
             email: 'soisotasupport@gmail.com'
         };
 
-        this.lengthListRestaurant = document.getElementById('list_restaurant').offsetHeight;
-        this.yAbsolute = this.lengthListRestaurant - 410 - 350;
+        this.lengthListRestaurant = document.getElementById('main_home').offsetHeight;
+        this.yAbsolute = this.lengthListRestaurant - 637;
             //
             // `Soisota \nthành phố Đồng Hới, tỉnh Quảng Bình \nSố điện thoại: 0922211222 ` +
             // `\nEmail: <a href="mailto:soisotasupport@gmail.com">`;
@@ -88,11 +88,12 @@ export class WelcomeComponent implements OnInit {
     @HostListener("document:scroll")
     onScrollBanner(){
         this.y = window.scrollY;
-        //console.log(this.y);
+        console.log(this.y);
         if (this.y >= this.yAbsolute){
-
+            console.log('vao' + this.yAbsolute);
+            let top = this.lengthListRestaurant - 635;
             document.getElementById('scroll_div').style.position = 'absolute';
-            document.getElementById('scroll_div').style.top = this.yAbsolute    + 'px';
+            document.getElementById('scroll_div').style.top = top   + 'px';
         }else{
             document.getElementById('scroll_div').style.position = 'fixed';
             document.getElementById('scroll_div').style.top = '0px';
