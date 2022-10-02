@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {Router} from '@angular/router';
 
@@ -15,6 +15,7 @@ export class WelcomeComponent implements OnInit {
     displayModal: boolean;
     listLinkFooter: any[] = [];
     address: any;
+    x: any = 0;
 
   constructor(private router: Router) { }
 
@@ -79,5 +80,16 @@ export class WelcomeComponent implements OnInit {
         ];
     }
 
+    @HostListener("document:scroll")
+    abc(){
+        this.x = window.scrollY;
+        console.log(this.x);
+        if (this.x >= 200){
+            console.log('vao r');
+            document.getElementById('scroll_div').style.position = 'absolute';
+        }else{
+            document.getElementById('scroll_div').style.position = 'fixed';
+        }
+    }
 
 }
