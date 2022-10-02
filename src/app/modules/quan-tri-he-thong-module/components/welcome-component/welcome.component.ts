@@ -81,7 +81,7 @@ export class WelcomeComponent implements OnInit {
     }
 
     @HostListener("document:scroll")
-    abc(){
+    onScrollBanner(){
         this.x = window.scrollY;
         console.log(this.x);
         if (this.x >= 200){
