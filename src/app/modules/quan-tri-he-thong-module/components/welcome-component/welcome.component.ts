@@ -36,7 +36,7 @@ export class WelcomeComponent implements OnInit {
         };
 
         this.lengthListRestaurant = document.getElementById('list_restaurant').offsetHeight;
-        this.yAbsolute = this.lengthListRestaurant - 410;
+        this.yAbsolute = this.lengthListRestaurant - 410 - 350;
             //
             // `Soisota \nthành phố Đồng Hới, tỉnh Quảng Bình \nSố điện thoại: 0922211222 ` +
             // `\nEmail: <a href="mailto:soisotasupport@gmail.com">`;
@@ -92,7 +92,7 @@ export class WelcomeComponent implements OnInit {
         if (this.y >= this.yAbsolute){
 
             document.getElementById('scroll_div').style.position = 'absolute';
-            document.getElementById('scroll_div').style.top = this.yAbsolute  + 'px';
+            document.getElementById('scroll_div').style.top = this.yAbsolute    + 'px';
         }else{
             document.getElementById('scroll_div').style.position = 'fixed';
             document.getElementById('scroll_div').style.top = '0px';
