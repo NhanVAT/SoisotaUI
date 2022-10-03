@@ -506,16 +506,58 @@
         <div id="footer-bottom"></div>
     </div>
 </footer>
-<p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+<p-dialog header="Godfather I" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true"
           [draggable]="false" [resizable]="false">
-    <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div class="p-inputgroup" style="width: 100%;">
+        <input type="text" pInputText placeholder="Tìm kiếm" style="padding-left: 10px">
+        <button type="button"  pRipple style="width:50px">
+            <span class="pi pi-search" style="padding: 0px 9px;"></span>
+        </button>
+    </div>
+    <div>
+        <div class="list-restaurant">
+            <div class="item-restaurant item-address">
+                <a target="_blank" class="item-content" href="">
+                    <div class="info-restaurant info-basic-res">
+                        <h4 class="name-res" title="Bếp Bà Muối - Ăn Vặt Online">Bếp Bà Muối - Ăn Vặt Online</h4>
+                        <div class="address-res" title="606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM">606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM</div>
+                    </div>
+                </a>
+            </div>
+            <div class="item-restaurant item-address">
+                <a target="_blank" class="item-content" href="">
+                    <div class="info-restaurant info-basic-res">
+                        <h4 class="name-res" title="Bếp Bà Muối - Ăn Vặt Online">Bếp Bà Muối - Ăn Vặt Online</h4>
+                        <div class="address-res" title="606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM">606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM</div>
+                    </div>
+                </a>
+            </div>
+            <div class="item-restaurant item-address">
+                <a target="_blank" class="item-content" href="">
+                    <div class="info-restaurant info-basic-res">
+                        <h4 class="name-res" title="Bếp Bà Muối - Ăn Vặt Online">Bếp Bà Muối - Ăn Vặt Online</h4>
+                        <div class="address-res" title="606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM">606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM</div>
+                    </div>
+                </a>
+            </div>
+            <div class="item-restaurant item-address">
+                <a target="_blank" class="item-content" href="">
+                    <div class="info-restaurant info-basic-res">
+                        <h4 class="name-res" title="Bếp Bà Muối - Ăn Vặt Online">Bếp Bà Muối - Ăn Vặt Online</h4>
+                        <div class="address-res" title="606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM">606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM</div>
+                    </div>
+                </a>
+            </div>
+            </div>
+    </div>
+    <div>
+
+    </div>
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
-<p-dialog header="Header" [(visible)]="displaymodalSearch" [modal]="true" [style]="{width: '50vw'}"
+<p-dialog header="Header" [(visible)]="displaymodalSearch" [modal]="true" [style]="{width: '100%'}" [style.background-color]="'red!important'"
           [draggable]="false" [resizable]="false">
     <div class="p-inputgroup" style="width: 90%;">
         <input type="text" pInputText placeholder="Tìm kiếm" style="padding-left: 10px">

@@ -1,6 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {Router} from '@angular/router';
+import {Customer} from '../../../../demo/domain/customer';
 
 @Component({
   selector: 'app-welcome',
@@ -19,6 +20,7 @@ export class WelcomeComponent implements OnInit {
     y: any = 0;
     lengthListRestaurant: any = 0;
     yAbsolute: any = 0;
+
 
   constructor(private router: Router) { }
 
