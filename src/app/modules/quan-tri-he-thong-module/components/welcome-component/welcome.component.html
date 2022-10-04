@@ -56,8 +56,8 @@
     <div class="banner" id="scroll_div">
         <div class="container">
             <div class="now-search">
-                <div>
-                    <h1>  Đặt đồ ăn, giao hàng từ 20'...</h1>
+                <div style="font-size: 15px; color: darkblue">
+                    <h1> Đặt đồ ăn, giao hàng từ 20'...</h1>
                     <div> có 12345 địa điểm ở Quảng Bình từ 00:00 - 23:59</div>
                 </div>
                 <div class="form-search">
@@ -506,58 +506,17 @@
         <div id="footer-bottom"></div>
     </div>
 </footer>
-<p-dialog header="Godfather I" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true"
+<p-dialog header="Chọn địa điểm" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true"
           [draggable]="false" [resizable]="false">
-    <div class="p-inputgroup" style="width: 100%;">
-        <input type="text" pInputText placeholder="Tìm kiếm" style="padding-left: 10px">
-        <button type="button"  pRipple style="width:50px">
-            <span class="pi pi-search" style="padding: 0px 9px;"></span>
-        </button>
-    </div>
-    <div>
-        <div class="list-restaurant">
-            <div class="item-restaurant item-address">
-                <a target="_blank" class="item-content" href="">
-                    <div class="info-restaurant info-basic-res">
-                        <h4 class="name-res" title="Bếp Bà Muối - Ăn Vặt Online">Bếp Bà Muối - Ăn Vặt Online</h4>
-                        <div class="address-res" title="606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM">606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM</div>
-                    </div>
-                </a>
-            </div>
-            <div class="item-restaurant item-address">
-                <a target="_blank" class="item-content" href="">
-                    <div class="info-restaurant info-basic-res">
-                        <h4 class="name-res" title="Bếp Bà Muối - Ăn Vặt Online">Bếp Bà Muối - Ăn Vặt Online</h4>
-                        <div class="address-res" title="606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM">606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM</div>
-                    </div>
-                </a>
-            </div>
-            <div class="item-restaurant item-address">
-                <a target="_blank" class="item-content" href="">
-                    <div class="info-restaurant info-basic-res">
-                        <h4 class="name-res" title="Bếp Bà Muối - Ăn Vặt Online">Bếp Bà Muối - Ăn Vặt Online</h4>
-                        <div class="address-res" title="606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM">606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM</div>
-                    </div>
-                </a>
-            </div>
-            <div class="item-restaurant item-address">
-                <a target="_blank" class="item-content" href="">
-                    <div class="info-restaurant info-basic-res">
-                        <h4 class="name-res" title="Bếp Bà Muối - Ăn Vặt Online">Bếp Bà Muối - Ăn Vặt Online</h4>
-                        <div class="address-res" title="606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM">606/52 Đường 3 Tháng 2, P. 14, Quận 10, TP. HCM</div>
-                    </div>
-                </a>
-            </div>
-            </div>
-    </div>
-    <div>
-
+    <div style="width: 100%;">
+        <p-autoComplete [(ngModel)]="selectedCountry" [showEmptyMessage]="true" [suggestions]="filteredCountries" [style]="{width: '100%'}" [inputStyle]="{width: '100%'}" appendTo="body"
+                        (completeMethod)="filterCountry($event)" field="name" [minLength]="1"></p-autoComplete>
     </div>
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
-<p-dialog header="Header" [(visible)]="displaymodalSearch" [modal]="true" [style]="{width: '100%'}" [style.background-color]="'red!important'"
+<p-dialog header="Header" [(visible)]="displaymodalSearch" [modal]="true" [style]="{width: '100%'}"
           [draggable]="false" [resizable]="false">
     <div class="p-inputgroup" style="width: 90%;">
         <input type="text" pInputText placeholder="Tìm kiếm" style="padding-left: 10px">

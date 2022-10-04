@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {MenuItem} from 'primeng/api';
+import {FilterService, MenuItem} from 'primeng/api';
 import {Router} from '@angular/router';
-import {Customer} from '../../../../demo/domain/customer';
+import {CountryService} from '../../../../demo/service/countryservice';
 
 @Component({
   selector: 'app-welcome',
@@ -20,13 +20,31 @@ export class WelcomeComponent implements OnInit {
     y: any = 0;
     lengthListRestaurant: any = 0;
     yAbsolute: any = 0;
-
-
-  constructor(private router: Router) { }
+    selectedCountry: any[];
+    filteredCountries: any[];
+    countries: any[];
+  constructor(private router: Router, private countryService: CountryService, private filterService: FilterService) { }
 
   ngOnInit(): void {
       this.onInitPage();
+      this.countryService.getCountries().then(countries => {
+          this.countries = countries;
+      });
   }
+    filterCountry(event) {
+        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+        let filtered : any[] = [];
+        let query = event.query;
+
+        for(let i = 0; i < this.countries.length; i++) {
+            let country = this.countries[i];
+            if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                filtered.push(country);
+            }
+        }
+
+        this.filteredCountries = filtered;
+    }
     private onInitPage() {
         this.onInitTabMenu();
         this.onInitSelectList();
@@ -39,7 +57,7 @@ export class WelcomeComponent implements OnInit {
         };
 
         this.lengthListRestaurant = document.getElementById('main_home').offsetHeight;
-        this.yAbsolute = this.lengthListRestaurant - 637;
+        this.yAbsolute = this.lengthListRestaurant - 637 ;
             //
             // `Soisota \nthành phố Đồng Hới, tỉnh Quảng Bình \nSố điện thoại: 0922211222 ` +
             // `\nEmail: <a href="mailto:soisotasupport@gmail.com">`;
@@ -107,3 +125,4 @@ export class WelcomeComponent implements OnInit {
     }
 
 }
+

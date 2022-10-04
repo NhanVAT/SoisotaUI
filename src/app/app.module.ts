@@ -88,6 +88,7 @@ import {
 import {QuanTriDoiTacModule} from "./modules/quan-tri-doi-tac-module/quan-tri-doi-tac.module";
 import {QuanTriDanhMucModule} from "./modules/quan-tri-danh-muc-module/quan-tri-danh-muc.module";
 import {QuanTriCuaHangModule} from "./modules/quan-tri-cua-hang-module/quan-tri-cua-hang.module";
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 @NgModule({
     imports: [
@@ -102,7 +103,8 @@ import {QuanTriCuaHangModule} from "./modules/quan-tri-cua-hang-module/quan-tri-
         QuanTriHeThongModule,
         QuanTriDoiTacModule,
         QuanTriDanhMucModule,
-        QuanTriCuaHangModule
+        QuanTriCuaHangModule,
+        AutoCompleteModule,
     ],
     declarations: [
         AppComponent,
