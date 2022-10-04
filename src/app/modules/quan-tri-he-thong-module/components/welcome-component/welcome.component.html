@@ -516,15 +516,11 @@
         <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
-<p-dialog header="Header" [(visible)]="displaymodalSearch" [modal]="true" [style]="{width: '100%'}"
+<p-dialog styleClass="modal_se" [(visible)]="displaymodalSearch" [modal]="true"
           [draggable]="false" [resizable]="false">
-    <div class="p-inputgroup" style="width: 90%;">
-        <input type="text" pInputText placeholder="Tìm kiếm" style="padding-left: 10px">
-        <button type="button"  pRipple style="width:50px">
-            <span class="pi pi-search" style="padding: 0px 9px;"></span>
-        </button>
+    <div class="p-inputgroup" style="width: 100%; background-color: #080808f2">
+        <input type="text" pInputText id="input_search_dialog">
     </div>
-    <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="displaymodalSearch=false" label="Ok" styleClass="p-button-text"></p-button>
-    </ng-template>
+
+    <p-button (click)="closeDialogSearch()" icon="pi pi-times" styleClass="btn-close-search"></p-button>
 </p-dialog>

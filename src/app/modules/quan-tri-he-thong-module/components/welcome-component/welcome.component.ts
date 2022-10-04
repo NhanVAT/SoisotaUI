@@ -101,6 +101,10 @@ export class WelcomeComponent implements OnInit {
         this.displaymodalSearch = true;
     }
 
+    closeDialogSearch(){
+        this.displaymodalSearch = false;
+    }
+
     private onInitListLinkFooter() {
         this.listLinkFooter = [
             {name : 'Giới thiệu', url : '/' },
@@ -123,6 +127,7 @@ export class WelcomeComponent implements OnInit {
             document.getElementById('scroll_div').style.top = '0px';
         }
     }
+
 
 }
 

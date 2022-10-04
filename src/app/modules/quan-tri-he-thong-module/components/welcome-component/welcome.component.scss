@@ -406,3 +406,62 @@ list-address{
         width: 100%;
     }
 }
+
+.p-dialog-content{
+    margin-top: 100px;
+}
+
+p-dialog .modal_se{
+    max-height: 100% !important;
+}
+
+:host ::ng-deep {
+    .p-dialog{
+        box-sizing: border-box;
+        max-height: 100% !important;
+        background-color: #080808f2;
+        padding:70px 100px 400px;
+        position:fixed;
+        top:0;
+        right:0;
+        bottom:0;
+        left:0;
+        z-inde: 1050;
+        outline:0;
+        overflow-y: auto;
+
+    }
+
+    .p-dialog-header{
+        background-color: transparent ;
+    }
+
+    .p-dialog-content{
+        background-color: transparent ;
+        width: 60%;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+    }
+
+    #input_search_dialog{
+        text-align: center;
+        padding: 7px;
+        border: none;
+        outline: none;
+    }
+
+    .btn-close-search{
+        position: fixed;
+        border-radius: 50% !important;
+        min-width: 3rem !important;
+        top:5rem;
+        right: 25rem;
+        background-color: transparent;
+    }
+
+    .btn-close-search:hover{
+        background-color: transparent;
+        color: red;
+    }
+}
