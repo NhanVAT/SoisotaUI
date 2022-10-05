@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {AppComponent} from '../../app.component';
 import {AppMainComponent} from '../../app.main.component';
 
@@ -196,9 +196,11 @@ import {AppMainComponent} from '../../app.main.component';
                   styleClass="layout-config-button"></p-button>
     `
 })
+
+@Injectable()
 export class AppConfigComponent implements OnInit {
 
-    scale = 12;
+    scale = 13;
 
     scales: number[] = [12, 13, 14, 15, 16];
 
@@ -291,6 +293,8 @@ export class AppConfigComponent implements OnInit {
         this.selectedMenuTheme = this.menuThemes.find(theme => theme.name === this.menuTheme);
         this.selectedTopbarTheme = this.topbarThemes.find(theme => theme.name === this.topbarTheme);
         document.documentElement.style.fontSize = this.scale + 'px';
+
+        //this.onLayoutModeChange(null, 'dark');
     }
 
     decrementScale() {

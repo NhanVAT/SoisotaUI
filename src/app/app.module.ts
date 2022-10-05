@@ -71,20 +71,12 @@ import {AppBreadcrumbService} from './app-systems/app-breadcrumb/app.breadcrumb.
 import {AppContactusComponent} from './pages/app.contactus.component';
 
 import {ComponentModule} from './modules/components-module/component.modules';
-import {
-    ComponentCustomerModule
-} from './modules/compoents-customer-module/component-customer.modules';
+import {ComponentCustomerModule} from './modules/compoents-customer-module/component-customer.modules';
 import {QuanTriHeThongModule} from './modules/quan-tri-he-thong-module/quan-tri-he-thong.module';
 import {ShareData} from "./modules/compoents-customer-module/components-customer";
-import {
-    CacheData
-} from "./modules/compoents-customer-module/shared-data-services/cachedata.service";
-import {
-    LoadingInterceptor
-} from "./modules/compoents-customer-module/Interceptors/LoadingInterceptor";
-import {
-    MyHttpInterceptor
-} from "./modules/compoents-customer-module/Interceptors/MyHttpInterceptor";
+import {CacheData} from "./modules/compoents-customer-module/shared-data-services/cachedata.service";
+import {LoadingInterceptor} from "./modules/compoents-customer-module/Interceptors/LoadingInterceptor";
+import {MyHttpInterceptor} from "./modules/compoents-customer-module/Interceptors/MyHttpInterceptor";
 import {QuanTriDoiTacModule} from "./modules/quan-tri-doi-tac-module/quan-tri-doi-tac.module";
 import {QuanTriDanhMucModule} from "./modules/quan-tri-danh-muc-module/quan-tri-danh-muc.module";
 import {QuanTriCuaHangModule} from "./modules/quan-tri-cua-hang-module/quan-tri-cua-hang.module";
@@ -164,7 +156,7 @@ import {QuanTriCuaHangModule} from "./modules/quan-tri-cua-hang-module/quan-tri-
         PhotoService, ProductService, MenuService, AppBreadcrumbService, DatePipe,
         {provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
-        ShareData, CacheData,
+        ShareData, CacheData, AppConfigComponent
     ],
     bootstrap: [AppComponent]
 })

@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
     layoutMode = 'light';
 
-    menuMode = 'horizontal';
+    menuMode = 'static';
 
     inlineMenuPosition = 'bottom';
 
