@@ -420,7 +420,7 @@ p-dialog .modal_se{
         box-sizing: border-box;
         max-height: 100% !important;
         background-color: #080808f2;
-        padding:70px 100px 400px;
+        padding:70px 100px 0;
         position:fixed;
         top:0;
         right:0;
@@ -428,7 +428,7 @@ p-dialog .modal_se{
         left:0;
         z-inde: 1050;
         outline:0;
-        overflow-y: auto;
+        overflow-y: hidden;
 
     }
 
@@ -442,6 +442,8 @@ p-dialog .modal_se{
         margin: 0 auto;
         padding: 0;
         position: relative;
+        height: auto;
+        overflow-y: hidden;
     }
 
     #input_search_dialog{
@@ -464,4 +466,60 @@ p-dialog .modal_se{
         background-color: transparent;
         color: red;
     }
+
+    .p-dialog-footer{
+        position: relative;
+        background-color: transparent ;
+        width: 60%;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .now-idea-searching{
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .now-idea-searching .now-list-restaurant-row{
+        position: absolute;
+        width: 100%;
+        height: 500px;
+        margin: 0;
+        top: 100%;
+    }
+
+    .now-idea-searching > .now-list-restaurant-row > .item-restaurant{
+        width: 100%;
+        text-align: left;
+        margin: 0;
+        padding: 15px;
+    }
+
+    .now-idea-searching > .now-list-restaurant-row > .item-restaurant:hover{
+        background-color: #F2F2F2;
+    }
+
+    .now-idea-searching .item-restaurant .item-content::after{
+        clear: both;
+    }
+
+    .now-idea-searching .item-restaurant .img-restaurant{
+        float: left;
+        margin-right: 1rem;
+    }
+
+    .now-idea-searching .item-restaurant .info-restaurant{
+        border: none;
+    }
+
+    .now-idea-searching .item-restaurant .info-restaurant .name-res{
+        font-weight: bolder
+    }
+
+    .now-idea-searching img{
+        width: 50px;
+        border-radius: 4px
+    }
+
+
 }

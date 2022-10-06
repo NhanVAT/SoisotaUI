@@ -23,7 +23,12 @@ export class WelcomeComponent implements OnInit {
     selectedCountry: any[];
     filteredCountries: any[];
     countries: any[];
-  constructor(private router: Router, private countryService: CountryService, private filterService: FilterService) { }
+    searchSuggest: any[];
+    isSearchSuggest = false;
+    searchFoodVal: any = '';
+
+  constructor(private router: Router, private countryService: CountryService, private filterService: FilterService) {
+  }
 
   ngOnInit(): void {
       this.onInitPage();
@@ -103,6 +108,8 @@ export class WelcomeComponent implements OnInit {
 
     closeDialogSearch(){
         this.displaymodalSearch = false;
+        this.isSearchSuggest = false;
+        this.searchFoodVal = '';
     }
 
     private onInitListLinkFooter() {
@@ -128,6 +135,15 @@ export class WelcomeComponent implements OnInit {
         }
     }
 
-
+    searchFood(food: any){
+      if (food === ''){
+          this.isSearchSuggest = false;
+          return;
+      }
+      this.isSearchSuggest = true;
+      console.log(food);
+      //search food
+        // them vao this.searchSuggest; -> ngfor suggest
+    }
 }
 

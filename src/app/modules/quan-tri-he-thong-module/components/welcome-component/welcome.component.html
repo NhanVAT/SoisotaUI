@@ -519,8 +519,90 @@
 <p-dialog styleClass="modal_se" [(visible)]="displaymodalSearch" [modal]="true"
           [draggable]="false" [resizable]="false">
     <div class="p-inputgroup" style="width: 100%; background-color: #080808f2">
-        <input type="text" pInputText id="input_search_dialog">
+        <input (change)="searchFood($event.target.value)" type="text" pInputText id="input_search_dialog" [(ngModel)]="searchFoodVal" >
+    </div>
+    <p-button (click)="closeDialogSearch()" icon="pi pi-times" styleClass="btn-close-search"></p-button>
+    <div class="now-idea-searching" *ngIf="isSearchSuggest">
+        <div class="now-list-restaurant-row">
+            <div class="item-restaurant">
+                <a href="/ho-chi-minh/fi-cafe-vu-huy-tan" class="item-content">
+                    <div class="img-restaurant">
+                        <img src="https://images.foody.vn/res/g115/1144774/prof/s280x175/file_restaurant_photo_pfpx_16578-ad3afa44-220715100414.jpg" alt="FI Cafe - Vũ Huy Tấn" title="FI Cafe - Vũ Huy Tấn">
+                    </div>
+                    <div class="info-restaurant"><div class="name-res">FI Cafe - Vũ Huy Tấn</div>
+                        <div class="address-res">15C Vũ Huy Tấn, P. 3, Bình Thạnh, TP. HCM</div>
+                    </div>
+                    <div class="opentime-status"><span class="stt online" title="Mở cửa" style="color: rgb(35, 152, 57); background-color: rgb(35, 152, 57);"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="item-restaurant">
+                <a href="/ho-chi-minh/fi-cafe-vu-huy-tan" class="item-content">
+                    <div class="img-restaurant">
+                        <img src="https://images.foody.vn/res/g115/1144774/prof/s280x175/file_restaurant_photo_pfpx_16578-ad3afa44-220715100414.jpg" alt="FI Cafe - Vũ Huy Tấn" title="FI Cafe - Vũ Huy Tấn">
+                    </div>
+                    <div class="info-restaurant"><div class="name-res">FI Cafe - Vũ Huy Tấn</div>
+                        <div class="address-res">15C Vũ Huy Tấn, P. 3, Bình Thạnh, TP. HCM</div>
+                    </div>
+                    <div class="opentime-status">
+                        <span class="stt online" title="Mở cửa" style="color: rgb(35, 152, 57); background-color: rgb(35, 152, 57);"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="item-restaurant">
+                <a href="/ho-chi-minh/fi-cafe-vu-huy-tan" class="item-content">
+                    <div class="img-restaurant">
+                        <img src="https://images.foody.vn/res/g115/1144774/prof/s280x175/file_restaurant_photo_pfpx_16578-ad3afa44-220715100414.jpg" alt="FI Cafe - Vũ Huy Tấn" title="FI Cafe - Vũ Huy Tấn">
+                    </div>
+                    <div class="info-restaurant"><div class="name-res">FI Cafe - Vũ Huy Tấn</div>
+                        <div class="address-res">15C Vũ Huy Tấn, P. 3, Bình Thạnh, TP. HCM</div>
+                    </div>
+                    <div class="opentime-status">
+                        <span class="stt online" title="Mở cửa" style="color: rgb(35, 152, 57); background-color: rgb(35, 152, 57);"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="item-restaurant">
+                <a href="/ho-chi-minh/fi-cafe-vu-huy-tan" class="item-content">
+                    <div class="img-restaurant">
+                        <img src="https://images.foody.vn/res/g115/1144774/prof/s280x175/file_restaurant_photo_pfpx_16578-ad3afa44-220715100414.jpg" alt="FI Cafe - Vũ Huy Tấn" title="FI Cafe - Vũ Huy Tấn">
+                    </div>
+                    <div class="info-restaurant"><div class="name-res">FI Cafe - Vũ Huy Tấn</div>
+                        <div class="address-res">15C Vũ Huy Tấn, P. 3, Bình Thạnh, TP. HCM</div>
+                    </div>
+                    <div class="opentime-status">
+                        <span class="stt online" title="Mở cửa" style="color: rgb(35, 152, 57); background-color: rgb(35, 152, 57);"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="item-restaurant">
+                <a href="/ho-chi-minh/fi-cafe-vu-huy-tan" class="item-content">
+                    <div class="img-restaurant">
+                        <img src="https://images.foody.vn/res/g115/1144774/prof/s280x175/file_restaurant_photo_pfpx_16578-ad3afa44-220715100414.jpg" alt="FI Cafe - Vũ Huy Tấn" title="FI Cafe - Vũ Huy Tấn">
+                    </div>
+                    <div class="info-restaurant"><div class="name-res">FI Cafe - Vũ Huy Tấn</div>
+                        <div class="address-res">15C Vũ Huy Tấn, P. 3, Bình Thạnh, TP. HCM</div>
+                    </div>
+                    <div class="opentime-status">
+                        <span class="stt online" title="Mở cửa" style="color: rgb(35, 152, 57); background-color: rgb(35, 152, 57);"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="item-restaurant">
+                <a href="/ho-chi-minh/fi-cafe-vu-huy-tan" class="item-content">
+                    <div class="img-restaurant">
+                        <img src="https://images.foody.vn/res/g115/1144774/prof/s280x175/file_restaurant_photo_pfpx_16578-ad3afa44-220715100414.jpg" alt="FI Cafe - Vũ Huy Tấn" title="FI Cafe - Vũ Huy Tấn">
+                    </div>
+                    <div class="info-restaurant"><div class="name-res">FI Cafe - Vũ Huy Tấn</div>
+                        <div class="address-res">15C Vũ Huy Tấn, P. 3, Bình Thạnh, TP. HCM</div>
+                    </div>
+                    <div class="opentime-status">
+                        <span class="stt online" title="Mở cửa" style="color: rgb(35, 152, 57); background-color: rgb(35, 152, 57);"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 
-    <p-button (click)="closeDialogSearch()" icon="pi pi-times" styleClass="btn-close-search"></p-button>
+
 </p-dialog>
