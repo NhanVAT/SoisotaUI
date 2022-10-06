@@ -129,7 +129,7 @@ const routes: Routes = [
             },
             // Quản trị cửa hàng module
             {
-                path: 'QTriDanhMuc',
+                path: 'QTriCuaHang',
                 loadChildren: () => import('./modules/quan-tri-cua-hang-module/quan-tri-cua-hang.module').then(m => m.QuanTriCuaHangModule),
             },
 

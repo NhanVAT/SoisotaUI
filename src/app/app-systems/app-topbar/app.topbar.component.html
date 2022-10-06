@@ -1,8 +1,9 @@
 <div class="layout-topbar shadow-4">
     <div class="layout-topbar-left">
         <a class="layout-topbar-logo" routerLink="/">
-            <img id="app-logo" src="../../../assets/layout/images/logoSoi.png" alt="ultima-layout"
-                 style="height: 2.25rem">
+            <img id="app-logo" src="../../../assets/layout/images/S_BILL_Topbar_2.png"
+                 alt="ultima-layout"
+                 style="height: 95%; width: 95%">
         </a>
 
         <a class="layout-menu-button shadow-6" (click)="appMain.onMenuButtonClick($event)" pRipple>
@@ -172,6 +173,34 @@
                     </div>
                 </li>
                 <li class="layout-topbar-item">
+                    <div class="grid grid-nogutter">
+                        <div class="col-12" style="text-align: center">
+                            <span>
+                                <b>0 Đ</b>
+                            </span>
+                        </div>
+                        <div class="col-12" style="text-align: center">
+                            <span>
+                                Số dư ví
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <li class="layout-topbar-item">
+                    <div class="grid grid-nogutter">
+                        <div class="col-12" style="text-align: center">
+                            <span>
+                                <b>{{userName}}</b>
+                            </span>
+                        </div>
+                        <div class="col-12" style="text-align: center">
+                            <span>
+                                {{userFullName}}
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <li class="layout-topbar-item">
                     <a class="layout-topbar-action flex flex-row justify-content-center align-items-center px-2 rounded-circle"
                        (click)="appMain.onTopbarItemClick($event, 'profile')" pRipple>
                         <img src="../../../assets/demo/images/avatar/amyelsner.png" alt="avatar"
@@ -185,21 +214,21 @@
                             <a class="flex flex-row align-items-center" pRipple>
                                 <i class="pi pi-cog"
                                    [ngClass]="{'mr-2': !app.isRTL, 'ml-2': app.isRTL}"></i>
-                                <span>Settings</span>
+                                <span>Thông tin</span>
                             </a>
                         </li>
                         <li class="layout-topbar-action-item">
                             <a class="flex flex-row align-items-center" pRipple>
                                 <i class="pi pi-file-o"
                                    [ngClass]="{'mr-2': !app.isRTL, 'ml-2': app.isRTL}"></i>
-                                <span>Terms of Usage</span>
+                                <span>Lịch sử</span>
                             </a>
                         </li>
                         <li class="layout-topbar-action-item">
                             <a class="flex flex-row align-items-center" pRipple>
                                 <i class="pi pi-compass"
                                    [ngClass]="{'mr-2': !app.isRTL, 'ml-2': app.isRTL}"></i>
-                                <span>Support</span>
+                                <span>Hỗ trợ</span>
                             </a>
                         </li>
                         <li class="layout-topbar-action-item">
@@ -207,7 +236,7 @@
                                pRipple>
                                 <i class="pi pi-power-off"
                                    [ngClass]="{'mr-2': !app.isRTL, 'ml-2': app.isRTL}"></i>
-                                <span>Logout</span>
+                                <span>Đăng xuất</span>
                             </a>
                         </li>
                     </ul>

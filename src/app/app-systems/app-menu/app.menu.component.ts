@@ -37,6 +37,10 @@ export class AppMenuComponent implements OnInit {
                 this.shareData.userInfo = response;
                 this.shareData.userRoles = response.appRoles;
 
+                //Lưu vào Session để lần sau dùng các thím ạ
+                sessionStorage.setItem('USER_CURRENT', JSON.stringify(response));
+                sessionStorage.setItem('USER_ROLES', JSON.stringify(response.appRoles));
+
                 if (!!this.shareData.userRoles) {
                     await this.shareData.userRoles.forEach(itemRole => {
                         this.shareData.userMenus = [...this.shareData.userMenus, ...itemRole.menus];

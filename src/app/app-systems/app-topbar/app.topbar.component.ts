@@ -9,7 +9,6 @@ import {
     iServiceBase,
     ShareData
 } from 'src/app/modules/compoents-customer-module/components-customer';
-import * as API from 'src/app/services/apiURL';
 
 @Component({
     selector: 'app-topbar',
@@ -27,6 +26,10 @@ import * as API from 'src/app/services/apiURL';
     ]
 })
 export class AppTopBarComponent extends iComponentBase implements OnInit {
+
+    userCurrent: any;
+    userName: any;
+    userFullName: any;
 
     constructor(public appMain: AppMainComponent,
                 public app: AppComponent,
@@ -253,8 +256,13 @@ export class AppTopBarComponent extends iComponentBase implements OnInit {
     }
 
 
-
     ngOnInit() {
+        //Lấy thong tin user ra nào
+        this.userCurrent = JSON.parse(sessionStorage.getItem('USER_CURRENT'));
 
+        if (this.userCurrent) {
+            this.userName = this.userCurrent.userName;
+            this.userFullName = this.userCurrent.fullName;
+        }
     }
 }
