@@ -1,4 +1,4 @@
-export interface AbstractAuditing {
+export class AbstractAuditing {
     active: boolean;
     createdBy: string;
     createdDate: any;

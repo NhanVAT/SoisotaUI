@@ -1,7 +1,7 @@
 import {AbstractAuditing} from "../../compoents-customer-module/models/abstract-auditing.model";
 import {TreeNode} from "primeng/api";
 
-export class AppMenu<T = any> implements AbstractAuditing, TreeNode {
+export class AppMenu<T = any> extends AbstractAuditing implements TreeNode {
     id: number;
     menuBadge: string;
     menuBadgeClass: string;
@@ -14,11 +14,6 @@ export class AppMenu<T = any> implements AbstractAuditing, TreeNode {
     menuRouterLink: string;
     menuTarget: string;
     menuUrl: string;
-    active: boolean;
-    createdBy: string;
-    createdDate: any;
-    lastModifiedBy: string;
-    lastModifiedDate: any;
 
     label?: string;
     data?: T;

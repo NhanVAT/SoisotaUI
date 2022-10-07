@@ -1,8 +1,6 @@
 import {AbstractAuditing} from '../../compoents-customer-module/models/abstract-auditing.model';
 
-export class AppUser implements AbstractAuditing {
-    constructor() {
-    }
+export class AppUser extends AbstractAuditing {
 
     id: number;
     email: string;
@@ -16,10 +14,5 @@ export class AppUser implements AbstractAuditing {
     userId: any;
     userName: string;
     appRoles: any;
-    active: boolean;
-    createdBy: string;
-    createdDate: any;
-    lastModifiedBy: string;
-    lastModifiedDate: any;
     lstRoleId: any[];
 }

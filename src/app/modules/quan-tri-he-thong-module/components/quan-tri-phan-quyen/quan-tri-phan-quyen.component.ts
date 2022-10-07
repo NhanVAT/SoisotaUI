@@ -4,17 +4,12 @@ import {AppBreadcrumbService} from "../../../../app-systems/app-breadcrumb/app.b
 import {AppRole} from "../../models/approle.model";
 import {
     iComponentBase,
-    iServiceBase, mType,
+    iServiceBase,
+    mType,
     ShareData
 } from 'src/app/modules/compoents-customer-module/components-customer';
 import * as API from "../../../../services/apiURL";
-import {
-    ConfirmationService,
-    LazyLoadEvent,
-    MessageService,
-    SelectItem,
-    TreeNode
-} from "primeng/api";
+import {ConfirmationService, MessageService, TreeNode} from "primeng/api";
 import {AppMenu} from "../../models/appmenu.model";
 
 @Component({
@@ -169,10 +164,11 @@ export class QuanTriPhanQuyenComponent extends iComponentBase implements OnInit 
     onCreateRole() {
         this.headerDialog = 'Thêm mới phân quyền';
 
+        this.roleModel = new AppRole();
+
         this.roleModel.roleId = 'ROLE_ADMIN';
         this.roleModel.active = true;
         this.roleModel.lstMenuId = [];
-        this.roleModel = new AppRole();
 
         this.displayDialogCreateRole = true;
     }

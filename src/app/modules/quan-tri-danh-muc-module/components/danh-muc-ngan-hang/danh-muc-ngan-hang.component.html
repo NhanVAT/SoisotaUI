@@ -1,0 +1,243 @@
+<div class="grid table-demo">
+    <div class="col-12">
+        <div class="card">
+            <h5>Danh mục ngân hàng</h5>
+            <p>Danh mục Ngân hàng dùng trong hệ thống</p>
+            <p-table #dt [value]="lstAppBank" [(selection)]="selectedBanks" dataKey="id"
+                     styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
+                     [showCurrentPageReport]="true"
+                     [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
+                     currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} ngân hàng"
+                     [globalFilterFields]="['bankId','bankName']" responsiveLayout="scroll"
+                     [loading]="loading">
+                <ng-template pTemplate="caption">
+                    <div class="grid">
+                        <div class="col-6">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                       (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                       placeholder="Tìm kiếm ngân hàng"/>
+                            </span>
+                        </div>
+
+                        <div class="col-4">&nbsp;</div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Thêm mới" icon="pi pi-plus"
+                                    (click)="onCreateBank()"
+                                    style="width: 100%;"></button>
+                        </div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Xóa" icon="pi pi-trash"
+                                    style="width: 100%;" (click)="onDeleteListBank()"
+                                    [disabled]="!selectedBanks || selectedBanks.length == 0"
+                                    class="p-button-danger"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="bankKey">
+                            <div class="flex justify-content-between align-items-center">
+                                Mã ngân hàng
+                                <p-sortIcon field="bankId"></p-sortIcon>
+                                <p-columnFilter type="text" field="bankId" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="bankId">
+                            <div class="flex justify-content-between align-items-center">
+                                Nhóm ngân hàng
+                                <p-sortIcon field="bankId"></p-sortIcon>
+                                <p-columnFilter type="text" field="bankId" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="bankName">
+                            <div class="flex justify-content-between align-items-center">
+                                Tên ngân hàng
+                                <p-sortIcon field="bankName"></p-sortIcon>
+                                <p-columnFilter type="text" field="bankName" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="bankName">
+                            <div class="flex justify-content-between align-items-center">
+                                Mô tả
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdBy">
+                            <div class="flex justify-content-between align-items-center">
+                                Người tạo
+                                <p-sortIcon field="createdBy"></p-sortIcon>
+                                <p-columnFilter type="text" field="createdBy" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdDate">
+                            <div class="flex justify-content-between align-items-center">
+                                Ngày tạo
+                                <p-sortIcon field="createdDate"></p-sortIcon>
+                                <p-columnFilter type="text" field="createdDate" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Trạng thái
+                            </div>
+                        </th>
+                        <th style="width: 8rem">
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Tác vụ
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-bank>
+                    <tr class="p-selectable-row">
+                        <td>
+                            <p-tableCheckbox [value]="bank"></p-tableCheckbox>
+                        </td>
+                        <td>
+                            {{bank.bankCode}}
+                        </td>
+                        <td>
+                            {{bank.bankType}}
+                        </td>
+                        <td>
+                            {{bank.bankName}}
+                        </td>
+                        <td>
+                            {{bank.bankDescribe}}
+                        </td>
+                        <td>
+                            {{bank.createdBy}}
+                        </td>
+                        <td>
+                            {{bank.createdDate| date: 'MM/dd/yyyy'}}
+                        </td>
+                        <td style="text-align: center;">
+                            <button *ngIf="bank.active" pButton pRipple type="button"
+                                    label="Hoạt động"
+                                    class="p-button-rounded p-button-secondary mr-2 mb-2"></button>
+                            <button *ngIf="!bank.active" pButton pRipple type="button"
+                                    label="Không hoạt động"
+                                    class="p-button-rounded p-button-danger mr-2 mb-2"></button>
+                        </td>
+                        <td style="text-align: center">
+                            <div class="grid">
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                            (click)="onUpdateBank(bank)"
+                                            class="p-button-rounded p-mr-2"></button>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-trash"
+                                            (click)="onDeleteBank(bank, $event)"
+                                            class="p-button-rounded p-button-danger"></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">Không có ngân hàng nào.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<p-dialog [header]="headerDialog" [(visible)]="displayDialogCreateBank"
+          [breakpoints]="{'960px': '75vw'}"
+          [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false" [maximizable]="true">
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-12">
+            <div class="card">
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                        <b>Thông tin ngân hàng</b>
+                    </div>
+                </p-divider>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-input-icon-left p-float-label" style="width: 100%">
+						    <i class="pi pi-key"></i>
+                            <input type="text" class="w-full" [(ngModel)]="bankModel.bankCode"
+                                   [disabled]="true" pInputText/>
+                            <label>Mã ngân hàng</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-input-icon-left p-float-label" style="width: 100%">
+						    <i class="pi pi-user"></i>
+                            <input type="text" class="w-full" [(ngModel)]="bankModel.bankName"
+                                   pInputText/>
+                            <label>Tên ngân hàng*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					    <span class="p-input-icon-left p-float-label" style="width: 100%">
+                            <i class="pi pi-align-justify"></i>
+                            <input type="text" class="w-full" [(ngModel)]="bankModel.bankDescribe"
+                                   pInputText/>
+                            <label>Mô tả</label>
+					    </span>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="lstNhomBank" [(ngModel)]="bankModel.bankType"
+                                        [showClear]="true"
+                                        [autoDisplayFirst]="false"></p-dropdown>
+                            <label>Chọn nhóm ngân hàng*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <p-inputSwitch [(ngModel)]="bankModel.active"></p-inputSwitch>
+                        <h6> Hiệu lực</h6>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                    </div>
+                </div>
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                    </div>
+                </p-divider>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="grid" style="text-align: center">
+            <div class="col-5">&nbsp;</div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Lưu" icon="pi pi-save"
+                        (click)="onSaveBank()"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
+                        (click)="onCancelBank()" class="p-button-danger"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-5">&nbsp;</div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-toast baseZIndex='99999' key="notify"></p-toast>
+
+<p-confirmPopup></p-confirmPopup>
+
+<p-confirmDialog key="deleteList" header="Xóa ngân hàng"
+                 icon="pi pi-exclamation-triangle"></p-confirmDialog>

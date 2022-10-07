@@ -1,9 +1,6 @@
 import {AbstractAuditing} from "../../compoents-customer-module/models/abstract-auditing.model";
 
-export class AppRole implements AbstractAuditing {
-
-    constructor() {
-    }
+export class AppRole extends AbstractAuditing {
 
     roleId: string;
     roleKey: string;
@@ -12,9 +9,5 @@ export class AppRole implements AbstractAuditing {
     roleDescribe: string;
     menus: any;
     lstMenuId: any[];
-    active: boolean;
-    createdBy: string;
-    createdDate: any;
-    lastModifiedBy: string;
-    lastModifiedDate: any;
+
 }
