@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MessageService} from 'primeng/api';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {AppUser} from '../../models/user.model';
 import * as API from 'src/app/services/apiURL';
@@ -23,19 +23,20 @@ export class LoginComponent extends iComponentBase implements OnInit {
     siteKey: any = '';
     description: string;
     isOn: boolean = navigator.onLine;
-    isOnline: boolean = false;
+    isOnline = false;
     strIP: any;
-
+    use: AppUser;
     userName: any;
     password: any;
+    rememberMe: boolean;
     maDViQLy: any;
-
     constructor(
         private router: Router,
         public http: HttpClient,
         public messageService: MessageService,
         private iServiceBase: iServiceBase,
-        private datePipe: DatePipe,) {
+
+        private datePipe: DatePipe, ) {
         super(messageService);
     }
 
@@ -49,18 +50,32 @@ export class LoginComponent extends iComponentBase implements OnInit {
     }
 
     logout(user: AppUser) {
-        localStorage.removeItem(user.username)
+        localStorage.removeItem(user.username);
     }
-
+    checkRememberMe(){
+        if (this.rememberMe ){
+            localStorage.setItem('username', this.use.username);
+            localStorage.setItem('password', this.use.password);
+            console.log(localStorage.getItem('username'));
+            console.log(localStorage.getItem('password'));
+        }
+        else{
+            localStorage.setItem('username', "");
+            localStorage.setItem('password', "");
+            console.log(localStorage.getItem('username'));
+            console.log(localStorage.getItem('password'));
+        }
+    }
     async ngOnInit() {
         this.isLogged().then((result: boolean) => {
             if (result) {
-                let userinfo = localStorage.getItem('USER_INFO');
+                this.checkRememberMe();
+                const userinfo = localStorage.getItem('USER_INFO');
 
-                //Lấy SESSIONID ở local storage
-                let sessioninfo = localStorage.getItem('SESSIONID');
+                // Lấy SESSIONID ở local storage
+                const sessioninfo = localStorage.getItem('SESSIONID');
 
-                //Set lại SESSIONID ở local storage
+                // Set lại SESSIONID ở local storage
                 sessionStorage.setItem('SESSIONID', sessioninfo);
 
                 this.router.navigate(['/Home']);
@@ -76,44 +91,47 @@ export class LoginComponent extends iComponentBase implements OnInit {
         this.siteKey = IPService.SiteKey;
 
         this.loadInfoSys();
+
     }
 
     public loadInfoSys(): void {
+        if ((localStorage.getItem('username') != null) || (localStorage.getItem('password') !=null)){
+            this.userName = localStorage.getItem('username');
+            this.password = localStorage.getItem('password');
+
+        }
+
         if (sessionStorage.getItem('USER_NAME') != null){
             this.userName = sessionStorage.getItem('USER_NAME');
         }
     }
-
     async onSubmit() {
         this.submitted = true;
 
-        let parram = {
+        const parram = {
             userName: this.userName,
             password: this.password
         };
 
-        //Load thông tin người dùng'
-        let response = await this.iServiceBase.getDataAsyncByPostRequest(API.PHAN_HE.USER, API.API_USER.SIGNIN, parram);
+        // Load thông tin người dùng'
+        const response = await this.iServiceBase.getDataAsyncByPostRequest(API.PHAN_HE.USER, API.API_USER.SIGNIN, parram);
         if (response && response.token) {
             if (Storage) {
-                var versionOld = localStorage.getItem('VERSION');
+                const versionOld = localStorage.getItem('VERSION');
                 localStorage.setItem('VERSION', versionOld);
 
-                //Nếu log out thì xóa cái này ở local storage đi
-                //Lưu SESSIONID
+                // Nếu log out thì xóa cái này ở local storage đi
+                // Lưu SESSIONID
                 sessionStorage.setItem('SESSIONID', response.sessionId);
                 sessionStorage.setItem('JWT', response.token);
                 sessionStorage.setItem('USER_NAME', this.userName);
-                sessionStorage.setItem("TIME_LOGIN", this.datePipe.transform(new Date(), "dd/MM/yyyy"));
+                sessionStorage.setItem('TIME_LOGIN', this.datePipe.transform(new Date(), 'dd/MM/yyyy'));
             }
 
             this.router.navigate(['/Home']);
         } else {
-            this.showMessage(mType.error, "Thông báo", "Đăng nhập không thành công. Vui lòng kiểm tra lại", 'app-login');
+            this.showMessage(mType.error, 'Thông báo', 'Đăng nhập không thành công. Vui lòng kiểm tra lại', 'app-login');
         }
-    }
-    async onClickRegister(){
-        this.router.navigate(['/register']);
     }
     onEnter(event) {
         if (event.keyCode == 13) {

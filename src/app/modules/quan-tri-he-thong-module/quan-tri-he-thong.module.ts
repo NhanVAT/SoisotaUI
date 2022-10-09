@@ -10,6 +10,7 @@ import {QuanTriMenuComponent} from './components/quan-tri-menu/quan-tri-menu.com
 import {RouterModule, Routes} from "@angular/router";
 import {QuanTriPhanQuyenComponent} from './components/quan-tri-phan-quyen/quan-tri-phan-quyen.component';
 import {QuanTriNguoiDungComponent} from './components/quan-tri-nguoi-dung/quan-tri-nguoi-dung.component';
+import { ForgotPasswordComponent } from './components/forgot-password-component/forgot-password/forgot-password.component';
 
 const routes: Routes = [
     {path: 'QuanTriMenu', component: QuanTriMenuComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
         QuanTriMenuComponent,
         QuanTriPhanQuyenComponent,
         QuanTriNguoiDungComponent,
+        ForgotPasswordComponent,
     ],
     exports: [
         LoginComponent,

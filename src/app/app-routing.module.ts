@@ -48,6 +48,9 @@ import {
 import {
     RegisterComponent
 } from './modules/quan-tri-he-thong-module/components/register-component/register.component';
+import {
+    ForgotPasswordComponent
+} from './modules/quan-tri-he-thong-module/components/forgot-password-component/forgot-password/forgot-password.component';
 
 const routes: Routes = [
     {
@@ -65,8 +68,17 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: '',
+        redirectTo: '/forgotpassword',
+        pathMatch: 'full'
+    },
+    {
         path: 'register',
         component: RegisterComponent
+    },
+    {
+        path: 'forgotpassword',
+        component: ForgotPasswordComponent
     },
     {
         path: 'Home', component: AppMainComponent,
