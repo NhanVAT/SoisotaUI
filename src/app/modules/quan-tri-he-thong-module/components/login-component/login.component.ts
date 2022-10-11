@@ -115,6 +115,7 @@ export class LoginComponent extends iComponentBase implements OnInit {
                 const versionOld = localStorage.getItem('VERSION');
                 localStorage.setItem('VERSION', versionOld);
 
+
                 // Nếu log out thì xóa cái này ở local storage đi
                 // Lưu SESSIONID
                 sessionStorage.setItem('SESSIONID', response.sessionId);

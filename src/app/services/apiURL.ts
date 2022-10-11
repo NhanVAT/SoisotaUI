@@ -22,6 +22,12 @@ export class API_ROLE {
 // Service Danh Mục
 export class API_DANH_MUC {
     public static GET_DVI_QLY = "getDviqly";
+    public static GET_ALL_TEMPLATE = "getAllInvoiceTemplate";
+    public static INSERT_TEMPLATE = "insertAppInvoiceTemplate";
+    public static UPDATE_TEMPLATE = "updateAppInvoiceTemplate";
+    public static DELETE_TEMPLATE = "deleteAppInvoiceTemplate";
+    public static DELETE_LIST_TEMPLATE = "deleteListAppInvoiceTemplate";
+    public static UPLOAD_FILE_TEMPLATE = "uploadAppInvoiceTemplate";
 }
 
 // Service QTHT

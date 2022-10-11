@@ -404,7 +404,7 @@ export class iServiceBase {
                     return localStorage.getItem('APISERVICE') + '/quanTriHeThong/';
                 }
                 case API.PHAN_HE.DANHMUC: {
-                    return localStorage.getItem('APISERVICE') + '/danhmuc/';
+                    return localStorage.getItem('APISERVICE') + '/danhMuc/';
                 }
                 case API.PHAN_HE.USER: {
                     return localStorage.getItem('APISERVICE') + '/users/';
