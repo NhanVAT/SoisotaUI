@@ -28,7 +28,8 @@ export class LoginComponent extends iComponentBase implements OnInit {
     use: AppUser;
     userName: any;
     password: any;
-    rememberMe: boolean;
+    check: boolean;
+
     maDViQLy: any;
     constructor(
         private router: Router,
@@ -41,6 +42,7 @@ export class LoginComponent extends iComponentBase implements OnInit {
     }
 
     isLogged(): Promise<boolean> {
+
         if (Storage != undefined) {
             if (sessionStorage.getItem('SESSIONID')) {
                 return Promise.resolve(true);
@@ -52,32 +54,19 @@ export class LoginComponent extends iComponentBase implements OnInit {
     logout(user: AppUser) {
         localStorage.removeItem(user.username);
     }
-    checkRememberMe(){
-        if (this.rememberMe ){
-            localStorage.setItem('username', this.use.username);
-            localStorage.setItem('password', this.use.password);
-            console.log(localStorage.getItem('username'));
-            console.log(localStorage.getItem('password'));
-        }
-        else{
-            localStorage.setItem('username', "");
-            localStorage.setItem('password', "");
-            console.log(localStorage.getItem('username'));
-            console.log(localStorage.getItem('password'));
-        }
+    checked(check: boolean){
+        this.check = check;
     }
+
     async ngOnInit() {
         this.isLogged().then((result: boolean) => {
             if (result) {
-                this.checkRememberMe();
                 const userinfo = localStorage.getItem('USER_INFO');
 
                 // Lấy SESSIONID ở local storage
                 const sessioninfo = localStorage.getItem('SESSIONID');
-
                 // Set lại SESSIONID ở local storage
                 sessionStorage.setItem('SESSIONID', sessioninfo);
-
                 this.router.navigate(['/Home']);
             } else {
                 this.router.navigate(['/login']);
@@ -112,8 +101,14 @@ export class LoginComponent extends iComponentBase implements OnInit {
             userName: this.userName,
             password: this.password
         };
-
-        // Load thông tin người dùng'
+        if (this.check){
+            localStorage.setItem('username', this.userName);
+            localStorage.setItem('password', this.password);
+        }else{
+            localStorage.setItem('username',"");
+            localStorage.setItem('password',"");
+        }
+        //Load thông tin người dùng'
         const response = await this.iServiceBase.getDataAsyncByPostRequest(API.PHAN_HE.USER, API.API_USER.SIGNIN, parram);
         if (response && response.token) {
             if (Storage) {
@@ -127,7 +122,6 @@ export class LoginComponent extends iComponentBase implements OnInit {
                 sessionStorage.setItem('USER_NAME', this.userName);
                 sessionStorage.setItem('TIME_LOGIN', this.datePipe.transform(new Date(), 'dd/MM/yyyy'));
             }
-
             this.router.navigate(['/Home']);
         } else {
             this.showMessage(mType.error, 'Thông báo', 'Đăng nhập không thành công. Vui lòng kiểm tra lại', 'app-login');

@@ -27,8 +27,8 @@
             <p-password id="password" [(ngModel)]="password"  [toggleMask]="true"[feedback]="false" [inputStyle] = "{'width':'100%'}" ></p-password>
         </div>
         <div class="field-checkbox">
-            <p-checkbox id="rememberMe" value="vlrememberMe" [(ngModel)]="rememberMe"  inputId="ny"></p-checkbox>
-            <label for="rememberMe">Ghi nhớ đăng nhập</label>
+            <p-checkbox [(ngModel)]="check" [binary]="true" inputId="binary" (onChange)="checked(check)"></p-checkbox>
+            <label for="binary">Ghi nhớ đăng nhập</label>
         </div>
         <div class="field" style="width: 100%">
             <p-button class="login-button" (onClick)="onSubmit()" [style]="
