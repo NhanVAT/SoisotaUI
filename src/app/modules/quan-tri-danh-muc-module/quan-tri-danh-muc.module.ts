@@ -12,6 +12,7 @@ import {
     DanhMucMauHoaDonComponent
 } from './components/danh-muc-mau-hoa-don/danh-muc-mau-hoa-don.component'
 
+
 const routes: Routes = [
     {path: 'DanhMucNganHang', component: DanhMucNganHangComponent},
     {path: 'DanhMucGoiCuoc', component: DanhMucGoiCuocComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
         ComponentCustomerModule,
         ReactiveFormsModule,
         RouterModule.forChild(routes),
+
     ],
     declarations: [
         DanhMucNganHangComponent,

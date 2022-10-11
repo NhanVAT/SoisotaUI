@@ -1,1 +1,257 @@
-<p>danh-muc-mau-hoa-don works!</p>
+<div class="grid table-demo">
+    <div class="col-12">
+        <div class="card">
+            <h5>Danh mục Mẫu Hoá Đơn</h5>
+            <p>Danh mục Mẫu Hoá Đơn dùng trong hệ thống</p>
+            <p-table #dt [value]="lstAppInvoiceTemplate" [(selection)]="selectedAppInvoiceTemplate" dataKey="id"
+                     styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
+                     [showCurrentPageReport]="true"
+                     [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
+                     currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} ngân hàng"
+                     [globalFilterFields]="['bankId','bankName']" responsiveLayout="scroll"
+                     [loading]="loading">
+                <ng-template pTemplate="caption">
+                    <div class="grid">
+                        <div class="col-6">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                       (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                       placeholder="Tìm kiếm ngân hàng"/>
+                            </span>
+                        </div>
+
+                        <div class="col-4">&nbsp;</div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Thêm mới" icon="pi pi-plus"
+                                    (click)="onCreateInvoiceTemplate()"
+                                    style="width: 100%;"></button>
+                        </div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Xóa" icon="pi pi-trash"
+                                    style="width: 100%;" (click)="onDeleteListInvoiceTemplate()"
+                                    [disabled]="!selectedAppInvoiceTemplate || selectedAppInvoiceTemplate.length == 0"
+                                    class="p-button-danger"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="invoiceTemplateKey">
+                            <div class="flex justify-content-between align-items-center">
+                                Mã mẫu hoá đơn
+                                <p-sortIcon field="bankId"></p-sortIcon>
+                                <p-columnFilter type="text" field="bankId" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="bankId">
+                            <div class="flex justify-content-between align-items-center">
+                                Nhóm mẫu hoá đơn
+                                <p-sortIcon field="bankId"></p-sortIcon>
+                                <p-columnFilter type="text" field="bankId" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="bankName">
+                            <div class="flex justify-content-between align-items-center">
+                                Tên mẫu hoá đơn
+                                <p-sortIcon field="bankName"></p-sortIcon>
+                                <p-columnFilter type="text" field="bankName" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="bankName">
+                            <div class="flex justify-content-between align-items-center">
+                                Mô tả
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdBy">
+                            <div class="flex justify-content-between align-items-center">
+                                Người tạo
+                                <p-sortIcon field="createdBy"></p-sortIcon>
+                                <p-columnFilter type="text" field="createdBy" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdDate">
+                            <div class="flex justify-content-between align-items-center">
+                                Ngày tạo
+                                <p-sortIcon field="createdDate"></p-sortIcon>
+                                <p-columnFilter type="text" field="createdDate" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Trạng thái
+                            </div>
+                        </th>
+                        <th style="width: 8rem">
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Tác vụ
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-invoiceTemplate>
+                    <tr class="p-selectable-row">
+                        <td>
+                            <p-tableCheckbox [value]="invoiceTemplate"></p-tableCheckbox>
+                        </td>
+                        <td>
+                            {{invoiceTemplate.templateCode}}
+                        </td>
+                        <td>
+                            {{invoiceTemplate.templateType}}
+                        </td>
+                        <td>
+                            {{invoiceTemplate.templateName}}
+                        </td>
+                        <td>
+                            {{invoiceTemplate.templateDescribe}}
+                        </td>
+                        <td>
+                            {{invoiceTemplate.createdBy}}
+                        </td>
+                        <td>
+                            {{invoiceTemplate.createdDate| date: 'MM/dd/yyyy'}}
+                        </td>
+                        <td style="text-align: center;">
+                            <button *ngIf="invoiceTemplate.active" pButton pRipple type="button"
+                                    label="Hoạt động"
+                                    class="p-button-rounded p-button-secondary mr-2 mb-2"></button>
+                            <button *ngIf="!invoiceTemplate.active" pButton pRipple type="button"
+                                    label="Không hoạt động"
+                                    class="p-button-rounded p-button-danger mr-2 mb-2"></button>
+                        </td>
+                        <td style="text-align: center">
+                            <div class="grid">
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                            (click)="onUpdateInvoiceTemplate(invoiceTemplate)"
+                                            class="p-button-rounded p-mr-2"></button>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-trash"
+                                            (click)="onDeleteInvoiceTemplate(invoiceTemplate, $event)"
+                                            class="p-button-rounded p-button-danger"></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">Không có Mẫu Hoá Đơn nào haha.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<p-dialog [header]="headerDialog" [(visible)]="isDisplayDialog"
+          [breakpoints]="{'960px': '75vw'}"
+          [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false" [maximizable]="true">
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-12">
+            <div class="card">
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                        <b>Thông tin mẫu hoá đơn</b>
+                    </div>
+                </p-divider>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-input-icon-left p-float-label" style="width: 100%">
+						    <i class="pi pi-key"></i>
+                            <input type="text" class="w-full" [(ngModel)]="appInvoiceTemplate.templateCode"
+                                   [disabled]="true" pInputText/>
+                            <label>Mã ngân hàng</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-input-icon-left p-float-label" style="width: 100%">
+						    <i class="pi pi-user"></i>
+                            <input type="text" class="w-full" [(ngModel)]="appInvoiceTemplate.templateName"
+                                   pInputText/>
+                            <label>Tên mẫu hoá đơn*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					    <span class="p-input-icon-left p-float-label" style="width: 100%">
+                            <i class="pi pi-align-justify"></i>
+                            <input type="text" class="w-full" [(ngModel)]="appInvoiceTemplate.templateDescribe"
+                                   pInputText/>
+                            <label>Mô tả</label>
+					    </span>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="lstTemplateType" [(ngModel)]="appInvoiceTemplate.templateType"
+                                        [showClear]="true"
+                                        [autoDisplayFirst]="false"></p-dropdown>
+                            <label>Chọn hình thứ thanh toán*</label>
+                        </span>
+                    </div>
+
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <p-inputSwitch [(ngModel)]="appInvoiceTemplate.active"></p-inputSwitch>
+                        <h6>Hiệu lực</h6>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-12 mb-lg-0">
+                        <!--                        <input fileread="XSLFileUpload.file" type="file" name="datafile" accept=".xsl" class="fileup" ng-  required="true"/>-->
+                        <p-fileUpload [multiple]="false" name="datafile[]"
+                                      customUpload="true"
+                                      accept="{{filetype}}"
+                                      maxFileSize="{{maxFileSize}}"
+                                      (uploadHandler)="onUpload($event)"
+                                      required="true" chooseLabel="Thêm file"
+                                      cancelIcon="pi pi-times" showCancelButton="true"
+                                      formControlName="myFile"
+                        >
+                        </p-fileUpload>
+                    </div>
+                </div>
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                    </div>
+                </p-divider>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="grid" style="text-align: center">
+            <div class="col-5">&nbsp;</div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Lưu" icon="pi pi-save"
+                        (click)="onSaveTemplate()"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
+                        (click)="onCancelTemplate()" class="p-button-danger"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-5">&nbsp;</div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-toast baseZIndex='99999' key="notify"></p-toast>
+
+<p-confirmPopup></p-confirmPopup>
+
+<p-confirmDialog key="deleteList" header="Xóa ngân hàng"
+                 icon="pi pi-exclamation-triangle"></p-confirmDialog>
