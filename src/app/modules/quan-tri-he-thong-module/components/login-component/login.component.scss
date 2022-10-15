@@ -51,4 +51,13 @@ p{
 .footer-login > a{
     padding: 8px;
     border-radius: 5px;
-    margin: 8px;}
+    margin: 8px;
+}
+@media screen and (max-width: 800px) {
+    .body-left {
+        display: none !important;
+    }
+    .body-right{
+        width: 100%;
+    }
+}

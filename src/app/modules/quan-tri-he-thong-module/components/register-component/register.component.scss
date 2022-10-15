@@ -1,0 +1,78 @@
+:host ::ng-deep a {
+    text-decoration: none;
+    color: #ffffff !important;
+}
+p{
+    color: #ffffffcc !important;
+}
+
+.login-page {
+    ::placeholder {
+        color: azure;
+    }
+}
+
+.topbar-logo{
+    width: 150px;
+    height: 30px;
+    padding: 3px;
+    margin: 12px 4px 2px 22px;
+    z-index: 1;
+}
+
+.body-left{
+    width: 66.66667%;
+    padding: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.body-right{
+    width: 33.33333%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #120b0bb3;
+
+}
+.row{
+    width: 100%;
+    display: flex;
+    --bs-gutter-x: 2rem;
+}
+.col-md{
+    flex: 0 0 auto;
+    width: 47%;
+}
+.body-login{
+    padding: 50px;
+    width: 100%;
+}
+
+:host ::ng-deep .p-component {
+    width: 100%;
+}
+:host ::ng-deep.p-checkbox .p-checkbox-box{
+    border: none;
+}
+
+.footer-login{
+    padding: 5px;
+    text-align: center;
+}
+
+.footer-login > a{
+    padding: 8px;
+    border-radius: 5px;
+    margin: 8px;
+}
+@media screen and (max-width: 800px) {
+    .body-left {
+        display: none !important;
+    }
+    .body-right{
+        width: 100%;
+    }
+}

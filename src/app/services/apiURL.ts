@@ -5,6 +5,7 @@ export class PHAN_HE {
     public static ROLE = "Role";
     public static DANHMUC = "DanhMuc";
     public static QTHT = "QTHT";
+    public static SMSEMAIL = "smsemail";
 }
 
 // Service User
@@ -12,6 +13,7 @@ export class API_USER {
     public static SIGNIN = "signin";
     public static GET_INFO_CURRENT_USER = "getInfoCurrentUser";
     public static REGISTER = "register";
+    public static CHECK_EMAIL = "checkEmail"
 }
 
 // Service Role
@@ -54,4 +56,10 @@ export class SERVICE_GATEWAY {
     public static USER = "ServiceReport-Report-context-root/resources/serviceReport/";
     public static ROLE = "ServiceCommon-busCommon-context-root/resources/sercommon/";
     public static DANHMUC = "ServiceDichVu-DichVu-context-root/resources/serviceDichVu/";
+}
+
+// Service SMSEMAIL
+export class API_SMSEMAIL{
+    public static SEND_EMAIL_BY_CONTENT = "sendEmailByContent"
+    public static SEND_SMS_BY_CONTENT = "sendSMSByContent"
 }

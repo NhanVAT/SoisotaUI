@@ -12,18 +12,21 @@ import IPService from '/src/assets/config/IPService.json';
 export class iServiceBase {
     strIP_Service = '';
     strIP_GateWay = '';
+    strIP_SMSEMAIL = '';
     strVersion = '';
     strProjectName = '';
 
     constructor(public httpClient: HttpClient, public loadingService: LoadingService) {
         this.strIP_Service = IPService.APISERVICE;
         this.strIP_GateWay = IPService.APIGATEWAY;
+        this.strIP_SMSEMAIL = IPService.APISMSEMAIL;
         this.strVersion = IPService.Version;
         this.strProjectName = IPService.PROJECT_NAME;
 
         // Set IP các service vào localStorage để dùng
         localStorage.setItem('APISERVICE', this.strIP_Service);
         localStorage.setItem('APIGATEWAY', this.strIP_GateWay);
+        localStorage.setItem('APISMSEMAIL', this.strIP_SMSEMAIL);
         localStorage.setItem('VERSION', this.strVersion);
         localStorage.setItem('PROJECT_NAME', this.strProjectName);
 
@@ -411,6 +414,9 @@ export class iServiceBase {
                 }
                 case API.PHAN_HE.ROLE: {
                     return localStorage.getItem('APISERVICE') + '/roles/';
+                }
+                case API.PHAN_HE.SMSEMAIL: {
+                    return localStorage.getItem('APISMSEMAIL') + '/smsemail/';
                 }
                 default: {
                     return '';

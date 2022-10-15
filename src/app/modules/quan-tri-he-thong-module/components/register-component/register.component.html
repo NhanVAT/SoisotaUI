@@ -1,85 +1,85 @@
-<style>
 
-    input::placeholder {color: rgba(255, 255, 255, 0.68) !important}
-    .container{
-        padding: 15px;
-    }
-</style>
-<div class="pages-body login-page flex flex-column" filter-color="orange"style="overflow:overlay;">
-
-    <div class="align-self-center mt-auto mb-auto">
-        <div class="pages-panel card flex flex-column"
-             style="border-radius: 30px; border: none; background-color:#ffffff00; box-shadow: none; min-width: 330px;">
-            <div class="pages-header px-3 py-1"
-                 style="border-radius: 9px; border: none; background-color:#ffffff00">
-                <div class="logo">
-                    <img src="assets/layout/images/wolf_login_4.png"
-                         style="width: 250px; height: 170px"/>
+<div class="pages-body login-page flex" filter-color="orange" style="overflow:overlay; padding:0px;">
+    <!--        <a href="" class="topbar-logo">-->
+    <!--            <img src="assets/layout/images/S_BILL_Topbar_2.png "style="width: 60%; height: 100%"/>-->
+    <!--        </a>-->
+    <div class="body-left">
+        <div class=""
+             style="border-radius: 30px; border: none; background-color:#ffffff00; box-shadow: none; min-width: 330px;padding: 10rem;">
+            <div class="">
+                <img src="assets/layout/images/S_BILL_Login.png "
+                     style="width: 60%; height: 100% ;"/>
+            </div>
+        </div>
+    </div>
+    <div class="body-right">
+        <div class="body-login" style="color: #c9dedd">
+            <h2 style="color: #ffffff; font-family: sans-serif;">Chào mừng đến với <span>S BILL!👋</span></h2>
+            <p>Đăng ký ngay tài khoản để trải nghiệm dịch vụ của chúng tôi ngay nào!</p>
+            <div class="row">
+                <div class="field col-md " >
+                    <label for="username" class="block">Họ</label>
+                    <input id="fistName" type="username"  [(ngModel)]="firstName"  aria-describedby="" pInputText/>
+                </div>
+                <div style="width: 6%"></div>
+                <div class="field col-md" >
+                    <label for="username" class="block">Tên</label>
+                    <input id="lastName" type="username"  [(ngModel)]="lastName"  aria-describedby="" pInputText/>
                 </div>
             </div>
-            <div style="padding: 15px; background: #ececec29;border-radius: 20px; ">
-                <h1 style="color: #ffffff; font-family: sans-serif;">Đăng Ký</h1>
-                <div class="input-panel flex flex-column px-3">
-                    <div class="p-inputgroup flex space-x-4 mt-3 " style="max-width: 234px">
-                        <div class="">
-                            <input type="text" class="ng-valid ng-dirty border-none" [(ngModel)]="firstName"
-                                   style="padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; margin-right:10px"
-                                   id="fistName" pInputText  placeholder="Họ">
-                        </div>
-                        <div class="">
-                            <input type="text" class=""  [(ngModel)]="lastName"
-                                   style="padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none; margin-left: 10px"
-                                   id="lastName" pInputText placeholder="Tên">
-                        </div>
-                    </div>
-
-                    <div class="p-inputgroup mt-3 ">
-                        <input type="text" class="email"  [(ngModel)]="userName"
-                               style=" padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
-                               id="usename" pInputText placeholder="Tên đăng nhập">
-                    </div>
-                    <div class="p-inputgroup mt-3">
-                        <input type="password" [(ngModel)]="password"
-                               style="padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
-                               id="password" pInputText placeholder="Mật khẩu">
-                    </div>
-                    <div class="p-inputgroup mt-3 ">
-                        <input type="password"  [(ngModel)]="confirmPassword"
-                               style="padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF ; border: none;"
-                               id="confirm-password" pInputText placeholder="Xác nhận mật khẩu">
-                    </div>
-                    <div class="p-inputgroup mt-3 ">
-                        <input type="text" class="email"  [(ngModel)]="email"
-                               style=" padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
-                               id="email" pInputText placeholder="Email">
-                    </div>
-                    <div class="p-inputgroup mt-3 ">
-                        <input type="text" class=""  [(ngModel)]="phone"
-                               style=" padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
-                               id="phone-number" pInputText placeholder="Số điện thoại">
-                    </div>
-                    <div class="p-inputgroup mt-3 ">
-                        <input type="text" class=""  [(ngModel)]="address"
-                               style=" padding:0.4rem 0.4rem; border-radius: 20px 20px 20px 20px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none;"
-                               id="address" pInputText placeholder="Địa chỉ">
-                    </div>
-                    <div class=" mt-3 mb-6">
-                        <label class="container">
-                            <input type="checkbox" checked="checked"  [(ngModel)]="acceptTerm" >
-                            <span class="checkmark" style="color: #ffffff;"> Tôi đồng ý </span>
-                           <a style="color:#ceb017">với các điều khoản</a>
-                        </label>
-                    </div>
-                </div>
-                <p-button class="register-button mb-6 px-3 " (onClick)="onSubmit()"
-                          [style]="{'border-radius': '20px','width': '160px', 'background-color': 'white', 'color': 'black'}"
-                          label="Đăng ký">
-                </p-button>
+            <div class="field "style="width: 100%" >
+                <label for="username" class="block">Tài khoản</label>
+                <input id="username" type="username"  [(ngModel)]="userName"  aria-describedby="" pInputText/>
             </div>
+            <div class="row">
+                <div class="field col-md">
+                        <label for="password" class="block">Mật khẩu</label>
+                    <p-password id="password" [(ngModel)]="password"  [toggleMask]="true"[feedback]="false" [inputStyle] = "{'width':'100%'}" ></p-password>
+                </div>
+                <div style="width: 6%"></div>
+                <div class="field col-md">
+                    <label for="confirmPassword" class="block">Nhập lại mật khẩu</label>
+                    <p-password id="confirmPassword" [(ngModel)]="confirmPassword"  [toggleMask]="true"[feedback]="false" [inputStyle] = "{'width':'100%'}" ></p-password>
+                </div>
+            </div>
+            <div class="field "style="width: 100%" >
+                <label for="email" class="block">Email</label>
+                <input id="email" type="email"  [(ngModel)]="email"  aria-describedby="" pInputText/>
+            </div>
+            <div class="field "style="width: 100%" >
+                <label for="phone" class="block">Số điện thoại </label>
+                <input id="phone" type="phone"  [(ngModel)]="phone"  aria-describedby="" pInputText/>
+            </div>
+            <div class="field "style="width: 100%" >
+                <label for="address" class="block">Địa chỉ </label>
+                <input id="address" type="phone"  [(ngModel)]="address"  aria-describedby="" pInputText/>
+            </div>
+            <div class="field "style="width: 100%" >
+                <label class="container">
+                    <input type="checkbox" checked="checked"  [(ngModel)]="acceptTerm" >
+                    <span class="checkmark" style="color: #ffffff;"> Tôi đồng ý với </span>
+                    <a style="color:#ceb017!important;">chính sách & điều khoản bảo mật</a>
+                </label>
+            </div>
+
+            <div class="field" style="width: 100%">
+                <p-button class="login-button" (onClick)="onSubmit()" [style]="
+            {'background-color': 'white', 'color': 'black','margin-bottom':'0rem','width':'100%'}" label="Đăng Ký"></p-button>
+            </div>
+            <div class="footer-login" >
+                <p><span>Bạn có tài khoản rồi?</span> <a [routerLink]="['/login']" routerLinkActive="active" style="color:#ceb017!important;">Đăng nhập ngay</a></p>
+            </div>
+            <div class="px-3" style="align-items: center;border-bottom: 1px solid #dadde1;display: flex;margin: 20px 28px;text-align: center;width:80%;"></div>
+            <div class="footer-login">
+                <a style="background-color: #3b5998"href="" ><i class="pi pi-facebook"></i></a>
+                <a style="background-color:#444444"href=""><i class="pi pi-github"></i></a>
+                <a style="background-color:#55acee"href=""><i class="pi pi-twitter"></i></a>
+                <a style="background-color: #dd4b39"href=""><i class="pi pi-envelope"></i></a>
+
+            </div>
+
         </div>
     </div>
 
 </div>
-
 <p-toast baseZIndex='99999' key="app-register"></p-toast>
-
