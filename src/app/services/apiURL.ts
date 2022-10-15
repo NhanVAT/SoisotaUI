@@ -27,7 +27,7 @@ export class API_DANH_MUC {
     public static UPDATE_TEMPLATE = "updateAppInvoiceTemplate";
     public static DELETE_TEMPLATE = "deleteAppInvoiceTemplate";
     public static DELETE_LIST_TEMPLATE = "deleteListAppInvoiceTemplate";
-    public static UPLOAD_FILE_TEMPLATE = "uploadAppInvoiceTemplate";
+    public static GET_VIEW_INVOICE_TEMPLATE = "getViewInvoiceTemplate";
 }
 
 // Service QTHT

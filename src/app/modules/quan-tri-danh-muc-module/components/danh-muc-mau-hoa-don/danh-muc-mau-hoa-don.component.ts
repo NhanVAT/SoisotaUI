@@ -26,6 +26,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
     fileUpload: File = null;
     fileUploadBase64: any;
     BASE64_MARKER: any = ';base64,';
+    currentViewInvoiceTemplate: string;
 
   constructor(private iServiceBase: iServiceBase,
               private shareData: ShareData,
@@ -141,8 +142,8 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
     private async updateInvoiceTemplate(data: AppInvoiceTemplateModel) {
 
-        const respone = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.UPDATE_TEMPLATE, data);
-        if (respone && respone.success) {
+        const response = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.UPDATE_TEMPLATE, data);
+        if (response && response.success) {
             this.showMessage(mType.success, "Thông báo", "Thêm mới mẫu hoá đơn thành công!", 'notify');
 
             this.onHideDialod();
@@ -154,9 +155,9 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
     private async createInvoiceTemplate(data: AppInvoiceTemplateModel) {
 
-        const respone = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.INSERT_TEMPLATE, data);
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.INSERT_TEMPLATE, data);
 
-        if (respone && respone.success) {
+        if (response && response.success) {
             this.showMessage(mType.success, "Thông báo", "Thêm mới mẫu hoá đơn thành công!", 'notify');
 
             this.onHideDialod();
@@ -168,12 +169,11 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
     private async deleteInvoiceTemplate(invoiceTemplate: AppInvoiceTemplateModel) {
         const param = invoiceTemplate.id;
-        const respone = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_TEMPLATE, param);
-        if (respone && respone.success) {
-
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_TEMPLATE, param);
+        if (response && response.success) {
             this.showMessage(mType.success, "Thông báo", "Xoá mẫu hoá đơn thành công!", 'notify');
 
-            this.onInitListInvoiceTemplate();
+            await this.loadListAppInvoiceTemplate();
         }else{
             this.showMessage(mType.error, "Thông báo", "Xoá mẫu hoá đơn không thành công!. Vui lòng xem lại!", 'notify');
         }
@@ -184,6 +184,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
     }
 
     onUpload($event: any) {
+      console.log($event);
         this.fileUpload = $event.files[0];
 
         // convert to base64
@@ -208,6 +209,24 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
         reader.onerror = (error) => {
             console.log('Error: ', error);
         };
+    }
+
+    onViewInvoiceTemplate(id: number){
+        console.log('id: ',id);
+        const base64InvoiceTemplate = this.getViewInvoiceTemplate(id);
+        console.log('base64InvoiceTemplate', base64InvoiceTemplate);
+        this.currentViewInvoiceTemplate = 'data:text/xml;base64,' + base64InvoiceTemplate;
+    }
+
+    async getViewInvoiceTemplate(id: number) {
+        const params = {
+            id: id
+        };
+        const response = await this.iServiceBase.getDataWithParamsAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_VIEW_INVOICE_TEMPLATE, params);
+        if (response && response.success) {
+            return response.data;
+        }
+        return null;
     }
 
 }
