@@ -105,7 +105,12 @@
                             <p-tableCheckbox [value]="invoiceTemplate"></p-tableCheckbox>
                         </td>
                         <td>
-                            {{invoiceTemplate.templateCode}}
+                            <p-button label="{{invoiceTemplate.templateCode}}"
+                                      styleClass="p-button-link"
+                                      (click)="onViewInvoiceTemplate(invoiceTemplate.id)"
+                            >
+                            </p-button>
+
                         </td>
                         <td>
                             {{invoiceTemplate.templateType}}
@@ -132,12 +137,17 @@
                         </td>
                         <td style="text-align: center">
                             <div class="grid">
-                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-eye"
+                                            (click)="onViewInvoiceTemplate(invoiceTemplate.id)"
+                                            class="p-button-rounded p-mr-2"></button>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                                     <button pButton pRipple icon="pi pi-pencil"
                                             (click)="onUpdateInvoiceTemplate(invoiceTemplate)"
                                             class="p-button-rounded p-mr-2"></button>
                                 </div>
-                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                                     <button pButton pRipple icon="pi pi-trash"
                                             (click)="onDeleteInvoiceTemplate(invoiceTemplate, $event)"
                                             class="p-button-rounded p-button-danger"></button>
