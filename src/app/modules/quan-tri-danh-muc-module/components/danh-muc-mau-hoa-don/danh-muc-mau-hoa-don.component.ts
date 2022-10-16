@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppInvoiceTemplateModel} from '../../models/app-invoice-template.model';
-import { iServiceBase} from '../../../compoents-customer-module/functions/iServiceBase';
+import {iServiceBase} from '../../../compoents-customer-module/functions/iServiceBase';
 import * as API from '../../../../services/apiURL';
 import {File} from '@angular/compiler-cli/src/ngtsc/file_system/testing/src/mock_file_system';
 import {ShareData} from '../../../compoents-customer-module/shared-data-services/sharedata.service';
-import {iComponentBase, mType} from '../../../compoents-customer-module/functions/iComponentBase.component';
+import {
+    iComponentBase,
+    mType
+} from '../../../compoents-customer-module/functions/iComponentBase.component';
 import {ConfirmationService, MessageService} from 'primeng/api';
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-danh-muc-mau-hoa-don',
-  templateUrl: './danh-muc-mau-hoa-don.component.html',
-  styleUrls: ['./danh-muc-mau-hoa-don.component.scss']
+    selector: 'app-danh-muc-mau-hoa-don',
+    templateUrl: './danh-muc-mau-hoa-don.component.html',
+    styleUrls: ['./danh-muc-mau-hoa-don.component.scss']
 })
 export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit {
 
@@ -19,6 +23,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
     loading: boolean;
     headerDialog: string;
     isDisplayDialog: boolean;
+    isDisplayDialogView: boolean;
     appInvoiceTemplate: AppInvoiceTemplateModel = new AppInvoiceTemplateModel();
     lstTemplateType: any[] = [];
     filetype = '.xsl';
@@ -27,24 +32,26 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
     fileUploadBase64: any;
     BASE64_MARKER: any = ';base64,';
     currentViewInvoiceTemplate: string;
+    htmlView: any;
 
-  constructor(private iServiceBase: iServiceBase,
-              private shareData: ShareData,
-              public messageService: MessageService,
-              private confirmationService: ConfirmationService,
-  ) {
-      super(messageService);
-  }
+    constructor(private iServiceBase: iServiceBase,
+                private shareData: ShareData,
+                public messageService: MessageService,
+                private confirmationService: ConfirmationService,
+                private sanitizer: DomSanitizer
+    ) {
+        super(messageService);
+    }
 
-  ngOnInit(): void {
-    this.loadListAppInvoiceTemplate();
-    this.onInitListInvoiceTemplate();
-  }
+    ngOnInit(): void {
+        this.loadListAppInvoiceTemplate();
+        this.onInitListInvoiceTemplate();
+    }
 
     private async loadListAppInvoiceTemplate() {
         this.loading = true;
         const response = await this.iServiceBase.getDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_ALL_TEMPLATE);
-        if (response && response.length){
+        if (response && response.length) {
             this.lstAppInvoiceTemplate = response;
         }
         this.loading = false;
@@ -57,14 +64,14 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
         ];
     }
 
-    onDisplayDialog(header: string){
-      this.headerDialog = header;
-      this.appInvoiceTemplate = new AppInvoiceTemplateModel();
-      this.isDisplayDialog = true;
+    onDisplayDialog(header: string) {
+        this.headerDialog = header;
+        this.appInvoiceTemplate = new AppInvoiceTemplateModel();
+        this.isDisplayDialog = true;
     }
 
-    onHideDialod(){
-      this.isDisplayDialog = false;
+    onHideDialod() {
+        this.isDisplayDialog = false;
     }
 
     onCreateInvoiceTemplate() {
@@ -99,12 +106,12 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
     }
 
     onSaveTemplate() {
-        if (this.validateData()){
+        if (this.validateData()) {
             const data = this.bindingData();
             // update
-            if (data.id && data.id > 0){
+            if (data.id && data.id > 0) {
                 this.updateInvoiceTemplate(data);
-            } else{ // insert
+            } else { // insert
                 this.createInvoiceTemplate(data);
             }
             this.onHideDialod();
@@ -125,14 +132,14 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
             data.active = this.appInvoiceTemplate.active;
             data.templateDataBase64 = this.appInvoiceTemplate.templateDataBase64;
             // update
-            if (this.appInvoiceTemplate.id && this.appInvoiceTemplate.id > 0 ){
-               data.id = this.appInvoiceTemplate.id;
-               data.createdBy = this.appInvoiceTemplate.createdBy;
-               data.createdDate = this.appInvoiceTemplate.createdDate;
-               data.lastModifiedBy = this.shareData.userInfo.userName;
-               data.lastModifiedDate = new Date();
+            if (this.appInvoiceTemplate.id && this.appInvoiceTemplate.id > 0) {
+                data.id = this.appInvoiceTemplate.id;
+                data.createdBy = this.appInvoiceTemplate.createdBy;
+                data.createdDate = this.appInvoiceTemplate.createdDate;
+                data.lastModifiedBy = this.shareData.userInfo.userName;
+                data.lastModifiedDate = new Date();
 
-            }else{ // insert
+            } else { // insert
                 data.createdBy = this.shareData.userInfo.userName;
                 data.createdDate = new Date();
             }
@@ -148,7 +155,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
             this.onHideDialod();
             await this.loadListAppInvoiceTemplate();
-        }else{
+        } else {
             this.showMessage(mType.error, "Thông báo", "Thêm mới mẫu hoá đơn không thành công!. Vui lòng xem lại!", 'notify');
         }
     }
@@ -162,7 +169,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
             this.onHideDialod();
             await this.loadListAppInvoiceTemplate();
-        }else{
+        } else {
             this.showMessage(mType.error, "Thông báo", "Thêm mới mẫu hoá đơn không thành công!. Vui lòng xem lại!", 'notify');
         }
     }
@@ -174,7 +181,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
             this.showMessage(mType.success, "Thông báo", "Xoá mẫu hoá đơn thành công!", 'notify');
 
             await this.loadListAppInvoiceTemplate();
-        }else{
+        } else {
             this.showMessage(mType.error, "Thông báo", "Xoá mẫu hoá đơn không thành công!. Vui lòng xem lại!", 'notify');
         }
     }
@@ -184,7 +191,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
     }
 
     onUpload($event: any) {
-      console.log($event);
+        console.log($event);
         this.fileUpload = $event.files[0];
 
         // convert to base64
@@ -195,7 +202,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
         reader.readAsDataURL(file);
         reader.onload = () => {
             // me.modelvalue = reader.result;
-             console.log(reader.result);
+            console.log(reader.result);
             // url base64
             me.fileUploadBase64 = reader.result;
 
@@ -211,21 +218,21 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
         };
     }
 
-    onViewInvoiceTemplate(id: number){
-        console.log('id: ',id);
+    onViewInvoiceTemplate(id: number) {
         const base64InvoiceTemplate = this.getViewInvoiceTemplate(id);
-        console.log('base64InvoiceTemplate', base64InvoiceTemplate);
         this.currentViewInvoiceTemplate = 'data:text/xml;base64,' + base64InvoiceTemplate;
     }
 
-    async getViewInvoiceTemplate(id: number) {
-        const params = {
-            id: id
-        };
-        const response = await this.iServiceBase.getDataWithParamsAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_VIEW_INVOICE_TEMPLATE, params);
-        if (response && response.success) {
-            return response.data;
+    async getViewInvoiceTemplate(id) {
+        let param = id;
+
+        const response = await this.iServiceBase.getDataAsyncByPostRequest(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_VIEW_INVOICE_TEMPLATE, param);
+
+        if (response && response.html) {
+            this.htmlView = this.sanitizer.bypassSecurityTrustHtml(response.html);
+            this.isDisplayDialogView = true;
         }
+
         return null;
     }
 
