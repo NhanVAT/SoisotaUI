@@ -1,16 +1,16 @@
 <div class="grid table-demo">
     <div class="col-12">
         <div class="card">
-            <h5>Danh mục Mẫu Hoá Đơn</h5>
-            <p>Danh mục Mẫu Hoá Đơn dùng trong hệ thống</p>
-            <p-table #dt [value]="lstAppInvoiceTemplate" [(selection)]="selectedAppInvoiceTemplate"
-                     dataKey="id"
+            <h5>Danh mục Mẫu Sms Email</h5>
+            <p>Danh mục Mẫu Sms Email trong hệ thống</p>
+            <p-table #dt [value]="lstAppSmsEmail" [(selection)]="selectedAppSmsEmail" dataKey="id"
                      styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
                      [showCurrentPageReport]="true"
                      [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
-                     currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} mẫu hoá đơn"
-                     [globalFilterFields]="['invoiceTemplateKey','invoiceTemplateName']" responsiveLayout="scroll"
-                     [loading]="loading">
+                     currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} Sms-Email"
+                     [globalFilterFields]="['smsEmailKey','smsEmailName']" responsiveLayout="scroll"
+                     [loading]="loading"
+                >
                 <ng-template pTemplate="caption">
                     <div class="grid">
                         <div class="col-6">
@@ -25,13 +25,13 @@
                         <div class="col-4">&nbsp;</div>
                         <div class="col-1" style="text-align: center">
                             <button pButton type="button" label="Thêm mới" icon="pi pi-plus"
-                                    (click)="onCreateInvoiceTemplate()"
+                                    (click)="onCreateSmsEmail()"
                                     style="width: 100%;"></button>
                         </div>
                         <div class="col-1" style="text-align: center">
                             <button pButton type="button" label="Xóa" icon="pi pi-trash"
-                                    style="width: 100%;" (click)="onDeleteListInvoiceTemplate()"
-                                    [disabled]="!selectedAppInvoiceTemplate || selectedAppInvoiceTemplate.length == 0"
+                                    style="width: 100%;" (click)="onDeleteListSmsEmail()"
+                                    [disabled]="!selectedAppSmsEmail || selectedAppSmsEmail.length == 0"
                                     class="p-button-danger"></button>
                         </div>
                     </div>
@@ -41,31 +41,31 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="invoiceTemplateKey">
+                        <th pSortableColumn="smsEmailKey">
                             <div class="flex justify-content-between align-items-center">
-                                Mã mẫu hoá đơn
-                                <p-sortIcon field="invoiceTemplateKey"></p-sortIcon>
-                                <p-columnFilter type="text" field="invoiceTemplateKey" display="menu"
+                                Mã mẫu Sms Email
+                                <p-sortIcon field="smsEmailKey"></p-sortIcon>
+                                <p-columnFilter type="text" field="smsEmailKey" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="invoiceTemplateType">
+                        <th pSortableColumn="smsEmailId">
                             <div class="flex justify-content-between align-items-center">
-                                Nhóm mẫu hoá đơn
-                                <p-sortIcon field="invoiceTemplateType"></p-sortIcon>
-                                <p-columnFilter type="text" field="invoiceTemplateType" display="menu"
+                                Nhóm mẫu Sms Email
+                                <p-sortIcon field="smsEmailId"></p-sortIcon>
+                                <p-columnFilter type="text" field="smsEmailId" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="invoiceTemplateName">
+                        <th pSortableColumn="smsEmailName">
                             <div class="flex justify-content-between align-items-center">
-                                Tên mẫu hoá đơn
-                                <p-sortIcon field="invoiceTemplateName"></p-sortIcon>
-                                <p-columnFilter type="text" field="invoiceTemplateName" display="menu"
+                                Tên mẫu Sms Email
+                                <p-sortIcon field="smsEmailName"></p-sortIcon>
+                                <p-columnFilter type="text" field="smsEmailName" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="invoiceTemplateDescribe">
+                        <th pSortableColumn="smsEmailDescribe">
                             <div class="flex justify-content-between align-items-center">
                                 Mô tả
                             </div>
@@ -100,39 +100,39 @@
                         </th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-invoiceTemplate>
+                <ng-template pTemplate="body" let-smsEmail>
                     <tr class="p-selectable-row">
                         <td>
-                            <p-tableCheckbox [value]="invoiceTemplate"></p-tableCheckbox>
+                            <p-tableCheckbox [value]="smsEmail"></p-tableCheckbox>
                         </td>
                         <td>
-                            <p-button label="{{invoiceTemplate.templateCode}}"
+                            <p-button label="{{smsEmail.templateCode}}"
                                       styleClass="p-button-link"
-                                      (click)="onViewInvoiceTemplate(invoiceTemplate.id)"
+                                      (click)="onViewSmsEmail(smsEmail.id)"
                             >
                             </p-button>
 
                         </td>
                         <td>
-                            {{invoiceTemplate.templateType}}
+                            {{smsEmail.templateType}}
                         </td>
                         <td>
-                            {{invoiceTemplate.templateName}}
+                            {{smsEmail.templateName}}
                         </td>
                         <td>
-                            {{invoiceTemplate.templateDescribe}}
+                            {{smsEmail.templateDescribe}}
                         </td>
                         <td>
-                            {{invoiceTemplate.createdBy}}
+                            {{smsEmail.createdBy}}
                         </td>
                         <td>
-                            {{invoiceTemplate.createdDate| date: 'MM/dd/yyyy'}}
+                            {{smsEmail.createdDate| date: 'MM/dd/yyyy'}}
                         </td>
                         <td style="text-align: center;">
-                            <button *ngIf="invoiceTemplate.active" pButton pRipple type="button"
+                            <button *ngIf="smsEmail.active" pButton pRipple type="button"
                                     label="Hoạt động"
                                     class="p-button-rounded p-button-secondary mr-2 mb-2"></button>
-                            <button *ngIf="!invoiceTemplate.active" pButton pRipple type="button"
+                            <button *ngIf="!smsEmail.active" pButton pRipple type="button"
                                     label="Không hoạt động"
                                     class="p-button-rounded p-button-danger mr-2 mb-2"></button>
                         </td>
@@ -140,17 +140,17 @@
                             <div class="grid">
                                 <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                                     <button pButton pRipple icon="pi pi-eye"
-                                            (click)="onViewInvoiceTemplate(invoiceTemplate.id)"
+                                            (click)="onViewSmsEmail(smsEmail.id)"
                                             class="p-button-rounded p-mr-2"></button>
                                 </div>
                                 <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                                     <button pButton pRipple icon="pi pi-pencil"
-                                            (click)="onUpdateInvoiceTemplate(invoiceTemplate)"
+                                            (click)="onUpdateSmsEmail(smsEmail)"
                                             class="p-button-rounded p-mr-2"></button>
                                 </div>
                                 <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                                     <button pButton pRipple icon="pi pi-trash"
-                                            (click)="onDeleteInvoiceTemplate(invoiceTemplate, $event)"
+                                            (click)="onDeleteSmsEmail(smsEmail, $event)"
                                             class="p-button-rounded p-button-danger"></button>
                                 </div>
                             </div>
@@ -183,8 +183,7 @@
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                         <span class="p-input-icon-left p-float-label" style="width: 100%">
 						    <i class="pi pi-key"></i>
-                            <input type="text" class="w-full"
-                                   [(ngModel)]="appInvoiceTemplate.templateCode"
+                            <input type="text" class="w-full" [(ngModel)]="appSmsEmail.templateCode"
                                    [disabled]="true" pInputText/>
                             <label>Mã ngân hàng</label>
                         </span>
@@ -192,8 +191,7 @@
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                         <span class="p-input-icon-left p-float-label" style="width: 100%">
 						    <i class="pi pi-user"></i>
-                            <input type="text" class="w-full"
-                                   [(ngModel)]="appInvoiceTemplate.templateName"
+                            <input type="text" class="w-full" [(ngModel)]="appSmsEmail.templateName"
                                    pInputText/>
                             <label>Tên mẫu hoá đơn*</label>
                         </span>
@@ -201,8 +199,7 @@
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
 					    <span class="p-input-icon-left p-float-label" style="width: 100%">
                             <i class="pi pi-align-justify"></i>
-                            <input type="text" class="w-full"
-                                   [(ngModel)]="appInvoiceTemplate.templateDescribe"
+                            <input type="text" class="w-full" [(ngModel)]="appSmsEmail.templateDescribe"
                                    pInputText/>
                             <label>Mô tả</label>
 					    </span>
@@ -211,8 +208,7 @@
                 <div class="grid">
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                         <span class="p-float-label">
-                            <p-dropdown [options]="lstTemplateType"
-                                        [(ngModel)]="appInvoiceTemplate.templateType"
+                            <p-dropdown [options]="lstTemplateType" [(ngModel)]="appSmsEmail.templateType"
                                         [showClear]="true"
                                         [autoDisplayFirst]="false"></p-dropdown>
                             <label>Chọn hình thứ thanh toán*</label>
@@ -220,23 +216,23 @@
                     </div>
 
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
-                        <p-inputSwitch [(ngModel)]="appInvoiceTemplate.active"></p-inputSwitch>
+                        <p-inputSwitch [(ngModel)]="appSmsEmail.active"></p-inputSwitch>
                         <h6>Hiệu lực</h6>
                     </div>
                 </div>
                 <div class="grid">
                     <div class="col-12 mb-2 lg:col-12 mb-lg-0">
                         <!--                        <input fileread="XSLFileUpload.file" type="file" name="datafile" accept=".xsl" class="fileup" ng-  required="true"/>-->
-                        <p-fileUpload [multiple]="false" name="datafile[]"
-                                      customUpload="true"
-                                      accept="{{filetype}}"
-                                      maxFileSize="{{maxFileSize}}"
-                                      (uploadHandler)="onUpload($event)"
-                                      required="true" chooseLabel="Thêm file"
-                                      cancelIcon="pi pi-times" showCancelButton="true"
-                                      formControlName="myFile"
-                        >
-                        </p-fileUpload>
+<!--                        <p-fileUpload [multiple]="false" name="datafile[]"-->
+<!--                                      customUpload="true"-->
+<!--                                      accept="{{filetype}}"-->
+<!--                                      maxFileSize="{{maxFileSize}}"-->
+<!--                                      (uploadHandler)="onUpload($event)"-->
+<!--                                      required="true" chooseLabel="Thêm file"-->
+<!--                                      cancelIcon="pi pi-times" showCancelButton="true"-->
+<!--                                      formControlName="myFile"-->
+<!--                        >-->
+<!--                        </p-fileUpload>-->
                     </div>
                 </div>
                 <p-divider align="left">
@@ -264,46 +260,9 @@
     </ng-template>
 </p-dialog>
 
-<p-dialog [header]="headerDialog" [(visible)]="isDisplayDialogView"
-          [breakpoints]="{'960px': '75vw'}"
-          [style]="{width: '50vw'}"
-          [draggable]="false" [resizable]="false" [maximizable]="true">
-    <div class="grid p-fluid">
-        <div class="col-12 md:col-12">
-            <div class="card">
-                <div id="printSectionId">
-                    <div id="print-section"
-                         style="text-align: center; color: black; display: flex; align-items: center; justify-content: center;">
-                        <div style="width: 100%;">
-                            <div [innerHTML]="htmlView">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <ng-template pTemplate="footer">
-        <div class="grid" style="text-align: center">
-            <div class="col-5">&nbsp;</div>
-            <div class="col-1" style="text-align: center">
-                <button pButton type="button" label="Lưu" icon="pi pi-save"
-                        (click)="onSaveTemplate()"
-                        style="width: 100%;"></button>
-            </div>
-            <div class="col-1" style="text-align: center">
-                <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
-                        (click)="onCancelTemplate()" class="p-button-danger"
-                        style="width: 100%;"></button>
-            </div>
-            <div class="col-5">&nbsp;</div>
-        </div>
-    </ng-template>
-</p-dialog>
-
 <p-toast baseZIndex='99999' key="notify"></p-toast>
 
 <p-confirmPopup></p-confirmPopup>
 
-<p-confirmDialog key="deleteList" header="Xóa hoá đơn"
+<p-confirmDialog key="deleteList" header="Xóa Sms Email"
                  icon="pi pi-exclamation-triangle"></p-confirmDialog>
