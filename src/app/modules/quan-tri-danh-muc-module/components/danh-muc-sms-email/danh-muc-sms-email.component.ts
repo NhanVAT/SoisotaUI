@@ -39,7 +39,7 @@ export class DanhMucSmsEmailComponent extends iComponentBase implements OnInit {
     private async loadAllSmsEmailTemplate() {
         // this.loading = true;
         try {
-            const response = await this.iServiceBase.getDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_VIEW_SMS_EMAIL_TEMPLATE);
+            const response = await this.iServiceBase.getDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_ALL_SMS_EMAIL_TEMPLATE);
             if (response && response.length){
                this.lstAppSmsEmail = response.data;
             }
