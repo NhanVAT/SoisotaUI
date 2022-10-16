@@ -18,7 +18,7 @@ const routes: Routes = [
     {path: 'DanhMucNganHang', component: DanhMucNganHangComponent},
     {path: 'DanhMucGoiCuoc', component: DanhMucGoiCuocComponent},
     {path: 'DanhMucMauHoaDon', component: DanhMucMauHoaDonComponent},
-    {path: 'DanhMucMauSmsEmail', component: DanhMucSmsEmailComponent},
+    {path: 'DanhMucMauSMSEmail', component: DanhMucSmsEmailComponent},
 ];
 
 @NgModule({
