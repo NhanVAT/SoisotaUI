@@ -13,7 +13,6 @@ import {ConfirmationService, MessageService} from 'primeng/api';
   styleUrls: ['./danh-muc-mau-hoa-don.component.scss']
 })
 export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit {
-
     lstAppInvoiceTemplate: AppInvoiceTemplateModel[] = [];
     selectedAppInvoiceTemplate: AppInvoiceTemplateModel[] = [];
     loading: boolean;
@@ -78,7 +77,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
             this.showMessage(mType.success, "Thông báo", "Xóa mẫu hoá đơn thành công!", 'notify');
             await this.loadListAppInvoiceTemplate();
         } else {
-            this.showMessage(mType.success, "Thông báo", "Xóa mẫu hoá đơn không thành công. Vui lòng xem lại!", 'notify');
+            this.showMessage(mType.error, "Thông báo", "Xóa mẫu hoá đơn không thành công. Vui lòng xem lại!", 'notify');
         }
     }
 
