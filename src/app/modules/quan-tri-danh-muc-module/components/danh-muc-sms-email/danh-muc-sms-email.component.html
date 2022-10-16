@@ -1,0 +1,268 @@
+<div class="grid table-demo">
+    <div class="col-12">
+        <div class="card">
+            <h5>Danh mục Mẫu Sms Email</h5>
+            <p>Danh mục Mẫu Sms Email trong hệ thống</p>
+            <p-table #dt [value]="lstAppSmsEmail" [(selection)]="selectedAppSmsEmail" dataKey="id"
+                     styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
+                     [showCurrentPageReport]="true"
+                     [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
+                     currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} Sms-Email"
+                     [globalFilterFields]="['smsEmailKey','smsEmailName']" responsiveLayout="scroll"
+                     [loading]="loading"
+                >
+                <ng-template pTemplate="caption">
+                    <div class="grid">
+                        <div class="col-6">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                       (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                       placeholder="Tìm kiếm ngân hàng"/>
+                            </span>
+                        </div>
+
+                        <div class="col-4">&nbsp;</div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Thêm mới" icon="pi pi-plus"
+                                    (click)="onCreateSmsEmail()"
+                                    style="width: 100%;"></button>
+                        </div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Xóa" icon="pi pi-trash"
+                                    style="width: 100%;" (click)="onDeleteListSmsEmail()"
+                                    [disabled]="!selectedAppSmsEmail || selectedAppSmsEmail.length == 0"
+                                    class="p-button-danger"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="smsEmailKey">
+                            <div class="flex justify-content-between align-items-center">
+                                Mã mẫu Sms Email
+                                <p-sortIcon field="smsEmailKey"></p-sortIcon>
+                                <p-columnFilter type="text" field="smsEmailKey" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="smsEmailId">
+                            <div class="flex justify-content-between align-items-center">
+                                Nhóm mẫu Sms Email
+                                <p-sortIcon field="smsEmailId"></p-sortIcon>
+                                <p-columnFilter type="text" field="smsEmailId" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="smsEmailName">
+                            <div class="flex justify-content-between align-items-center">
+                                Tên mẫu Sms Email
+                                <p-sortIcon field="smsEmailName"></p-sortIcon>
+                                <p-columnFilter type="text" field="smsEmailName" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="smsEmailDescribe">
+                            <div class="flex justify-content-between align-items-center">
+                                Mô tả
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdBy">
+                            <div class="flex justify-content-between align-items-center">
+                                Người tạo
+                                <p-sortIcon field="createdBy"></p-sortIcon>
+                                <p-columnFilter type="text" field="createdBy" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdDate">
+                            <div class="flex justify-content-between align-items-center">
+                                Ngày tạo
+                                <p-sortIcon field="createdDate"></p-sortIcon>
+                                <p-columnFilter type="text" field="createdDate" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Trạng thái
+                            </div>
+                        </th>
+                        <th style="width: 8rem">
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Tác vụ
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-smsEmail>
+                    <tr class="p-selectable-row">
+                        <td>
+                            <p-tableCheckbox [value]="smsEmail"></p-tableCheckbox>
+                        </td>
+                        <td>
+                            <p-button label="{{smsEmail.templateCode}}"
+                                      styleClass="p-button-link"
+                                      (click)="onViewSmsEmail(smsEmail.id)"
+                            >
+                            </p-button>
+
+                        </td>
+                        <td>
+                            {{smsEmail.templateType}}
+                        </td>
+                        <td>
+                            {{smsEmail.templateName}}
+                        </td>
+                        <td>
+                            {{smsEmail.templateDescribe}}
+                        </td>
+                        <td>
+                            {{smsEmail.createdBy}}
+                        </td>
+                        <td>
+                            {{smsEmail.createdDate| date: 'MM/dd/yyyy'}}
+                        </td>
+                        <td style="text-align: center;">
+                            <button *ngIf="smsEmail.active" pButton pRipple type="button"
+                                    label="Hoạt động"
+                                    class="p-button-rounded p-button-secondary mr-2 mb-2"></button>
+                            <button *ngIf="!smsEmail.active" pButton pRipple type="button"
+                                    label="Không hoạt động"
+                                    class="p-button-rounded p-button-danger mr-2 mb-2"></button>
+                        </td>
+                        <td style="text-align: center">
+                            <div class="grid">
+                                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-eye"
+                                            (click)="onViewSmsEmail(smsEmail.id)"
+                                            class="p-button-rounded p-mr-2"></button>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                            (click)="onUpdateSmsEmail(smsEmail)"
+                                            class="p-button-rounded p-mr-2"></button>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-trash"
+                                            (click)="onDeleteSmsEmail(smsEmail, $event)"
+                                            class="p-button-rounded p-button-danger"></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">Không có Mẫu Hoá Đơn nào haha.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<p-dialog [header]="headerDialog" [(visible)]="isDisplayDialog"
+          [breakpoints]="{'960px': '75vw'}"
+          [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false" [maximizable]="true">
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-12">
+            <div class="card">
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                        <b>Thông tin mẫu hoá đơn</b>
+                    </div>
+                </p-divider>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-input-icon-left p-float-label" style="width: 100%">
+						    <i class="pi pi-key"></i>
+                            <input type="text" class="w-full" [(ngModel)]="appSmsEmail.templateCode"
+                                   [disabled]="true" pInputText/>
+                            <label>Mã ngân hàng</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-input-icon-left p-float-label" style="width: 100%">
+						    <i class="pi pi-user"></i>
+                            <input type="text" class="w-full" [(ngModel)]="appSmsEmail.templateName"
+                                   pInputText/>
+                            <label>Tên mẫu hoá đơn*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					    <span class="p-input-icon-left p-float-label" style="width: 100%">
+                            <i class="pi pi-align-justify"></i>
+                            <input type="text" class="w-full" [(ngModel)]="appSmsEmail.templateDescribe"
+                                   pInputText/>
+                            <label>Mô tả</label>
+					    </span>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="lstTemplateType" [(ngModel)]="appSmsEmail.templateType"
+                                        [showClear]="true"
+                                        [autoDisplayFirst]="false"></p-dropdown>
+                            <label>Chọn hình thứ thanh toán*</label>
+                        </span>
+                    </div>
+
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <p-inputSwitch [(ngModel)]="appSmsEmail.active"></p-inputSwitch>
+                        <h6>Hiệu lực</h6>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-12 mb-lg-0">
+                        <!--                        <input fileread="XSLFileUpload.file" type="file" name="datafile" accept=".xsl" class="fileup" ng-  required="true"/>-->
+<!--                        <p-fileUpload [multiple]="false" name="datafile[]"-->
+<!--                                      customUpload="true"-->
+<!--                                      accept="{{filetype}}"-->
+<!--                                      maxFileSize="{{maxFileSize}}"-->
+<!--                                      (uploadHandler)="onUpload($event)"-->
+<!--                                      required="true" chooseLabel="Thêm file"-->
+<!--                                      cancelIcon="pi pi-times" showCancelButton="true"-->
+<!--                                      formControlName="myFile"-->
+<!--                        >-->
+<!--                        </p-fileUpload>-->
+                    </div>
+                </div>
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                    </div>
+                </p-divider>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="grid" style="text-align: center">
+            <div class="col-5">&nbsp;</div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Lưu" icon="pi pi-save"
+                        (click)="onSaveTemplate()"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
+                        (click)="onCancelTemplate()" class="p-button-danger"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-5">&nbsp;</div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-toast baseZIndex='99999' key="notify"></p-toast>
+
+<p-confirmPopup></p-confirmPopup>
+
+<p-confirmDialog key="deleteList" header="Xóa Sms Email"
+                 icon="pi pi-exclamation-triangle"></p-confirmDialog>
