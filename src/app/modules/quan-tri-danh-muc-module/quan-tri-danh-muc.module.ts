@@ -11,14 +11,14 @@ import {DanhMucGoiCuocComponent} from './components/danh-muc-goi-cuoc/danh-muc-g
 import {
     DanhMucMauHoaDonComponent
 } from './components/danh-muc-mau-hoa-don/danh-muc-mau-hoa-don.component';
-import { DanhMucSmsEmailComponent } from './components/danh-muc-sms-email/danh-muc-sms-email.component'
+import { DanhMucMauSmsEmailComponent } from './components/danh-muc-mau-sms-email/danh-muc-mau-sms-email.component';
 
 
 const routes: Routes = [
     {path: 'DanhMucNganHang', component: DanhMucNganHangComponent},
     {path: 'DanhMucGoiCuoc', component: DanhMucGoiCuocComponent},
     {path: 'DanhMucMauHoaDon', component: DanhMucMauHoaDonComponent},
-    {path: 'DanhMucMauSMSEmail', component: DanhMucSmsEmailComponent},
+    {path: 'DanhMucMauSMSEmail', component: DanhMucMauSmsEmailComponent},
 ];
 
 @NgModule({
@@ -27,13 +27,12 @@ const routes: Routes = [
         ComponentCustomerModule,
         ReactiveFormsModule,
         RouterModule.forChild(routes),
-
     ],
     declarations: [
         DanhMucNganHangComponent,
         DanhMucGoiCuocComponent,
         DanhMucMauHoaDonComponent,
-        DanhMucSmsEmailComponent
+        DanhMucMauSmsEmailComponent,
     ],
     exports: [],
     providers: [

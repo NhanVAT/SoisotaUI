@@ -8,11 +8,11 @@ import {ShareData} from '../../../compoents-customer-module/shared-data-services
 
 
 @Component({
-  selector: 'app-danh-muc-sms-email',
-  templateUrl: './danh-muc-sms-email.component.html',
-  styleUrls: ['./danh-muc-sms-email.component.scss']
+  selector: 'app-danh-mau-muc-sms-email',
+  templateUrl: './danh-muc-mau-sms-email.component.html',
+  styleUrls: ['./danh-muc-mau-sms-email.component.scss']
 })
-export class DanhMucSmsEmailComponent extends iComponentBase implements OnInit {
+export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnInit {
 
     lstAppSmsEmail: AppSmsEmailModel[] = [];
     lstTemplateType: any[] = [];
@@ -30,14 +30,13 @@ export class DanhMucSmsEmailComponent extends iComponentBase implements OnInit {
       super(messageService);
   }
 
-  ngOnInit(): void {
-      this.isDisplayDialog = false;
-      this.loadAllSmsEmailTemplate();
+  async ngOnInit(){
+      await this.loadAllSmsEmailTemplate();
       this.onInitSmsEmailType();
   }
 
     private async loadAllSmsEmailTemplate() {
-        // this.loading = true;
+        this.loading = true;
         try {
             const response = await this.iServiceBase.getDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_ALL_SMS_EMAIL_TEMPLATE);
             if (response && response.length){
@@ -94,7 +93,8 @@ export class DanhMucSmsEmailComponent extends iComponentBase implements OnInit {
 
     async updateSmsEmail(smsEmail: AppSmsEmailModel){
         try {
-            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.UPDATE_SMS_EMAIL_TEMPLATE, smsEmail);
+            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC,
+                API.API_DANH_MUC.UPDATE_SMS_EMAIL_TEMPLATE, smsEmail);
             if (response && response.success){
                 this.loadAllSmsEmailTemplate();
                 this.showMessage(mType.success, "Thông báo", "Chỉnh sửa mẫu Sms Email thành công!", 'notify');
@@ -117,7 +117,8 @@ export class DanhMucSmsEmailComponent extends iComponentBase implements OnInit {
 
     async deleteSmsEmail(smsEmail: AppSmsEmailModel){
         try {
-            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_SMS_EMAIL_TEMPLATE, smsEmail);
+            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC,
+                API.API_DANH_MUC.DELETE_SMS_EMAIL_TEMPLATE, smsEmail);
             if (response && response.success){
                 this.loadAllSmsEmailTemplate();
                 this.showMessage(mType.success, "Thông báo", "Xóa mẫu Sms Email thành công!", 'notify');
