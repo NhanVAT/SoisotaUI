@@ -159,7 +159,7 @@
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="8">Không có Mẫu Hoá Đơn nào haha.</td>
+                        <td colspan="8">Không có Mẫu SMS Email lun haha.</td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -185,7 +185,7 @@
 						    <i class="pi pi-key"></i>
                             <input type="text" class="w-full" [(ngModel)]="appSmsEmail.templateCode"
                                    [disabled]="true" pInputText/>
-                            <label>Mã ngân hàng</label>
+                            <label>Mã SMS Email</label>
                         </span>
                     </div>
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
@@ -193,7 +193,7 @@
 						    <i class="pi pi-user"></i>
                             <input type="text" class="w-full" [(ngModel)]="appSmsEmail.templateName"
                                    pInputText/>
-                            <label>Tên mẫu hoá đơn*</label>
+                            <label>Tên mẫu SMS EMail*</label>
                         </span>
                     </div>
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
@@ -211,13 +211,21 @@
                             <p-dropdown [options]="lstTemplateType" [(ngModel)]="appSmsEmail.templateType"
                                         [showClear]="true"
                                         [autoDisplayFirst]="false"></p-dropdown>
-                            <label>Chọn hình thứ thanh toán*</label>
+                            <label>Chọn loại gửi tin*</label>
                         </span>
                     </div>
 
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                         <p-inputSwitch [(ngModel)]="appSmsEmail.active"></p-inputSwitch>
                         <h6>Hiệu lực</h6>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                         <span class="p-input-icon-left p-float-label" style="width: 100%">
+                            <i class="pi pi-align-justify"></i>
+                            <input type="text" class="w-full" [(ngModel)]="appSmsEmail.templateContent"
+                                   pInputText/>
+                            <label>Nội dung</label>
+					    </span>
                     </div>
                 </div>
                 <div class="grid">
@@ -244,18 +252,18 @@
     </div>
     <ng-template pTemplate="footer">
         <div class="grid" style="text-align: center">
-            <div class="col-5">&nbsp;</div>
-            <div class="col-1" style="text-align: center">
+            <div class="col-4">&nbsp;</div>
+            <div class="col-1" style="text-align: center; width: 8rem">
                 <button pButton type="button" label="Lưu" icon="pi pi-save"
                         (click)="onSaveTemplate()"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-1" style="text-align: center">
+            <div class="col-1" style="text-align: center; width: 8rem">
                 <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
                         (click)="onCancelTemplate()" class="p-button-danger"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-5">&nbsp;</div>
+            <div class="col-6">&nbsp;</div>
         </div>
     </ng-template>
 </p-dialog>

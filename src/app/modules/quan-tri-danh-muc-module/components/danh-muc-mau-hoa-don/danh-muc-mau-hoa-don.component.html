@@ -41,9 +41,9 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="invoiceTemplateKey">
+                        <th pSortableColumn="invoiceTemplateKey" >
                             <div class="flex justify-content-between align-items-center">
-                                Mã mẫu hoá đơn
+                                Mã hoá đơn
                                 <p-sortIcon field="invoiceTemplateKey"></p-sortIcon>
                                 <p-columnFilter type="text" field="invoiceTemplateKey" display="menu"
                                                 class="ml-auto"></p-columnFilter>
@@ -51,7 +51,7 @@
                         </th>
                         <th pSortableColumn="invoiceTemplateType">
                             <div class="flex justify-content-between align-items-center">
-                                Nhóm mẫu hoá đơn
+                                Nhóm hoá đơn
                                 <p-sortIcon field="invoiceTemplateType"></p-sortIcon>
                                 <p-columnFilter type="text" field="invoiceTemplateType" display="menu"
                                                 class="ml-auto"></p-columnFilter>
@@ -59,7 +59,7 @@
                         </th>
                         <th pSortableColumn="invoiceTemplateName">
                             <div class="flex justify-content-between align-items-center">
-                                Tên mẫu hoá đơn
+                                Tên hoá đơn
                                 <p-sortIcon field="invoiceTemplateName"></p-sortIcon>
                                 <p-columnFilter type="text" field="invoiceTemplateName" display="menu"
                                                 class="ml-auto"></p-columnFilter>
@@ -92,7 +92,7 @@
                                 Trạng thái
                             </div>
                         </th>
-                        <th style="width: 8rem">
+                        <th style="width: 13rem">
                             <div style="text-align: center;"
                                  class="justify-content-between align-items-center">
                                 Tác vụ
@@ -138,17 +138,17 @@
                         </td>
                         <td style="text-align: center">
                             <div class="grid">
-                                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                                <div class="col-12 mb-2 lg:col-4 mb-lg-0 btn-action">
                                     <button pButton pRipple icon="pi pi-eye"
                                             (click)="onViewInvoiceTemplate(invoiceTemplate.id)"
-                                            class="p-button-rounded p-mr-2"></button>
+                                            class="p-button-rounded  p-button-info"></button>
                                 </div>
-                                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                                <div class="col-12 mb-2 lg:col-4 mb-lg-0 btn-action">
                                     <button pButton pRipple icon="pi pi-pencil"
                                             (click)="onUpdateInvoiceTemplate(invoiceTemplate)"
                                             class="p-button-rounded p-mr-2"></button>
                                 </div>
-                                <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                                <div class="col-12 mb-2 lg:col-4 mb-lg-0 btn-action">
                                     <button pButton pRipple icon="pi pi-trash"
                                             (click)="onDeleteInvoiceTemplate(invoiceTemplate, $event)"
                                             class="p-button-rounded p-button-danger"></button>
@@ -159,7 +159,7 @@
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="8">Không có Mẫu Hoá Đơn nào haha.</td>
+                        <td colspan="8">Không có Mẫu Hoá đơn nào haha.</td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -186,7 +186,7 @@
                             <input type="text" class="w-full"
                                    [(ngModel)]="appInvoiceTemplate.templateCode"
                                    [disabled]="true" pInputText/>
-                            <label>Mã ngân hàng</label>
+                            <label>Mã hoá đơn</label>
                         </span>
                     </div>
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
@@ -285,18 +285,18 @@
     </div>
     <ng-template pTemplate="footer">
         <div class="grid" style="text-align: center">
-            <div class="col-5">&nbsp;</div>
-            <div class="col-1" style="text-align: center">
+            <div class="col-4">&nbsp;</div>
+            <div class="col-1" style="text-align: center; width: 8rem">
                 <button pButton type="button" label="Lưu" icon="pi pi-save"
                         (click)="onSaveTemplate()"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-1" style="text-align: center">
+            <div class="col-1" style="text-align: center; width: 8rem">
                 <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
                         (click)="onCancelTemplate()" class="p-button-danger"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-5">&nbsp;</div>
+            <div class="col-6">&nbsp;</div>
         </div>
     </ng-template>
 </p-dialog>

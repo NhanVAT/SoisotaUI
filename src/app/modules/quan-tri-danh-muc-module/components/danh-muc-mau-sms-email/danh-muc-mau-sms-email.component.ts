@@ -21,7 +21,7 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
 
     headerDialog: string;
     isDisplayDialog: boolean;
-    appSmsEmail: AppSmsEmailModel;
+    appSmsEmail: AppSmsEmailModel = new AppSmsEmailModel();
 
   constructor(private iServiceBase: iServiceBase,
               public messageService: MessageService,
@@ -62,7 +62,7 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
 
     onHideDialod(){
       this.appSmsEmail = new AppSmsEmailModel();
-      this.isDisplayDialog = true;
+      this.isDisplayDialog = false;
     }
 
     onCreateSmsEmail() {
@@ -150,10 +150,12 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
         if (this.validateData()){
             const result = this.onBindingData();
             if (result.id && result.id > 0){
+                console.log(1);
                 this.updateSmsEmail(result);
                 this.onHideDialod();
                 return;
             }
+            console.log(2);
             this.createSmsEmail(result);
             this.onHideDialod();
         }
@@ -175,6 +177,7 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
           data.templateType = this.appSmsEmail.templateType;
           data.templateDescribe = this.appSmsEmail.templateDescribe;
           data.active = this.appSmsEmail.active;
+          data.templateContent = this.appSmsEmail.templateContent;
           // update
           if (this.appSmsEmail.id && this.appSmsEmail.id > 0 ){
               data.id = this.appSmsEmail.id;

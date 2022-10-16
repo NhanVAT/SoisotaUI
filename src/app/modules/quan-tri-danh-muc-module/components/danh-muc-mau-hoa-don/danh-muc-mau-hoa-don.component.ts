@@ -66,15 +66,16 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
     onDisplayDialog(header: string) {
         this.headerDialog = header;
-        this.appInvoiceTemplate = new AppInvoiceTemplateModel();
         this.isDisplayDialog = true;
     }
 
     onHideDialod() {
+        this.appInvoiceTemplate = new AppInvoiceTemplateModel();
         this.isDisplayDialog = false;
     }
 
     onCreateInvoiceTemplate() {
+        this.appInvoiceTemplate = new AppInvoiceTemplateModel();
         this.onDisplayDialog('Thêm mẫu hoá đơn');
     }
 
