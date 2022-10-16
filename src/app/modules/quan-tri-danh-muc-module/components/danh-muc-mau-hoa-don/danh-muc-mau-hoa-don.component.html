@@ -3,7 +3,8 @@
         <div class="card">
             <h5>Danh mục Mẫu Hoá Đơn</h5>
             <p>Danh mục Mẫu Hoá Đơn dùng trong hệ thống</p>
-            <p-table #dt [value]="lstAppInvoiceTemplate" [(selection)]="selectedAppInvoiceTemplate" dataKey="id"
+            <p-table #dt [value]="lstAppInvoiceTemplate" [(selection)]="selectedAppInvoiceTemplate"
+                     dataKey="id"
                      styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
                      [showCurrentPageReport]="true"
                      [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
@@ -182,7 +183,8 @@
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                         <span class="p-input-icon-left p-float-label" style="width: 100%">
 						    <i class="pi pi-key"></i>
-                            <input type="text" class="w-full" [(ngModel)]="appInvoiceTemplate.templateCode"
+                            <input type="text" class="w-full"
+                                   [(ngModel)]="appInvoiceTemplate.templateCode"
                                    [disabled]="true" pInputText/>
                             <label>Mã ngân hàng</label>
                         </span>
@@ -190,7 +192,8 @@
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                         <span class="p-input-icon-left p-float-label" style="width: 100%">
 						    <i class="pi pi-user"></i>
-                            <input type="text" class="w-full" [(ngModel)]="appInvoiceTemplate.templateName"
+                            <input type="text" class="w-full"
+                                   [(ngModel)]="appInvoiceTemplate.templateName"
                                    pInputText/>
                             <label>Tên mẫu hoá đơn*</label>
                         </span>
@@ -198,7 +201,8 @@
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
 					    <span class="p-input-icon-left p-float-label" style="width: 100%">
                             <i class="pi pi-align-justify"></i>
-                            <input type="text" class="w-full" [(ngModel)]="appInvoiceTemplate.templateDescribe"
+                            <input type="text" class="w-full"
+                                   [(ngModel)]="appInvoiceTemplate.templateDescribe"
                                    pInputText/>
                             <label>Mô tả</label>
 					    </span>
@@ -207,7 +211,8 @@
                 <div class="grid">
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                         <span class="p-float-label">
-                            <p-dropdown [options]="lstTemplateType" [(ngModel)]="appInvoiceTemplate.templateType"
+                            <p-dropdown [options]="lstTemplateType"
+                                        [(ngModel)]="appInvoiceTemplate.templateType"
                                         [showClear]="true"
                                         [autoDisplayFirst]="false"></p-dropdown>
                             <label>Chọn hình thứ thanh toán*</label>
@@ -238,6 +243,43 @@
                     <div class="p-d-inline-flex p-ai-center">
                     </div>
                 </p-divider>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="grid" style="text-align: center">
+            <div class="col-5">&nbsp;</div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Lưu" icon="pi pi-save"
+                        (click)="onSaveTemplate()"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-1" style="text-align: center">
+                <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
+                        (click)="onCancelTemplate()" class="p-button-danger"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-5">&nbsp;</div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [header]="headerDialog" [(visible)]="isDisplayDialogView"
+          [breakpoints]="{'960px': '75vw'}"
+          [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false" [maximizable]="true">
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-12">
+            <div class="card">
+                <div id="printSectionId">
+                    <div id="print-section"
+                         style="text-align: center; color: black; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 100%;">
+                            <div [innerHTML]="htmlView">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
