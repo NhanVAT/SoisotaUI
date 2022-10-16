@@ -50,7 +50,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
     private async loadListAppInvoiceTemplate() {
         this.loading = true;
-        const response = await this.iServiceBase.getDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_ALL_TEMPLATE);
+        const response = await this.iServiceBase.getDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_ALL_INVOICE_TEMPLATE);
         if (response && response.length) {
             this.lstAppInvoiceTemplate = response;
         }
@@ -80,7 +80,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
     async onDeleteListInvoiceTemplate() {
         const param = this.selectedAppInvoiceTemplate.map(i => i.id);
-        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_LIST_TEMPLATE, param, true);
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_LIST_INVOICE_TEMPLATE, param, true);
         if (response) {
             this.showMessage(mType.success, "Thông báo", "Xóa người dùng thành công!", 'notify');
             await this.loadListAppInvoiceTemplate();
@@ -149,7 +149,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
     private async updateInvoiceTemplate(data: AppInvoiceTemplateModel) {
 
-        const response = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.UPDATE_TEMPLATE, data);
+        const response = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.UPDATE_INVOICE_TEMPLATE, data);
         if (response && response.success) {
             this.showMessage(mType.success, "Thông báo", "Thêm mới mẫu hoá đơn thành công!", 'notify');
 
@@ -162,7 +162,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
     private async createInvoiceTemplate(data: AppInvoiceTemplateModel) {
 
-        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.INSERT_TEMPLATE, data);
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.INSERT_INVOICE_TEMPLATE, data);
 
         if (response && response.success) {
             this.showMessage(mType.success, "Thông báo", "Thêm mới mẫu hoá đơn thành công!", 'notify');
@@ -176,7 +176,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
     private async deleteInvoiceTemplate(invoiceTemplate: AppInvoiceTemplateModel) {
         const param = invoiceTemplate.id;
-        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_TEMPLATE, param);
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_INVOICE_TEMPLATE, param);
         if (response && response.success) {
             this.showMessage(mType.success, "Thông báo", "Xoá mẫu hoá đơn thành công!", 'notify');
 
