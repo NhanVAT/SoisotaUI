@@ -8,7 +8,7 @@
                      [showCurrentPageReport]="true"
                      [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
                      currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} ngân hàng"
-                     [globalFilterFields]="['bankId','bankName']" responsiveLayout="scroll"
+                     [globalFilterFields]="['invoiceTemplateKey','invoiceTemplateName']" responsiveLayout="scroll"
                      [loading]="loading">
                 <ng-template pTemplate="caption">
                     <div class="grid">
@@ -43,28 +43,28 @@
                         <th pSortableColumn="invoiceTemplateKey">
                             <div class="flex justify-content-between align-items-center">
                                 Mã mẫu hoá đơn
-                                <p-sortIcon field="bankId"></p-sortIcon>
-                                <p-columnFilter type="text" field="bankId" display="menu"
+                                <p-sortIcon field="invoiceTemplateKey"></p-sortIcon>
+                                <p-columnFilter type="text" field="invoiceTemplateKey" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="bankId">
+                        <th pSortableColumn="invoiceTemplateType">
                             <div class="flex justify-content-between align-items-center">
                                 Nhóm mẫu hoá đơn
-                                <p-sortIcon field="bankId"></p-sortIcon>
-                                <p-columnFilter type="text" field="bankId" display="menu"
+                                <p-sortIcon field="invoiceTemplateType"></p-sortIcon>
+                                <p-columnFilter type="text" field="invoiceTemplateType" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="bankName">
+                        <th pSortableColumn="invoiceTemplateName">
                             <div class="flex justify-content-between align-items-center">
                                 Tên mẫu hoá đơn
-                                <p-sortIcon field="bankName"></p-sortIcon>
-                                <p-columnFilter type="text" field="bankName" display="menu"
+                                <p-sortIcon field="invoiceTemplateName"></p-sortIcon>
+                                <p-columnFilter type="text" field="invoiceTemplateName" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="bankName">
+                        <th pSortableColumn="invoiceTemplateDescribe">
                             <div class="flex justify-content-between align-items-center">
                                 Mô tả
                             </div>

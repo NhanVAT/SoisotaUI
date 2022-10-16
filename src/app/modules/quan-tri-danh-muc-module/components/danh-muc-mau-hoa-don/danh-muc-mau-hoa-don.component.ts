@@ -59,7 +59,6 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
     onDisplayDialog(header: string){
       this.headerDialog = header;
-      this.appInvoiceTemplate = new AppInvoiceTemplateModel();
       this.isDisplayDialog = true;
     }
 
@@ -68,6 +67,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
     }
 
     onCreateInvoiceTemplate() {
+        this.appInvoiceTemplate = new AppInvoiceTemplateModel();
         this.onDisplayDialog('Thêm mẫu hoá đơn');
     }
 
@@ -75,10 +75,10 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
         const param = this.selectedAppInvoiceTemplate.map(i => i.id);
         const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_LIST_TEMPLATE, param, true);
         if (response) {
-            this.showMessage(mType.success, "Thông báo", "Xóa người dùng thành công!", 'notify');
+            this.showMessage(mType.success, "Thông báo", "Xóa mẫu hoá đơn thành công!", 'notify');
             await this.loadListAppInvoiceTemplate();
         } else {
-            this.showMessage(mType.success, "Thông báo", "Xóa người dùng không thành công. Vui lòng xem lại!", 'notify');
+            this.showMessage(mType.success, "Thông báo", "Xóa mẫu hoá đơn không thành công. Vui lòng xem lại!", 'notify');
         }
     }
 
@@ -144,12 +144,12 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
         const response = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.UPDATE_TEMPLATE, data);
         if (response && response.success) {
-            this.showMessage(mType.success, "Thông báo", "Thêm mới mẫu hoá đơn thành công!", 'notify');
+            this.showMessage(mType.success, "Thông báo", "Sửa mới mẫu hoá đơn thành công!", 'notify');
 
             this.onHideDialod();
             await this.loadListAppInvoiceTemplate();
         }else{
-            this.showMessage(mType.error, "Thông báo", "Thêm mới mẫu hoá đơn không thành công!. Vui lòng xem lại!", 'notify');
+            this.showMessage(mType.error, "Thông báo", "Sửa mới mẫu hoá đơn không thành công!. Vui lòng xem lại!", 'notify');
         }
     }
 
@@ -224,6 +224,7 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
         };
         const response = await this.iServiceBase.getDataWithParamsAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_VIEW_INVOICE_TEMPLATE, params);
         if (response && response.success) {
+            console.log(atob(response.data));
             return response.data;
         }
         return null;
