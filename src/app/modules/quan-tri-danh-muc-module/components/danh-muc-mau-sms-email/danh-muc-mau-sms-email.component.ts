@@ -118,7 +118,7 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
     async deleteSmsEmail(smsEmail: AppSmsEmailModel){
         try {
             const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC,
-                API.API_DANH_MUC.DELETE_SMS_EMAIL_TEMPLATE, smsEmail);
+                API.API_DANH_MUC.DELETE_SMS_EMAIL_TEMPLATE, smsEmail.id);
             if (response && response.success){
                 this.loadAllSmsEmailTemplate();
                 this.showMessage(mType.success, "Thông báo", "Xóa mẫu Sms Email thành công!", 'notify');
@@ -172,7 +172,6 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
     onBindingData(): AppSmsEmailModel{
       const data = new AppSmsEmailModel();
       if (this.shareData && this.shareData.userInfo){
-          data.templateCode = this.appSmsEmail.templateCode;
           data.templateName = this.appSmsEmail.templateName;
           data.templateType = this.appSmsEmail.templateType;
           data.templateDescribe = this.appSmsEmail.templateDescribe;
@@ -181,6 +180,7 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
           // update
           if (this.appSmsEmail.id && this.appSmsEmail.id > 0 ){
               data.id = this.appSmsEmail.id;
+              data.templateCode = this.appSmsEmail.templateCode;
               data.createdBy = this.appSmsEmail.createdBy;
               data.createdDate = this.appSmsEmail.createdDate;
               data.lastModifiedBy = this.shareData.userInfo.userName;
