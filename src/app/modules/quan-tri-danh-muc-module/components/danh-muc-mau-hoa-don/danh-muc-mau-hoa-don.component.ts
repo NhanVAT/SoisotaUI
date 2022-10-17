@@ -9,7 +9,7 @@ import {
     mType
 } from '../../../compoents-customer-module/functions/iComponentBase.component';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-danh-muc-mau-hoa-don',
@@ -83,10 +83,10 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
         const param = this.selectedAppInvoiceTemplate.map(i => i.id);
         const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_LIST_INVOICE_TEMPLATE, param, true);
         if (response) {
-            this.showMessage(mType.success, "Thông báo", "Xóa người dùng thành công!", 'notify');
+            this.showMessage(mType.success, 'Thông báo', 'Xóa người dùng thành công!', 'notify');
             await this.loadListAppInvoiceTemplate();
         } else {
-            this.showMessage(mType.success, "Thông báo", "Xóa người dùng không thành công. Vui lòng xem lại!", 'notify');
+            this.showMessage(mType.success, 'Thông báo', 'Xóa người dùng không thành công. Vui lòng xem lại!', 'notify');
         }
     }
 
@@ -152,12 +152,12 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
 
         const response = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.UPDATE_INVOICE_TEMPLATE, data);
         if (response && response.success) {
-            this.showMessage(mType.success, "Thông báo", "Thêm mới mẫu hoá đơn thành công!", 'notify');
+            this.showMessage(mType.success, 'Thông báo', 'Thêm mới mẫu hoá đơn thành công!', 'notify');
 
             this.onHideDialod();
             await this.loadListAppInvoiceTemplate();
         } else {
-            this.showMessage(mType.error, "Thông báo", "Thêm mới mẫu hoá đơn không thành công!. Vui lòng xem lại!", 'notify');
+            this.showMessage(mType.error, 'Thông báo', 'Thêm mới mẫu hoá đơn không thành công!. Vui lòng xem lại!', 'notify');
         }
     }
 
@@ -166,12 +166,12 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
         const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.INSERT_INVOICE_TEMPLATE, data);
 
         if (response && response.success) {
-            this.showMessage(mType.success, "Thông báo", "Thêm mới mẫu hoá đơn thành công!", 'notify');
+            this.showMessage(mType.success, 'Thông báo', 'Thêm mới mẫu hoá đơn thành công!', 'notify');
 
             this.onHideDialod();
             await this.loadListAppInvoiceTemplate();
         } else {
-            this.showMessage(mType.error, "Thông báo", "Thêm mới mẫu hoá đơn không thành công!. Vui lòng xem lại!", 'notify');
+            this.showMessage(mType.error, 'Thông báo', 'Thêm mới mẫu hoá đơn không thành công!. Vui lòng xem lại!', 'notify');
         }
     }
 
@@ -179,11 +179,11 @@ export class DanhMucMauHoaDonComponent extends iComponentBase implements OnInit 
         const param = invoiceTemplate.id;
         const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_INVOICE_TEMPLATE, param);
         if (response && response.success) {
-            this.showMessage(mType.success, "Thông báo", "Xoá mẫu hoá đơn thành công!", 'notify');
+            this.showMessage(mType.success, 'Thông báo', 'Xoá mẫu hoá đơn thành công!', 'notify');
 
             await this.loadListAppInvoiceTemplate();
         } else {
-            this.showMessage(mType.error, "Thông báo", "Xoá mẫu hoá đơn không thành công!. Vui lòng xem lại!", 'notify');
+            this.showMessage(mType.error, 'Thông báo', 'Xoá mẫu hoá đơn không thành công!. Vui lòng xem lại!', 'notify');
         }
     }
 
