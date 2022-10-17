@@ -1,8 +1,7 @@
+<p-toast key="appRegister" [style]="{width: '30%'}"></p-toast>
 
-<div class="pages-body login-page flex" filter-color="orange" style="overflow:overlay; padding:0px;">
-    <!--        <a href="" class="topbar-logo">-->
-    <!--            <img src="assets/layout/images/S_BILL_Topbar_2.png "style="width: 60%; height: 100%"/>-->
-    <!--        </a>-->
+<div class="pages-body login-page flex" filter-color="orange" style="overflow:auto; padding:0px;">
+
     <div class="body-left">
         <div class=""
              style="border-radius: 30px; border: none; background-color:#ffffff00; box-shadow: none; min-width: 330px;padding: 10rem;">
@@ -14,67 +13,95 @@
     </div>
     <div class="body-right">
         <div class="body-login" style="color: #c9dedd">
-            <h2 style="color: #ffffff; font-family: sans-serif;">Chào mừng đến với <span>S BILL!👋</span></h2>
+            <h2 style="color: #ffffff; font-family: sans-serif;">Chào mừng đến với
+                <span>S BILL!👋</span></h2>
             <p>Đăng ký ngay tài khoản để trải nghiệm dịch vụ của chúng tôi ngay nào!</p>
-            <div class="row">
-                <div class="field col-md " >
-                    <label for="username" class="block">Họ</label>
-                    <input id="fistName" type="username"  [(ngModel)]="firstName"  aria-describedby="" pInputText/>
-                </div>
-                <div style="width: 6%"></div>
-                <div class="field col-md" >
-                    <label for="username" class="block">Tên</label>
-                    <input id="lastName" type="username"  [(ngModel)]="lastName"  aria-describedby="" pInputText/>
-                </div>
+            <div>
+                <p-card header="Thông báo!"
+                        [style]="{color : 'yellow', background: 'none', opacity: 0.5}">
+                    Vui lòng sử dụng địa chỉ email và số điện thoại thật để đăng kí tài khoản, chúng
+                    tôi
+                    sẽ gửi mã về mail của bạn khi bạn yêu cầu cấp lại mật khẩu
+                </p-card>
             </div>
-            <div class="field "style="width: 100%" >
-                <label for="username" class="block">Tài khoản</label>
-                <input id="username" type="username"  [(ngModel)]="userName"  aria-describedby="" pInputText/>
-            </div>
+            <br/>
             <div class="row">
-                <div class="field col-md">
-                        <label for="password" class="block">Mật khẩu</label>
-                    <p-password id="password" [(ngModel)]="password"  [toggleMask]="true"[feedback]="false" [inputStyle] = "{'width':'100%'}" ></p-password>
+                <div class="field col-md ">
+                    <label for="username" class="block">Họ *</label>
+                    <input id="fistName" type="username" [(ngModel)]="firstName" aria-describedby=""
+                           pInputText/>
                 </div>
                 <div style="width: 6%"></div>
                 <div class="field col-md">
-                    <label for="confirmPassword" class="block">Nhập lại mật khẩu</label>
-                    <p-password id="confirmPassword" [(ngModel)]="confirmPassword"  [toggleMask]="true"[feedback]="false" [inputStyle] = "{'width':'100%'}" ></p-password>
+                    <label for="username" class="block">Tên *</label>
+                    <input id="lastName" type="username" [(ngModel)]="lastName" aria-describedby=""
+                           pInputText/>
                 </div>
             </div>
-            <div class="field "style="width: 100%" >
-                <label for="email" class="block">Email</label>
-                <input id="email" type="email"  [(ngModel)]="email"  aria-describedby="" pInputText/>
+            <div class="field " style="width: 100%">
+                <label for="username" class="block">Tài khoản *</label>
+                <input id="username" type="username" [(ngModel)]="userName" aria-describedby=""
+                       pInputText/>
             </div>
-            <div class="field "style="width: 100%" >
-                <label for="phone" class="block">Số điện thoại </label>
-                <input id="phone" type="phone"  [(ngModel)]="phone"  aria-describedby="" pInputText/>
+            <div class="row">
+                <div class="field col-md">
+                    <label for="password" class="block">Mật khẩu *</label>
+                    <p-password id="password" [(ngModel)]="password" [toggleMask]="true"
+                                [feedback]="false" [inputStyle]="{'width':'100%'}"></p-password>
+                </div>
+                <div style="width: 6%"></div>
+                <div class="field col-md">
+                    <label for="confirmPassword" class="block">Nhập lại mật khẩu *</label>
+                    <p-password id="confirmPassword" [(ngModel)]="confirmPassword"
+                                [toggleMask]="true" [feedback]="false"
+                                [inputStyle]="{'width':'100%'}"></p-password>
+                </div>
             </div>
-            <div class="field "style="width: 100%" >
+            <div class="field " style="width: 100%">
+                <label for="email" class="block">Email *</label>
+                <input id="email" type="email" [(ngModel)]="email" aria-describedby="" pInputText/>
+            </div>
+            <div class="field " style="width: 100%">
+                <label for="phone" class="block">Số điện thoại *</label>
+                <input id="phone" type="text" [(ngModel)]="phone" aria-describedby="" pInputText/>
+            </div>
+            <div class="field " style="width: 100%">
                 <label for="address" class="block">Địa chỉ </label>
-                <input id="address" type="phone"  [(ngModel)]="address"  aria-describedby="" pInputText/>
+                <input id="address" type="text" [(ngModel)]="address" aria-describedby=""
+                       pInputText/>
             </div>
-            <div class="field "style="width: 100%" >
+            <div class="field " style="width: 100%">
+                <label for="address" class="block">Giới tính</label>
+                <p-dropdown [options]="lstSexUser" [(ngModel)]="sexUser"></p-dropdown>
+            </div>
+            <div class="field " style="width: 100%">
                 <label class="container">
-                    <input type="checkbox" checked="checked"  [(ngModel)]="acceptTerm" >
+                    <input type="checkbox" checked="checked" [(ngModel)]="acceptTerm">
                     <span class="checkmark" style="color: #ffffff;"> Tôi đồng ý với </span>
                     <a style="color:#ceb017!important;">chính sách & điều khoản bảo mật</a>
                 </label>
             </div>
 
             <div class="field" style="width: 100%">
-                <p-button class="login-button" (onClick)="onSubmit()" [style]="
-            {'background-color': 'white', 'color': 'black','margin-bottom':'0rem','width':'100%'}" label="Đăng Ký"></p-button>
+                <p-button class="login-button" [disabled]="!acceptTerm" (onClick)="onSubmit()"
+                          [style]="
+            {'background-color': 'white', 'color': 'black','margin-bottom':'0rem','width':'100%'}"
+                          label="Đăng Ký"></p-button>
             </div>
-            <div class="footer-login" >
-                <p><span>Bạn có tài khoản rồi?</span> <a [routerLink]="['/login']" routerLinkActive="active" style="color:#ceb017!important;">Đăng nhập ngay</a></p>
-            </div>
-            <div class="px-3" style="align-items: center;border-bottom: 1px solid #dadde1;display: flex;margin: 20px 28px;text-align: center;width:80%;"></div>
             <div class="footer-login">
-                <a style="background-color: #3b5998"href="" ><i class="pi pi-facebook"></i></a>
-                <a style="background-color:#444444"href=""><i class="pi pi-github"></i></a>
-                <a style="background-color:#55acee"href=""><i class="pi pi-twitter"></i></a>
-                <a style="background-color: #dd4b39"href=""><i class="pi pi-envelope"></i></a>
+                <p><span>Bạn có tài khoản rồi? &nbsp;</span> <a [routerLink]="['/login']"
+                                                                routerLinkActive="active"
+                                                                style="color:#ceb017!important;">Đăng
+                    nhập
+                    ngay</a></p>
+            </div>
+            <div class="px-3"
+                 style="align-items: center;border-bottom: 1px solid #dadde1;display: flex;margin: 20px 28px;text-align: center;width:80%;"></div>
+            <div class="footer-login">
+                <a style="background-color: #3b5998" href=""><i class="pi pi-facebook"></i></a>
+                <a style="background-color:#444444" href=""><i class="pi pi-github"></i></a>
+                <a style="background-color:#55acee" href=""><i class="pi pi-twitter"></i></a>
+                <a style="background-color: #dd4b39" href=""><i class="pi pi-envelope"></i></a>
 
             </div>
 
@@ -82,4 +109,3 @@
     </div>
 
 </div>
-<p-toast baseZIndex='99999' key="app-register"></p-toast>

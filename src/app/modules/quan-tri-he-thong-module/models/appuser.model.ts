@@ -13,6 +13,8 @@ export class AppUser extends AbstractAuditing {
     phone: string;
     userId: any;
     userName: string;
+    avatarImage: string;
+    avatar: any;
     appRoles: any;
     lstRoleId: any[];
 }

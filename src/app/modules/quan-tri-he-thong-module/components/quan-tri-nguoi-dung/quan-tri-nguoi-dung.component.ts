@@ -11,8 +11,7 @@ import {
 import {AppBreadcrumbService} from '../../../../app-systems/app-breadcrumb/app.breadcrumb.service';
 import {ShareData} from '../../../compoents-customer-module/shared-data-services/sharedata.service';
 import {AppRole} from '../../models/approle.model';
-import {isEmpty} from 'rxjs/operators';
-
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-quan-tri-nguoi-dung',
@@ -42,6 +41,7 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 public messageService: MessageService,
                 private confirmationService: ConfirmationService,
                 private iServiceBase: iServiceBase,
+                private sanitizer: DomSanitizer
     ) {
         super(messageService, breadcrumbService);
     }
@@ -51,34 +51,31 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
         this.loadAllUser();
         this.getAllRole();
     }
-    initlistActionDefault(){
+
+    initlistActionDefault() {
         this.arrayAction = [
             {name: 'Tác vụ', value: 'action'},
             {name: 'Sửa', value: 'editUser'},
             {name: 'Xóa', value: 'deleteUser'}
         ];
     }
-    onChangeAction(user: AppUser, selectValue: any) {
-        switch (selectValue.value) {
-            case 'editUser':
-                this.onEditUser(user);
-                break;
-            case 'deleteUser':
-                this.onDeleteUser(user);
-                break;
-            default:
-                break;
-        }
-    }
 
-    openNew() {
+    onCreateUser() {
         this.submitted = false;
         this.selectedRoles = [];
         this.userModel = new AppUser();
-        this.openDialog("Thêm người dùng mới");
+
+        this.userModel.active = true;
+
+        this.headerDialog = 'Thêm mới người dùng';
+        this.userDialog = true;
     }
-    onEditUser(user: AppUser) {
+
+    onUpdateUser(user: AppUser) {
         const headerDialog = `Cập nhật người dùng: ${user.fullName}`;
+        this.submitted = false;
+        this.userDialog = true;
+
         this.userModel = Object.assign({}, user);
         let fullname = this.userModel.fullName;
         let firstName = fullname.split(' ')[0];
@@ -89,11 +86,9 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
         for (let i = 0; i < user.appRoles.length; i++) {
             this.selectedRoles.push(this.listAppRole.filter(val => val.id === user.appRoles[i].id)[0]);
         }
-        //console.log(this.selectedRoles);
-        this.openDialog(headerDialog);
     }
 
-    async editUser(user) {
+    async updateUser(user) {
         const response = await this.iServiceBase.putDataAsync(API.PHAN_HE.QTHT, API.API_QTHT.UPDATE_APP_USER, user);
         if (response && response.success) {
             this.showMessage(mType.success, 'Thông báo', 'Cập nhật người dùng thành công!', 'notify');
@@ -101,13 +96,15 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             // load again
             await this.loadAllUser();
 
+            this.userDialog = false;
         } else {
             this.showMessage(mType.error, 'Thông báo', 'Cập nhật người dùng không thành công. Vui lòng xem lại!', 'notify');
         }
     }
 
-    onDeleteUser(user: AppUser) {
+    onDeleteUser(user: AppUser, event) {
         this.confirmationService.confirm({
+            target: event.target,
             message: 'Bạn có chắc muốn xoá người dùng này chứ ' + user.fullName + ' (' + user.userId + ') ' + '?',
             header: 'Xác nhận',
             icon: 'pi pi-exclamation-triangle',
@@ -174,6 +171,14 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
 
             if (response && response.length) {
                 this.listAppUser = response;
+
+                if (this.listAppUser && this.listAppUser.length) {
+                    this.listAppUser.forEach(user => {
+                        if (user.avatarImage) {
+                            user.avatar = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${user.avatarImage}`);
+                        }
+                    });
+                }
             }
 
             this.loading = false;
@@ -249,50 +254,34 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
                 this.userDialog = false;
 
                 this.loadAllUser();
-
+                this.userDialog = false;
             } else {
                 this.showMessage(mType.error, "Thông báo", "Thêm mới nggưi dùng không thành công. Vui lòng xem lại!", 'notify');
             }
         } catch (e) {
             console.log(e);
         }
-        this.userModel = new AppUser();
     }
 
-    saveUser() {
-        console.log(this.selectedRoles);
+    onSaveUser() {
         const userEnity = this.bindingDataUserModel();
-        console.log(userEnity.id);
-        if (this.validateUserModel()){
+        if (this.validateUserModel()) {
             if (userEnity && userEnity.id && userEnity.id > 0) {
-                console.log('vao up');
-                this.editUser(userEnity);
-
+                this.updateUser(userEnity);
             } else {
                 this.createUser(userEnity);
             }
-            console.log(userEnity);
-            this.hideDialog();
         }
 
     }
 
-    onCreateUser() {
-        this.openDialog('Tạo người dùng mới');
-    }
-
-    openDialog(header: string) {
-        this.headerDialog = header;
-        this.submitted = false;
-        this.userDialog = true;
-    }
-
-    hideDialog() {
+    onCancelUser() {
         this.userDialog = false;
         this.submitted = false;
     }
-    validateUserModel(): boolean{
-        if (!this.userModel.firstName || this.userModel.firstName == ''){
+
+    validateUserModel(): boolean {
+        if (!this.userModel.firstName || this.userModel.firstName == '') {
             this.showMessage(mType.warn, "Thông báo", "Bạn chưa nhập họ!", 'notify');
             return false;
         }
@@ -316,25 +305,25 @@ export class QuanTriNguoiDungComponent extends iComponentBase implements OnInit 
             this.showMessage(mType.warn, "Thông báo", "Mật khẩu không giống nhau! ", 'notify');
             return false;
         }
-        if (!this.userModel.phone || this.userModel.phone =='') {
+        if (!this.userModel.phone || this.userModel.phone == '') {
             this.showMessage(mType.warn, "Thông báo", "Bạn chưa nhập số điện thoại! ", 'notify');
             return false;
         }
-        if(!this.userModel.email || this.userModel.email ==''){
+        if (!this.userModel.email || this.userModel.email == '') {
             this.showMessage(mType.warn, "Thông báo", "Bạn chưa nhập emai! ", 'notify');
             return false;
         }
         const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-        if(re.test(this.userModel.email) == false){
+        if (re.test(this.userModel.email) == false) {
             this.showMessage(mType.warn, "Thông báo", "Bạn nhập email chưa đúng! ", 'notify');
             return false;
         }
         var reg = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-        if(reg.test(this.userModel.phone) == false){
+        if (reg.test(this.userModel.phone) == false) {
             this.showMessage(mType.warn, "Thông báo", "Số điện thoại bạn nhập không đúng! ", 'notify');
             return false;
         }
-        if (!this.selectedRoles || this.selectedRoles.length === 0 )  {
+        if (!this.selectedRoles || this.selectedRoles.length === 0) {
             this.showMessage(mType.warn, "Thông báo", "Bạn chưa chọn phân quyền! ", 'notify');
             return false;
         }

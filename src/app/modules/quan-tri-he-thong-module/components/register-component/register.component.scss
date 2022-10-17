@@ -2,7 +2,8 @@
     text-decoration: none;
     color: #ffffff !important;
 }
-p{
+
+p {
     color: #ffffffcc !important;
 }
 
@@ -12,7 +13,7 @@ p{
     }
 }
 
-.topbar-logo{
+.topbar-logo {
     width: 150px;
     height: 30px;
     padding: 3px;
@@ -20,7 +21,7 @@ p{
     z-index: 1;
 }
 
-.body-left{
+.body-left {
     width: 66.66667%;
     padding: 5rem;
     display: flex;
@@ -29,7 +30,7 @@ p{
     text-align: center;
 }
 
-.body-right{
+.body-right {
     width: 33.33333%;
     display: flex;
     align-items: center;
@@ -37,16 +38,19 @@ p{
     background: #120b0bb3;
 
 }
-.row{
+
+.row {
     width: 100%;
     display: flex;
     --bs-gutter-x: 2rem;
 }
-.col-md{
+
+.col-md {
     flex: 0 0 auto;
     width: 47%;
 }
-.body-login{
+
+.body-login {
     padding: 50px;
     width: 100%;
 }
@@ -54,25 +58,28 @@ p{
 :host ::ng-deep .p-component {
     width: 100%;
 }
-:host ::ng-deep.p-checkbox .p-checkbox-box{
+
+:host ::ng-deep.p-checkbox .p-checkbox-box {
     border: none;
 }
 
-.footer-login{
+.footer-login {
     padding: 5px;
     text-align: center;
 }
 
-.footer-login > a{
+.footer-login > a {
     padding: 8px;
     border-radius: 5px;
     margin: 8px;
 }
+
 @media screen and (max-width: 800px) {
     .body-left {
         display: none !important;
     }
-    .body-right{
+    .body-right {
         width: 100%;
     }
 }
+

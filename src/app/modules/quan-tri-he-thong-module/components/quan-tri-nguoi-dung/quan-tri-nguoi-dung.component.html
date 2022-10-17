@@ -1,4 +1,3 @@
-
 <p-toast></p-toast>
 <div class="grid table-demo">
     <div class="col-12">
@@ -28,7 +27,7 @@
                         <div class="col-4">&nbsp;</div>
                         <div class="col-1" style="text-align: center">
                             <button pButton type="button" label="Thêm mới" icon="pi pi-plus"
-                                    (click)="openNew()"
+                                    (click)="onCreateUser()"
                                     style="width: 100%;"></button>
                         </div>
                         <div class="col-1" style="text-align: center">
@@ -47,42 +46,57 @@
                         </th>
                         <th pSortableColumn="fullname">
                             <div class="flex justify-content-between align-items-center">Họ và tên
-                            <p-sortIcon field="fullname"></p-sortIcon>
-                            <p-columnFilter type="text" field="fullname" display="menu"
-                                            class="ml-auto"></p-columnFilter>
+                                <p-sortIcon field="fullname"></p-sortIcon>
+                                <p-columnFilter type="text" field="fullname" display="menu"
+                                                class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
                         <th>Avatar</th>
                         <th pSortableColumn="username">Tên đăng nhập
                             <p-sortIcon field="username"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+                        <th pSortableColumn="email">Email
+                            <p-sortIcon field="email"></p-sortIcon>
+                        </th>
                         <th pSortableColumn="phonenumber">
                             <div class="flex justify-content-between align-items-center">
-                            Số điện thoại <p-sortIcon field="phonenumber"></p-sortIcon>
+                                Số điện thoại
+                                <p-sortIcon field="phonenumber"></p-sortIcon>
                                 <p-columnFilter type="text" field="phonenumber" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
                         <th pSortableColumn="address">
                             <div class="flex justify-content-between align-items-center">
-                            Địa chỉ <p-sortIcon field="address"></p-sortIcon>
+                                Địa chỉ
+                                <p-sortIcon field="address"></p-sortIcon>
                                 <p-columnFilter type="text" field="address" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
                         <th pSortableColumn="role">
                             <div class="flex justify-content-between align-items-center">
-                            Vai trò<p-sortIcon field="role"></p-sortIcon>
+                                Vai trò
+                                <p-sortIcon field="role"></p-sortIcon>
                                 <p-columnFilter type="text" field="role" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="createdby">Được tạo bởi<p-sortIcon field="createdby"></p-sortIcon></th>
-                        <th> <div style="text-align: center;" class="justify-content-between align-items-center">
-                                Kích hoạt </div>
+                        <th pSortableColumn="createdby">Người tạo
+                            <p-sortIcon field="createdby"></p-sortIcon>
                         </th>
-                        <th class="justify-content-between align-items-center" >Tác vụ</th>
+                        <th>
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Trạng thái
+                            </div>
+                        </th>
+                        <th style="width: 8rem">
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Tác vụ
+                            </div>
+                        </th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-user>
@@ -94,14 +108,18 @@
                             <span class="p-column-title">Họ và tên</span>
                             {{user.fullName}}
                         </td>
+                        <td *ngIf="user.avatarImage">
+                            <img [src]="user.avatar" width="80" style="border-radius: 50%;"
+                                 class="shadow-4"/></td>
+                        <td *ngIf="!user.avatarImage">
+                            <img [src]="'/assets/demo/images/avatar/amyelsner.png' "
+                                 style="border-radius: 50%;" width="80" class="shadow-4"/></td>
                         <td>
-        <!--                    <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" /></td>-->
-                            <img [src]="'/assets/demo/images/avatar/amyelsner.png' " width="100" class="shadow-4" /></td>
-                        <td >
+
                             <span class="p-column-title">Tên đăng nhập</span>
                             {{user.userName}}
                         </td>
-                        <td >
+                        <td>
                             <span class="p-column-title">Email</span>
                             {{user.email}}
                         </td>
@@ -116,7 +134,8 @@
                         <td>
                             <span class="p-column-title">Vai trò</span>
                             <ul>
-                                <li style="list-style-type: none" *ngFor="let role of user.appRoles" >
+                                <li style="list-style-type: none"
+                                    *ngFor="let role of user.appRoles">
                                     {{role.roleName}}
                                 </li>
                             </ul>
@@ -136,10 +155,19 @@
                                     label="Chưa kích hoạt"
                                     class="p-button-rounded p-button-danger mr-2 mb-2"></button>
                         </td>
-                        <td>
-                            <p-dropdown [options]="arrayAction"
-                                        optionLabel="name" [showClear]="true"
-                                        (onChange)="onChangeAction(user, $event.value)" ></p-dropdown>
+                        <td style="text-align: center">
+                            <div class="grid">
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                            (click)="onUpdateUser(user)"
+                                            class="p-button-rounded p-mr-2"></button>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-trash"
+                                            (click)="onDeleteUser(user, $event)"
+                                            class="p-button-rounded p-button-danger"></button>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </ng-template>
@@ -161,99 +189,116 @@
         <div class="grid p-fluid">
             <div class="col-12 md:col-12">
                 <div class="card">
-        <!--        <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image">-->
-            <img [src]="'/assets/demo/images/avatar/amyelsner.png'" class="product-image">
-            <p-divider align="left">
-                <div class="p-d-inline-flex p-ai-center">
-                    <b>Thông tin người dùng</b>
-                </div>
-            </p-divider>
-            <div class="grid">
-                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
-                    <span class="p-float-label" >
-                        <input type="text" pInputText id="fistName" [(ngModel)]="userModel.firstName" required autofocus/>
+                    <!--        <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image">-->
+                    <!--                    <img [src]="'/assets/demo/images/avatar/amyelsner.png'" class="product-image">-->
+                    <img *ngIf="userModel.avatarImage" [src]="userModel.avatar" width="150"
+                         style="border-radius: 50%;" class="product-image"/>
+                    <img *ngIf="!userModel.avatarImage"
+                         [src]="'/assets/demo/images/avatar/amyelsner.png' "
+                         style="border-radius: 50%;" width="150" class="product-image"/>
+                    <p-divider align="left">
+                        <div class="p-d-inline-flex p-ai-center">
+                            <b>Thông tin người dùng</b>
+                        </div>
+                    </p-divider>
+                    <div class="grid">
+                        <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                    <span class="p-float-label">
+                        <input type="text" pInputText id="fistName"
+                               [(ngModel)]="userModel.firstName" required autofocus/>
                         <label for="fistName">Họ*</label>
                     </span>
-                </div>
-                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                        </div>
+                        <div class="col-12 mb-2 lg:col-6 mb-lg-0">
                     <span class="p-float-label">
-                        <input type="text" pInputText id="lastName" [(ngModel)]="userModel.lastName" required autofocus />
+                        <input type="text" pInputText id="lastName" [(ngModel)]="userModel.lastName"
+                               required autofocus/>
                         <label for="lastName">Tên*</label>
                     </span>
-                </div>
-            </div>
-            <div class="field">
+                        </div>
+                    </div>
+                    <div class="field">
                   <span class="p-float-label">
-                    <input type="text" pInputText id="username" [(ngModel)]="userModel.userName"  required autofocus />
+                    <input type="text" pInputText id="username" [(ngModel)]="userModel.userName"
+                           required autofocus/>
                     <small class="p-error" *ngIf="submitted && !
                     appUser.userName
                     ">username is required.</small>
                     <label for="username">Tên đăng nhập*</label>
                 </span>
-            </div>
-            <div class="field">
+                    </div>
+                    <div class="field">
                 <span class="p-float-label">
-                    <p-password id="password" [(ngModel)]="userModel.password" [toggleMask]="true"></p-password>
+                    <p-password id="password" [(ngModel)]="userModel.password"
+                                [toggleMask]="true"></p-password>
                     <label for="password">Mật khẩu*</label>
                 </span>
-            </div>
-            <div class="field">
+                    </div>
+                    <div class="field">
                 <span class="p-float-label">
-                    <p-password id="confirmpassword" [(ngModel)]="userModel.confirmPassword" [toggleMask]="true"></p-password>
+                    <p-password id="confirmpassword" [(ngModel)]="userModel.confirmPassword"
+                                [toggleMask]="true"></p-password>
                     <label for="confirmpassword">Xác nhận mật khẩu*</label>
                 </span>
-            </div>
-            <div class="field">
+                    </div>
+                    <div class="field">
                 <span class="p-float-label">
-                    <input type="text" pInputText id="email"  [(ngModel)]="userModel.email" required autofocus />
+                    <input type="text" pInputText id="email" [(ngModel)]="userModel.email" required
+                           autofocus/>
                      <label for="email">Email*</label>
                 </span>
-            </div>
-            <div class="field">
+                    </div>
+                    <div class="field">
                  <span class="p-float-label">
-                    <input type="text" pInputText id="phone" [(ngModel)]="userModel.phone" required autofocus />
+                    <input type="text" pInputText id="phone" [(ngModel)]="userModel.phone" required
+                           autofocus/>
                      <label for="phone">Số điện thoại*</label>
                 </span>
-            </div>
-            <div class="field">
+                    </div>
+                    <div class="field">
                  <span class="p-float-label">
-                    <input type="text" pInputText id="address"  [(ngModel)]="userModel.address" required autofocus />
+                    <input type="text" pInputText id="address" [(ngModel)]="userModel.address"
+                           required autofocus/>
                      <label for="address">Địa chỉ</label>
                 </span>
-            </div>
-            <p-divider align="left">
-                <div class="p-d-inline-flex p-ai-center">
-                </div>
-            </p-divider>
-            <p-fieldset legend="Chọn nhóm quyền" [toggleable]="true">
-                <div class="field">
-                    <p-inputSwitch [(ngModel)]="userModel.active"></p-inputSwitch>
-                    <h6> Kích hoạt</h6>
-                </div>
-                <div class="field">
-                    <p-multiSelect [options]="listAppRole" [(ngModel)]="selectedRoles" appendTo="body" defaultLabel="Chọn quyền" optionLabel="roleName"
-                                   selectedItemsLabel="{0} quyền đã chọn"
-                                   defaultValue="true" display="chip">
-                    </p-multiSelect>
-                </div>
+                    </div>
+                    <p-divider align="left">
+                        <div class="p-d-inline-flex p-ai-center">
+                        </div>
+                    </p-divider>
+                    <p-fieldset legend="Chọn nhóm quyền" [toggleable]="true">
+                        <div class="field">
+                            <p-inputSwitch [(ngModel)]="userModel.active"></p-inputSwitch>
+                            <h6> Kích hoạt</h6>
+                        </div>
+                        <div class="field">
+                            <p-multiSelect [options]="listAppRole" [(ngModel)]="selectedRoles"
+                                           appendTo="body" defaultLabel="Chọn quyền"
+                                           optionLabel="roleName"
+                                           selectedItemsLabel="{0} quyền đã chọn"
+                                           defaultValue="true" display="chip">
+                            </p-multiSelect>
+                        </div>
 
-            </p-fieldset>
+                    </p-fieldset>
 
+                </div>
             </div>
         </div>
-    </div>
     </ng-template>
 
     <ng-template pTemplate="footer">
         <div class="grid" style="text-align: center">
             <div class="col-4">&nbsp;</div>
-                <div class="col-2" style="text-align: center">
-                    <button pButton pRipple label="Lưu" icon="pi pi-check" class="p-button" (click)="saveUser()"></button>
-                </div>
-                <div class="col-2" style="text-align: center">
-                    <button pButton pRipple label="Hủy bỏ" icon="pi pi-times" class="p-button-danger"(click)="hideDialog()"></button>
-                </div>
-                    <div class="col-4">&nbsp;</div>
+            <div class="col-2" style="text-align: center">
+                <button pButton pRipple label="Lưu" icon="pi pi-check" class="p-button"
+                        (click)="onSaveUser()"></button>
+            </div>
+            <div class="col-2" style="text-align: center">
+                <button pButton pRipple label="Hủy bỏ" icon="pi pi-times" class="p-button-danger"
+                        (click)="onCancelUser()"></button>
+            </div>
+            <div class="col-4">&nbsp;</div>
         </div>
     </ng-template>
 
