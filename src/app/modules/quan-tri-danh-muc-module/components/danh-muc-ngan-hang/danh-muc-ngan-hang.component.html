@@ -219,18 +219,18 @@
     </div>
     <ng-template pTemplate="footer">
         <div class="grid" style="text-align: center">
-            <div class="col-5">&nbsp;</div>
-            <div class="col-1" style="text-align: center">
+            <div class="col-4">&nbsp;</div>
+            <div class="col-2" style="text-align: center; width: 8rem">
                 <button pButton type="button" label="Lưu" icon="pi pi-save"
                         (click)="onSaveBank()"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-1" style="text-align: center">
+            <div class="col-2" style="text-align: center; width: 8rem">
                 <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
                         (click)="onCancelBank()" class="p-button-danger"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-5">&nbsp;</div>
+            <div class="col-4">&nbsp;</div>
         </div>
     </ng-template>
 </p-dialog>
@@ -240,4 +240,4 @@
 <p-confirmPopup></p-confirmPopup>
 
 <p-confirmDialog key="deleteList" header="Xóa ngân hàng"
-                 icon="pi pi-exclamation-triangle"></p-confirmDialog>
+                 icon="pi pi-exclamation-triangle"></p-confirmDialog>s
