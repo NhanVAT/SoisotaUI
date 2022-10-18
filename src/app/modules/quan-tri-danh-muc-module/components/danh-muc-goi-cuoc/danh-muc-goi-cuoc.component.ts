@@ -20,9 +20,7 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
 
     headerDialog: string;
     isDisplayDialog = false;
-
-    isForever = false;
-    isUnLimited = false;
+    confirmDel = false;
 
     constructor(private iServiceBase: iServiceBase,
                 public messageService: MessageService,
@@ -34,11 +32,11 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
 
     ngOnInit(): void {
         this.loadAllPackage();
-
+        this.onInitPackageType();
     }
 
     async loadAllPackage(){
-        //this.loading = true;
+        this.loading = true;
         try {
             const response = await this.iServiceBase.getDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_ALL_APP_PACKAGE);
             if (response && response.length){
@@ -48,6 +46,14 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
             console.log('khong load duoc data');
         }
         this.loading = false;
+    }
+
+    onInitPackageType(){
+        this.lstPackageGroup = [
+            {label: 'Bảo hiểm sinh tử', value: '0'},
+            {label: 'Bảo hiểm từ kỳ', value: '1'},
+            {label: 'Bảo hiểm hưu trí', value: '2'},
+        ];
     }
 
     onDisplayDialog(header: string){
@@ -62,6 +68,7 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
 
     onCreatePackage() {
         this.appPackage = new AppPackageModel();
+        this.appPackage.active = true;
         this.onDisplayDialog('Thêm mới gói cước');
     }
 
@@ -83,10 +90,16 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
         }
 
         try {
-            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, url, appPackageModel);
+            let response;
+            if (type === 1){
+                response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, url, appPackageModel);
+            }else{
+                response = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, url, appPackageModel);
+            }
             if (response && response.success){
                 this.showMessage(mType.success, 'Thông báo',  message + ' thành công', 'notify');
             }
+            this.onHideDialog();
             await this.loadAllPackage();
         }catch (e) {
             this.showMessage(mType.error, 'Thông báo', message + ' không thành công', 'notify');
@@ -94,6 +107,7 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
     }
 
     onUpdatePackage(appPackage: AppPackageModel) {
+        // parse minutes to day
         this.appPackage = Object.assign({}, appPackage);
         this.onDisplayDialog('Chỉnh sửa gói cước');
     }
@@ -104,28 +118,18 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
             header: 'Xác nhận',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                switch (type) {
-                    case 1: // delete single
-                        this.deletePackageAPI(1);
-                        break;
-                    case 2: // delete list
-                        this.deletePackageAPI(2);
-                        break;
-                    default:
-                        console.error('tác vụ không có ở confirm');
-                        break;
-                }
+                this.deletePackageAPI(type);
             }
         });
     }
 
     async onDeletePackage(appPackage: AppPackageModel) {
         this.appPackage = appPackage;
-        await this.confirmDelete('Bạn có chắc muốn xoá gói cước này chứ?', 1);
+        this.confirmDelete('Bạn có chắc muốn xoá gói cước này chứ?', 1);
     }
 
     async onDeleteListPackage() {
-        await this.confirmDelete('Bạn có chắc muốn xoá danh sách gói cước này chứ?', 2);
+        this.confirmDelete('Bạn có chắc muốn xoá danh sách gói cước này chứ?', 2);
     }
 
     async deletePackageAPI(type: number){
@@ -134,9 +138,7 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
         let message;
         switch (type){
             case 1: // delete single
-                params = {
-                    id: this.appPackage.id
-                };
+                params = this.appPackage.id;
                 url = API.API_DANH_MUC.DELETE_APP_PACKAGE;
                 message = 'Xoá gói cước';
                 break;
@@ -188,10 +190,12 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
         if (this.shareData && this.shareData.userInfo){
             data.packageName = this.appPackage.packageName;
             data.packageType = this.appPackage.packageType;
-            data.packageEffectiveTime = this.appPackage.packageEffectiveTime;
-            data.packageMaximumInvoice = this.appPackage.packageMaximumInvoice;
             data.packageDescribe = this.appPackage.packageDescribe;
             data.active = this.appPackage.active;
+            data.packageEffectiveTime = this.appPackage.packageEffectiveTime;
+            data.packageMaximumInvoice = this.appPackage.packageMaximumInvoice;
+            data.isUnLimited = this.appPackage.isUnLimited;
+            data.isForever = this.appPackage.isForever;
 
             if (this.appPackage.id && this.appPackage.id > 0){
                 data.id = this.appPackage.id;

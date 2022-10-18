@@ -8,7 +8,7 @@
                      [showCurrentPageReport]="true"
                      [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
                      currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} ngân hàng"
-                     [globalFilterFields]="['bankId','bankName']" responsiveLayout="scroll"
+                     [globalFilterFields]="['packageKey','packageName']" responsiveLayout="scroll"
                      [loading]="loading">
                 <ng-template pTemplate="caption">
                     <div class="grid">
@@ -40,31 +40,31 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="bankKey">
+                        <th pSortableColumn="packageKey">
                             <div class="flex justify-content-between align-items-center">
                                 Mã gói cước
-                                <p-sortIcon field="bankId"></p-sortIcon>
-                                <p-columnFilter type="text" field="bankId" display="menu"
+                                <p-sortIcon field="packageKey"></p-sortIcon>
+                                <p-columnFilter type="text" field="packageKey" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="bankId">
+                        <th pSortableColumn="packageType">
                             <div class="flex justify-content-between align-items-center">
                                 Nhóm gói cước
-                                <p-sortIcon field="bankId"></p-sortIcon>
-                                <p-columnFilter type="text" field="bankId" display="menu"
+                                <p-sortIcon field="packageType"></p-sortIcon>
+                                <p-columnFilter type="text" field="packageType" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="bankName">
+                        <th pSortableColumn="packageName">
                             <div class="flex justify-content-between align-items-center">
                                 Tên gói cước
-                                <p-sortIcon field="bankName"></p-sortIcon>
-                                <p-columnFilter type="text" field="bankName" display="menu"
+                                <p-sortIcon field="packageName"></p-sortIcon>
+                                <p-columnFilter type="text" field="packageName" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="bankName">
+                        <th pSortableColumn="bankDescribe">
                             <div class="flex justify-content-between align-items-center">
                                 Mô tả
                             </div>
@@ -219,11 +219,11 @@
                 </p-divider>
                 <div class="grid">
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
-                        <p-inputSwitch [(ngModel)]="isForever"></p-inputSwitch>
+                        <p-inputSwitch [(ngModel)]="appPackage.isForever"></p-inputSwitch>
                         <b style="margin-left: 10px"> Vĩnh viễn</b>
                     </div>
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
-                        <p-inputSwitch [(ngModel)]="isUnLimited"></p-inputSwitch>
+                        <p-inputSwitch [(ngModel)]="appPackage.isUnLimited"></p-inputSwitch>
                         <b style="margin-left: 10px"> Không giới hạn</b>
                     </div>
 
@@ -234,7 +234,7 @@
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                             <span class="p-input-icon-left p-float-label" style="width: 100%">
                                 <i class="pi pi-clock"></i>
-                                <input [disabled]="isForever" type="number" min="1" class="w-full" [(ngModel)]="appPackage.packageEffectiveTime"
+                                <input [disabled]="appPackage.isForever" type="number" min="1" class="w-full" [(ngModel)]="appPackage.packageEffectiveTime"
                                        pInputText/>
                                 <label>Thời gian hiệu lực (ngày)*</label>
                             </span>
@@ -242,7 +242,7 @@
                     <div class="col-12 mb-2 lg:col-4 mb-lg-0">
                             <span class="p-input-icon-left p-float-label" style="width: 100%">
                                 <i class="pi pi-list"></i>
-                                <input [disabled]="isUnLimited" type="number" min="1" class="w-full" [(ngModel)]="appPackage.packageMaximumInvoice"
+                                <input [disabled]="appPackage.isUnLimited" type="number" min="1" class="w-full" [(ngModel)]="appPackage.packageMaximumInvoice"
                                        pInputText/>
                                 <label>SL hoá đơn tối đa*</label>
                             </span>

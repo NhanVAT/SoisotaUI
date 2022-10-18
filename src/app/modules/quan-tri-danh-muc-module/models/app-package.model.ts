@@ -8,4 +8,6 @@ export class AppPackageModel extends AbstractAuditing{
     packageEffectiveTime: number;
     packageMaximumInvoice: number;
     packageDescribe: string;
+    isForever: boolean;
+    isUnLimited: boolean;
 }
