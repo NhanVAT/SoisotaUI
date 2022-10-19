@@ -41,6 +41,15 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
             const response = await this.iServiceBase.getDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.GET_ALL_APP_PACKAGE);
             if (response && response.length){
                 this.lstAppPackage = response;
+                this.lstAppPackage.forEach( (each) => {
+                   if (each.isForever){
+                      each.packageEffectiveTime = null;
+                   }
+
+                   if (each.isUnLimited){
+                       each.packageMaximumInvoice = null;
+                   }
+                });
             }
         }catch (e) {
             console.log('khong load duoc data');
@@ -89,19 +98,17 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
                 break;
         }
 
-        try {
-            let response;
-            if (type === 1){
-                response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, url, appPackageModel);
-            }else{
-                response = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, url, appPackageModel);
-            }
-            if (response && response.success){
-                this.showMessage(mType.success, 'Thông báo',  message + ' thành công', 'notify');
-            }
+        let response;
+        if (type === 1){
+            response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, url, appPackageModel);
+        }else{
+            response = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, url, appPackageModel);
+        }
+        if (response && response.success){
+            this.showMessage(mType.success, 'Thông báo',  message + ' thành công', 'notify');
             this.onHideDialog();
             await this.loadAllPackage();
-        }catch (e) {
+        }else{
             this.showMessage(mType.error, 'Thông báo', message + ' không thành công', 'notify');
         }
     }
@@ -152,13 +159,11 @@ export class DanhMucGoiCuocComponent extends iComponentBase implements OnInit {
                 break;
         }
 
-        try {
-            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, url, params);
-            if (response && response.success){
-                this.showMessage(mType.success, 'Thông báo', message + ' thành công', 'notify');
-            }
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, url, params);
+        if (response && response.success){
+            this.showMessage(mType.success, 'Thông báo', message + ' thành công', 'notify');
             await this.loadAllPackage();
-        }catch (e) {
+        }else {
             this.showMessage(mType.error, 'Thông báo', message + ' không thành công', 'notify');
         }
     }
