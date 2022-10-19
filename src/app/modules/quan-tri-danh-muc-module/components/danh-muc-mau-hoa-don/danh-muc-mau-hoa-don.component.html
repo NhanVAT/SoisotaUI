@@ -170,7 +170,8 @@
 <p-dialog [header]="headerDialog" [(visible)]="isDisplayDialog"
           [breakpoints]="{'960px': '75vw'}"
           [style]="{width: '50vw'}"
-          [draggable]="false" [resizable]="false" [maximizable]="true">
+          [draggable]="false" [resizable]="false"
+          [maximizable]="true" [closable]="false">
     <div class="grid p-fluid">
         <div class="col-12 md:col-12">
             <div class="card">
@@ -227,17 +228,39 @@
                 <div class="grid">
                     <div class="col-12 mb-2 lg:col-12 mb-lg-0">
                         <!--                        <input fileread="XSLFileUpload.file" type="file" name="datafile" accept=".xsl" class="fileup" ng-  required="true"/>-->
-                        <p-fileUpload [multiple]="false" name="datafile[]"
+                        <p-fileUpload [multiple]="false" [files]="datafile"
                                       customUpload="true"
                                       accept="{{filetype}}"
                                       maxFileSize="{{maxFileSize}}"
                                       (uploadHandler)="onUpload($event)"
-                                      required="true" chooseLabel="Thêm file"
+                                      required="true" chooseLabel="Chọn file"
+                                      uploadLabel="Thêm file"
+                                      cancelLabel="Xoá file"
                                       cancelIcon="pi pi-times" showCancelButton="true"
-                                      formControlName="myFile"
+                                      (change)="onChangePositionEye($event)"
+                                      (onRemove)="onRemoveFile()"
                         >
                         </p-fileUpload>
                     </div>
+                    <div *ngIf="isShowEyeView"  class="col-12 mb-2 lg:col-12 mb-lg-0" id="div-eye-view">
+                        <div id="btn-eye-view">
+                            <span style="position: relative; top: -0.8rem"><i>Xem mẫu cũ</i></span>
+                            <button pButton pRipple type="button" icon="pi pi-eye"
+                                    class="p-button-rounded p-button-text"
+                                    (click)="onViewOldTemplate()"
+                            ></button>
+                        </div>
+                    </div>
+                    <div id="process-upload" *ngIf="isShowMessUpload">
+                        <div id="div-message-upload">
+                            <b id="message-upload"
+                               [ngStyle]="{'color': (codeColorMess == 1) ? '#FF4081' : '#050505'}"
+                            >
+                                {{message}}
+                            </b>
+                        </div>
+                    </div>
+                    <div *ngIf="isFireWork" class="firework"></div>
                 </div>
                 <p-divider align="left">
                     <div class="p-d-inline-flex p-ai-center">
@@ -248,18 +271,18 @@
     </div>
     <ng-template pTemplate="footer">
         <div class="grid" style="text-align: center">
-            <div class="col-5">&nbsp;</div>
-            <div class="col-1" style="text-align: center; width: 8rem">
+            <div class="col-4">&nbsp;</div>
+            <div class="col-2" style="text-align: center">
                 <button pButton type="button" label="Lưu" icon="pi pi-save"
                         (click)="onSaveTemplate()"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-1" style="text-align: center; width: 8rem">
+            <div class="col-2" style="text-align: center">
                 <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
                         (click)="onCancelTemplate()" class="p-button-danger"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-5">&nbsp;</div>
+            <div class="col-4">&nbsp;</div>
         </div>
     </ng-template>
 </p-dialog>
@@ -283,20 +306,36 @@
             </div>
         </div>
     </div>
+</p-dialog>
+
+<p-dialog [header]="'Mẫu cũ'" [(visible)]="isDisplayDialogViewOld"
+          [breakpoints]="{'960px': '75vw'}"
+          [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false"
+          [maximizable]="true" [closable]="false">
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-12">
+            <div class="card">
+                <div class="grid">
+                    <textarea [rows]="25" [cols]="40" pInputTextarea [autoResize]="false" [value]="htmlViewOld"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
     <ng-template pTemplate="footer">
         <div class="grid" style="text-align: center">
-            <div class="col-5">&nbsp;</div>
-            <div class="col-1" style="text-align: center; width: 8rem">
+            <div class="col-4">&nbsp;</div>
+            <div class="col-2" style="text-align: center">
                 <button pButton type="button" label="Lưu" icon="pi pi-save"
-                        (click)="onSaveTemplate()"
+                        (click)="onSaveDataOld()"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-1" style="text-align: center; width: 8rem">
+            <div class="col-2" style="text-align: center">
                 <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
-                        (click)="onCancelTemplate()" class="p-button-danger"
+                        (click)="onCancelDataOld()" class="p-button-danger"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-5">&nbsp;</div>
+            <div class="col-4">&nbsp;</div>
         </div>
     </ng-template>
 </p-dialog>
