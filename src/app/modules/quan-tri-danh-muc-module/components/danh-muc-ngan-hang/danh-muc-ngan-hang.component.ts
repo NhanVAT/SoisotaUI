@@ -75,13 +75,11 @@ export class DanhMucNganHangComponent extends iComponentBase implements OnInit {
     }
 
     async createBank(bank: AppBank){
-        try {
-            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.INSERT_APP_BANK, bank);
-            if (response && response.success){
-                this.showMessage(mType.success, 'Thông báo', 'Thêm Ngân hàng thành công', 'notify');
-            }
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.INSERT_APP_BANK, bank);
+        if (response && response.success){
+            this.showMessage(mType.success, 'Thông báo', 'Thêm Ngân hàng thành công', 'notify');
             this.loadAllBank();
-        }catch (e) {
+        }else{
             this.showMessage(mType.error, 'Thông báo', 'Thêm Ngân hàng không thành công', 'notify');
         }
     }
@@ -99,13 +97,11 @@ export class DanhMucNganHangComponent extends iComponentBase implements OnInit {
 
     async deleteListBank(){
         const params = this.selectedBanks.map(b => b.id);
-        try {
-            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_LIST_APP_BANK, params);
-            if (response && response.success){
-                this.showMessage(mType.success, 'Thông báo', 'Xoá danh sách Ngân hàng thành công', 'notify');
-            }
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_LIST_APP_BANK, params);
+        if (response && response.success){
+            this.showMessage(mType.success, 'Thông báo', 'Xoá danh sách Ngân hàng thành công', 'notify');
             this.loadAllBank();
-        }catch (e) {
+        }else{
             this.showMessage(mType.error, 'Thông báo', 'Xoá danh sách Ngân hàng không thành công', 'notify');
         }
     }
@@ -116,13 +112,11 @@ export class DanhMucNganHangComponent extends iComponentBase implements OnInit {
     }
 
     async updateBank(bank: AppBank){
-        try {
-            const response = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.UPDATE_APP_BANK, bank);
-            if (response && response.success){
-                this.showMessage(mType.success, 'Thông báo', 'Chỉnh sửa Ngân hàng thành công', 'notify');
-            }
+        const response = await this.iServiceBase.putDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.UPDATE_APP_BANK, bank);
+        if (response && response.success){
+            this.showMessage(mType.success, 'Thông báo', 'Chỉnh sửa Ngân hàng thành công', 'notify');
             this.loadAllBank();
-        }catch (e) {
+        }else{
             this.showMessage(mType.error, 'Thông báo', 'Chỉnh sửa Ngân hàng không thành công', 'notify');
         }
     }
@@ -139,15 +133,12 @@ export class DanhMucNganHangComponent extends iComponentBase implements OnInit {
     }
 
     async deleteBank(bank: AppBank){
-        try {
-            const param =  bank.id;
-
-            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_APP_BANK, param);
-            if (response && response.success){
-               this.showMessage(mType.success, 'Thông báo', 'Xoá ngân hàng thành công', 'notify');
-            }
+        const param =  bank.id;
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.DELETE_APP_BANK, param);
+        if (response && response.success){
+            this.showMessage(mType.success, 'Thông báo', 'Xoá ngân hàng thành công', 'notify');
             this.loadAllBank();
-        }catch (e) {
+        }else{
             this.showMessage(mType.error, 'Thông báo', 'Xoá ngân hàng không thành công', 'notify');
         }
     }
