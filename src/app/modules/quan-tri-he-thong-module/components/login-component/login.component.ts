@@ -110,7 +110,7 @@ export class LoginComponent extends iComponentBase implements OnInit {
         }
         //Load thông tin người dùng'
         const response = await this.iServiceBase.getDataAsyncByPostRequest(API.PHAN_HE.USER, API.API_USER.SIGNIN, parram);
-        if (response && response.token) {
+        if (response && response.accessToken) {
             if (Storage) {
                 const versionOld = localStorage.getItem('VERSION');
                 localStorage.setItem('VERSION', versionOld);
@@ -119,7 +119,9 @@ export class LoginComponent extends iComponentBase implements OnInit {
                 // Nếu log out thì xóa cái này ở local storage đi
                 // Lưu SESSIONID
                 sessionStorage.setItem('SESSIONID', response.sessionId);
-                sessionStorage.setItem('JWT', response.token);
+                sessionStorage.setItem('JWT', response.accessToken);
+                sessionStorage.setItem('REFRESH_TOKEN', response.refreshToken);
+                sessionStorage.setItem('TOKEN_TYPE', response.tokenType);
                 sessionStorage.setItem('USER_NAME', this.userName);
                 sessionStorage.setItem('TIME_LOGIN', this.datePipe.transform(new Date(), 'dd/MM/yyyy'));
             }

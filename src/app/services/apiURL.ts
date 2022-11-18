@@ -15,6 +15,7 @@ export class API_USER {
     public static REGISTER = "register";
     public static CHECK_EMAIL = "checkEmail"
     public static FORGOT_PASSWORD = "forgotPassword"
+    public static REFRESH = "refresh"
 }
 
 // Service Role
