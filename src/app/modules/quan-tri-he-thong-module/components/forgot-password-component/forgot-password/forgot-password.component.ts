@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MessageService} from 'primeng/api';
 import * as API from '../../../../../services/apiURL';
-import {iComponentBase, mType} from '../../../../compoents-customer-module/functions/iComponentBase.component';
+import {
+    iComponentBase,
+    mType
+} from '../../../../compoents-customer-module/functions/iComponentBase.component';
 import {iServiceBase} from '../../../../compoents-customer-module/functions/iServiceBase';
-import {AppUser} from '../../../models/appuser.model';
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+    selector: 'app-forgot-password',
+    templateUrl: './forgot-password.component.html',
+    styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent extends iComponentBase implements OnInit {
-    emailorphone: any;
+    emailOrPhone: any;
     submitted: boolean;
+
     constructor(public iServiceBase: iServiceBase,
-                public messageService: MessageService,) {
+                public messageService: MessageService,
+                public router: Router) {
         super(messageService);
     }
 
@@ -22,39 +27,30 @@ export class ForgotPasswordComponent extends iComponentBase implements OnInit {
     }
 
     async onSubmit() {
-        this.submitted = true;
-        var reg = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-        if (reg.test(this.emailorphone)) {
-          const params =
-          {
-              appCode: 'S_BILL',
-              content: 'Test SMS Service 122223',
-              phone: this.emailorphone
-          };
-          const response = await this.iServiceBase.getDataAsyncByPostRequest(API.PHAN_HE.SMSEMAIL, API.API_SMSEMAIL.SEND_SMS_BY_CONTENT, params);
+        try {
+            this.submitted = true;
+
+            let params = {
+                emailOrPhone: this.emailOrPhone
+            }
+
+            const reponse = await this.iServiceBase.getDataAsyncByPostRequest(API.PHAN_HE.USER, API.API_USER.FORGOT_PASSWORD, params, true);
+
+            if (reponse && reponse.success) {
+                this.showMessage(mType.success, "Thông báo", `Cấp lại mật khẩu thành công. Vui lòng kiểm tra SMS hoặc Email`, 'appForgot');
+
+                await this.router.navigate(['/login']);
+            } else {
+                this.showMessage(mType.error, "Thông báo", `Cấp lại mật khẩu không thành công. ${reponse.message}`, 'appForgot');
+            }
+        } catch (e) {
+            console.log(e);
         }
-        else {
-            if (this.validateUser()){
-            const params =
-            {
-              appCode: 'S_BILL',
-              content: 'Test Email Service 122223',
-              subject: 'Test email Server',
-              email: this.emailorphone
-            };
-           const response = await this.iServiceBase.getDataAsyncByPostRequest(API.PHAN_HE.SMSEMAIL, API.API_SMSEMAIL.SEND_EMAIL_BY_CONTENT, params);
-        }}
     }
-    async validateUser(){
-        const params = {
-            email: this.emailorphone,
-        };
-        try{
-            const reponse =  await this.iServiceBase.getDataWithParamsAsync(API.PHAN_HE.USER, API.API_USER.CHECK_EMAIL, params, true);
-        }catch (error){
-            this.showMessage(mType.warn, "Thông báo", "Email không có trong hệ thống! ", 'forgot-password');
-            return false;
+
+    onSubmitEnter(event) {
+        if (event.keyCode == 13) {
+            this.onSubmit();
         }
-        return true;
     }
 }

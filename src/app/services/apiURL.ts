@@ -14,6 +14,7 @@ export class API_USER {
     public static GET_INFO_CURRENT_USER = "getInfoCurrentUser";
     public static REGISTER = "register";
     public static CHECK_EMAIL = "checkEmail"
+    public static FORGOT_PASSWORD = "forgotPassword"
 }
 
 // Service Role
@@ -62,10 +63,4 @@ export class SERVICE_GATEWAY {
     public static USER = "ServiceReport-Report-context-root/resources/serviceReport/";
     public static ROLE = "ServiceCommon-busCommon-context-root/resources/sercommon/";
     public static DANHMUC = "ServiceDichVu-DichVu-context-root/resources/serviceDichVu/";
-}
-
-// Service SMSEMAIL
-export class API_SMSEMAIL{
-    public static SEND_EMAIL_BY_CONTENT = "sendEmailByContent"
-    public static SEND_SMS_BY_CONTENT = "sendSMSByContent"
 }

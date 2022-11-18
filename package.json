@@ -5,8 +5,8 @@
     "angular-cli": {},
     "scripts": {
         "ng": "ng",
-        "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve",
-        "start-prod": "ng serve --configuration production",
+        "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve --port 4400 --host 0.0.0.0",
+        "start-prod": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve --configuration production --port 4400 --host 0.0.0.0",
         "build-dev": "ng build",
         "build": "ng build --configuration production",
         "test": "ng test",
