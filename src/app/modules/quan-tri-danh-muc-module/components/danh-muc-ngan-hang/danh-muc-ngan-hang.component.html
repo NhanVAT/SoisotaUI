@@ -8,7 +8,7 @@
                      [showCurrentPageReport]="true"
                      [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
                      currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} ngân hàng"
-                     [globalFilterFields]="['bankId','bankName']" responsiveLayout="scroll"
+                     [globalFilterFields]="['bankKey','bankName']" responsiveLayout="scroll"
                      [loading]="loading">
                 <ng-template pTemplate="caption">
                     <div class="grid">
@@ -43,16 +43,16 @@
                         <th pSortableColumn="bankKey">
                             <div class="flex justify-content-between align-items-center">
                                 Mã ngân hàng
-                                <p-sortIcon field="bankId"></p-sortIcon>
-                                <p-columnFilter type="text" field="bankId" display="menu"
+                                <p-sortIcon field="bankKey"></p-sortIcon>
+                                <p-columnFilter type="text" field="bankKey" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="bankId">
+                        <th pSortableColumn="bankType">
                             <div class="flex justify-content-between align-items-center">
                                 Nhóm ngân hàng
-                                <p-sortIcon field="bankId"></p-sortIcon>
-                                <p-columnFilter type="text" field="bankId" display="menu"
+                                <p-sortIcon field="bankType"></p-sortIcon>
+                                <p-columnFilter type="text" field="bankType" display="menu"
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
@@ -64,7 +64,7 @@
                                                 class="ml-auto"></p-columnFilter>
                             </div>
                         </th>
-                        <th pSortableColumn="bankName">
+                        <th pSortableColumn="bankDescribe">
                             <div class="flex justify-content-between align-items-center">
                                 Mô tả
                             </div>
@@ -219,18 +219,18 @@
     </div>
     <ng-template pTemplate="footer">
         <div class="grid" style="text-align: center">
-            <div class="col-5">&nbsp;</div>
-            <div class="col-1" style="text-align: center">
+            <div class="col-4">&nbsp;</div>
+            <div class="col-2" style="text-align: center; width: 8rem">
                 <button pButton type="button" label="Lưu" icon="pi pi-save"
                         (click)="onSaveBank()"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-1" style="text-align: center">
+            <div class="col-2" style="text-align: center; width: 8rem">
                 <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
                         (click)="onCancelBank()" class="p-button-danger"
                         style="width: 100%;"></button>
             </div>
-            <div class="col-5">&nbsp;</div>
+            <div class="col-4">&nbsp;</div>
         </div>
     </ng-template>
 </p-dialog>

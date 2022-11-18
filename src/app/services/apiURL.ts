@@ -25,18 +25,32 @@ export class API_ROLE {
 // Service Danh Mục
 export class API_DANH_MUC {
     public static GET_DVI_QLY = "getDviqly";
+
     public static GET_ALL_INVOICE_TEMPLATE = "getAllInvoiceTemplate";
     public static INSERT_INVOICE_TEMPLATE = "insertAppInvoiceTemplate";
     public static UPDATE_INVOICE_TEMPLATE = "updateAppInvoiceTemplate";
     public static DELETE_INVOICE_TEMPLATE = "deleteAppInvoiceTemplate";
     public static DELETE_LIST_INVOICE_TEMPLATE = "deleteListAppInvoiceTemplate";
     public static GET_VIEW_INVOICE_TEMPLATE = "getViewInvoiceTemplate";
+
     public static GET_ALL_SMS_EMAIL_TEMPLATE = "getAllSmsEmailTemplate";
     public static INSERT_SMS_EMAIL_TEMPLATE = "insertAppSmsEmailTemplate";
     public static UPDATE_SMS_EMAIL_TEMPLATE = "updateAppSmsEmailTemplate";
     public static DELETE_SMS_EMAIL_TEMPLATE = "deleteAppSmsEmailTemplate";
     public static DELETE_LIST_SMS_EMAIL_TEMPLATE = "deleteListAppSmsEmailTemplate";
     public static GET_VIEW_SMS_EMAIL_TEMPLATE = "getViewSmsEmailTemplate";
+
+    public static GET_ALL_APP_BANK = "getAllBank";
+    public static INSERT_APP_BANK = "insertAppBank";
+    public static UPDATE_APP_BANK = "updateAppBank";
+    public static DELETE_APP_BANK = "deleteAppBank";
+    public static DELETE_LIST_APP_BANK = "deleteListAppBank";
+
+    public static GET_ALL_APP_PACKAGE = "getAllPackage";
+    public static INSERT_APP_PACKAGE = "insertAppPackage";
+    public static UPDATE_APP_PACKAGE = "updateAppPackage";
+    public static DELETE_APP_PACKAGE = "deleteAppPackage";
+    public static DELETE_LIST_APP_PACKAGE = "deleteListAppPackage";
 }
 
 // Service QTHT

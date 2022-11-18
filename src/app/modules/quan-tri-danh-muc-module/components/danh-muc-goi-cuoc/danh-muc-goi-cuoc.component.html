@@ -1,1 +1,280 @@
-<p>danh-muc-goi-cuoc works!</p>
+<div class="grid table-demo">
+    <div class="col-12">
+        <div class="card">
+            <h5>Danh mục gói cước</h5>
+            <p>Danh mục gói cước dùng trong hệ thống</p>
+            <p-table #dt [value]="lstAppPackage" [(selection)]="selectedPackages" dataKey="id"
+                     styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
+                     [showCurrentPageReport]="true"
+                     [paginator]="true" [filterDelay]="0" [rowsPerPageOptions]="[5,10,25,50]"
+                     currentPageReportTemplate="Hiển thị từ {first} đến {last} trong tổng {totalRecords} ngân hàng"
+                     [globalFilterFields]="['packageKey','packageName']" responsiveLayout="scroll"
+                     [loading]="loading">
+                <ng-template pTemplate="caption">
+                    <div class="grid">
+                        <div class="col-6">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                       (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                       placeholder="Tìm kiếm gói cước"/>
+                            </span>
+                        </div>
+
+                        <div class="col-4">&nbsp;</div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Thêm mới" icon="pi pi-plus"
+                                    (click)="onCreatePackage()"
+                                    style="width: 100%;"></button>
+                        </div>
+                        <div class="col-1" style="text-align: center">
+                            <button pButton type="button" label="Xóa" icon="pi pi-trash"
+                                    style="width: 100%;" (click)="onDeleteListPackage()"
+                                    [disabled]="!selectedPackages || selectedPackages.length == 0"
+                                    class="p-button-danger"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="packageKey">
+                            <div class="flex justify-content-between align-items-center">
+                                Mã gói cước
+                                <p-sortIcon field="packageKey"></p-sortIcon>
+                                <p-columnFilter type="text" field="packageKey" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="packageType">
+                            <div class="flex justify-content-between align-items-center">
+                                Nhóm gói cước
+                                <p-sortIcon field="packageType"></p-sortIcon>
+                                <p-columnFilter type="text" field="packageType" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="packageName">
+                            <div class="flex justify-content-between align-items-center">
+                                Tên gói cước
+                                <p-sortIcon field="packageName"></p-sortIcon>
+                                <p-columnFilter type="text" field="packageName" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="bankDescribe">
+                            <div class="flex justify-content-between align-items-center">
+                                Mô tả
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdBy">
+                            <div class="flex justify-content-between align-items-center">
+                                Người tạo
+                                <p-sortIcon field="createdBy"></p-sortIcon>
+                                <p-columnFilter type="text" field="createdBy" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdDate">
+                            <div class="flex justify-content-between align-items-center">
+                                Ngày tạo
+                                <p-sortIcon field="createdDate"></p-sortIcon>
+                                <p-columnFilter type="text" field="createdDate" display="menu"
+                                                class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th>
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Hiệu lực
+                            </div>
+                        </th>
+                        <th style="width: 8rem">
+                            <div style="text-align: center;"
+                                 class="justify-content-between align-items-center">
+                                Tác vụ
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-appPackageModel>
+                    <tr class="p-selectable-row">
+                        <td>
+                            <p-tableCheckbox [value]="appPackageModel"></p-tableCheckbox>
+                        </td>
+                        <td>
+                            {{appPackageModel.packageCode}}
+                        </td>
+                        <td>
+                            {{appPackageModel.packageType}}
+                        </td>
+                        <td>
+                            {{appPackageModel.packageName}}
+                        </td>
+                        <td>
+                            {{appPackageModel.packageDescribe}}
+                        </td>
+                        <td>
+                            {{appPackageModel.createdBy}}
+                        </td>
+                        <td>
+                            {{appPackageModel.createdDate| date: 'MM/dd/yyyy'}}
+                        </td>
+                        <td style="text-align: center;">
+                            <button *ngIf="appPackageModel.active" pButton pRipple type="button"
+                                    label="Hoạt động"
+                                    class="p-button-rounded p-button-secondary mr-2 mb-2"></button>
+                            <button *ngIf="!appPackageModel.active" pButton pRipple type="button"
+                                    label="Không hoạt động"
+                                    class="p-button-rounded p-button-danger mr-2 mb-2"></button>
+                        </td>
+                        <td style="text-align: center">
+                            <div class="grid">
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                            (click)="onUpdatePackage(appPackageModel)"
+                                            class="p-button-rounded p-mr-2"></button>
+                                </div>
+                                <div class="col-12 mb-2 lg:col-6 mb-lg-0">
+                                    <button pButton pRipple icon="pi pi-trash"
+                                            (click)="onDeletePackage(appPackageModel)"
+                                            class="p-button-rounded p-button-danger"></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">Không có gói cước nào.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<p-dialog [header]="headerDialog" [(visible)]="isDisplayDialog"
+          [breakpoints]="{'960px': '75vw'}"
+          [style]="{width: '50vw'}"
+          [draggable]="false" [resizable]="false" [maximizable]="true">
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-12">
+            <div class="card">
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                        <b>Thông tin gói cước</b>
+                    </div>
+                </p-divider>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-input-icon-left p-float-label" style="width: 100%">
+						    <i class="pi pi-key"></i>
+                            <input type="text" class="w-full" [(ngModel)]="appPackage.packageCode"
+                                   [disabled]="true" pInputText/>
+                            <label>Mã gói cước</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-input-icon-left p-float-label" style="width: 100%">
+						    <i class="pi pi-user"></i>
+                            <input type="text" class="w-full" [(ngModel)]="appPackage.packageName"
+                                   pInputText/>
+                            <label>Tên gói cước*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+					    <span class="p-input-icon-left p-float-label" style="width: 100%">
+                            <i class="pi pi-align-justify"></i>
+                            <input type="text" class="w-full" [(ngModel)]="appPackage.packageDescribe"
+                                   pInputText/>
+                            <label>Mô tả</label>
+					    </span>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="lstPackageGroup" [(ngModel)]="appPackage.packageType"
+                                        [showClear]="true"
+                                        [autoDisplayFirst]="false"></p-dropdown>
+                            <label>Chọn nhóm gói cước*</label>
+                        </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <p-inputSwitch [(ngModel)]="appPackage.active"></p-inputSwitch>
+                        <h6> Hiệu lực</h6>
+                    </div>
+
+
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                    </div>
+                </div>
+                <p-divider align="left">
+                    <div class="p-d-inline-flex p-ai-center">
+                        <b>Chi tiết</b>
+                    </div>
+                </p-divider>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <p-inputSwitch [(ngModel)]="appPackage.isForever"></p-inputSwitch>
+                        <b style="margin-left: 10px"> Vĩnh viễn</b>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                        <p-inputSwitch [(ngModel)]="appPackage.isUnLimited"></p-inputSwitch>
+                        <b style="margin-left: 10px"> Không giới hạn</b>
+                    </div>
+
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                            <span class="p-input-icon-left p-float-label" style="width: 100%">
+                                <i class="pi pi-clock"></i>
+                                <input [disabled]="appPackage.isForever" type="number" min="1" class="w-full" [(ngModel)]="appPackage.packageEffectiveTime"
+                                       pInputText/>
+                                <label>Thời gian hiệu lực (ngày)*</label>
+                            </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+                            <span class="p-input-icon-left p-float-label" style="width: 100%">
+                                <i class="pi pi-list"></i>
+                                <input [disabled]="appPackage.isUnLimited" type="number" min="1" class="w-full" [(ngModel)]="appPackage.packageMaximumInvoice"
+                                       pInputText/>
+                                <label>SL hoá đơn tối đa*</label>
+                            </span>
+                    </div>
+                    <div class="col-12 mb-2 lg:col-4 mb-lg-0">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="grid" style="text-align: center">
+            <div class="col-4">&nbsp;</div>
+            <div class="col-2" style="text-align: center">
+                <button pButton type="button" label="Lưu" icon="pi pi-save"
+                        (click)="onSavePackage()"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-2" style="text-align: center">
+                <button pButton type="button" label="Hủy bỏ" icon="pi pi-times"
+                        (click)="onCancelPackage()" class="p-button-danger"
+                        style="width: 100%;"></button>
+            </div>
+            <div class="col-4">&nbsp;</div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-toast baseZIndex='99999' key="notify"></p-toast>
+
+<p-confirmPopup></p-confirmPopup>
+
+<p-confirmDialog key="deleteList" header="Xóa ngân hàng"
+                 icon="pi pi-exclamation-triangle"></p-confirmDialog>

@@ -71,13 +71,11 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
     }
 
     async createSmsEmail(smsEmail: AppSmsEmailModel){
-      try {
-          const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.INSERT_SMS_EMAIL_TEMPLATE, smsEmail);
-          if (response && response.success){
-              this.loadAllSmsEmailTemplate();
-              this.showMessage(mType.success, "Thông báo", "Thêm mẫu Sms Email thành công!", 'notify');
-          }
-      }catch (e){
+      const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC, API.API_DANH_MUC.INSERT_SMS_EMAIL_TEMPLATE, smsEmail);
+      if (response && response.success){
+          this.loadAllSmsEmailTemplate();
+          this.showMessage(mType.success, "Thông báo", "Thêm mẫu Sms Email thành công!", 'notify');
+      }else{
           this.showMessage(mType.error, "Thông báo", "Thêm mẫu hoá đơn không thành công!", 'notify');
       }
     }
@@ -92,14 +90,12 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
     }
 
     async updateSmsEmail(smsEmail: AppSmsEmailModel){
-        try {
-            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC,
-                API.API_DANH_MUC.UPDATE_SMS_EMAIL_TEMPLATE, smsEmail);
-            if (response && response.success){
-                this.loadAllSmsEmailTemplate();
-                this.showMessage(mType.success, "Thông báo", "Chỉnh sửa mẫu Sms Email thành công!", 'notify');
-            }
-        }catch (e){
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC,
+            API.API_DANH_MUC.UPDATE_SMS_EMAIL_TEMPLATE, smsEmail);
+        if (response && response.success){
+            this.loadAllSmsEmailTemplate();
+            this.showMessage(mType.success, "Thông báo", "Chỉnh sửa mẫu Sms Email thành công!", 'notify');
+        }else{
             this.showMessage(mType.error, "Thông báo", "Chỉnh sửa mẫu Sms Email không thành công!. Vui lòng xem lại!", 'notify');
         }
     }
@@ -116,14 +112,12 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
     }
 
     async deleteSmsEmail(smsEmail: AppSmsEmailModel){
-        try {
-            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC,
-                API.API_DANH_MUC.DELETE_SMS_EMAIL_TEMPLATE, smsEmail);
-            if (response && response.success){
-                this.loadAllSmsEmailTemplate();
-                this.showMessage(mType.success, "Thông báo", "Xóa mẫu Sms Email thành công!", 'notify');
-            }
-        }catch (e){
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC,
+            API.API_DANH_MUC.DELETE_SMS_EMAIL_TEMPLATE, smsEmail.id);
+        if (response && response.success){
+            this.loadAllSmsEmailTemplate();
+            this.showMessage(mType.success, "Thông báo", "Xóa mẫu Sms Email thành công!", 'notify');
+        }else{
             this.showMessage(mType.error, "Thông báo", "Xoá mẫu Sms Email không thành công!. Vui lòng xem lại!", 'notify');
         }
     }
@@ -134,14 +128,13 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
     }
 
     async deleteListSmsEmail(lstId: any){
-        try {
-            const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC,
-                API.API_DANH_MUC.DELETE_LIST_SMS_EMAIL_TEMPLATE, lstId);
-            if (response && response.success){
-                this.loadAllSmsEmailTemplate();
-                this.showMessage(mType.success, "Thông báo", "Xóa danh sách mẫu Sms Email thành công!", 'notify');
-            }
-        }catch (e){
+
+        const response = await this.iServiceBase.postDataAsync(API.PHAN_HE.DANHMUC,
+            API.API_DANH_MUC.DELETE_LIST_SMS_EMAIL_TEMPLATE, lstId);
+        if (response && response.success){
+            this.loadAllSmsEmailTemplate();
+            this.showMessage(mType.success, "Thông báo", "Xóa danh sách mẫu Sms Email thành công!", 'notify');
+        }else{
             this.showMessage(mType.error, "Thông báo", "Xoá danh sách mẫu Sms Email không thành công!. Vui lòng xem lại!", 'notify');
         }
     }
@@ -172,7 +165,6 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
     onBindingData(): AppSmsEmailModel{
       const data = new AppSmsEmailModel();
       if (this.shareData && this.shareData.userInfo){
-          data.templateCode = this.appSmsEmail.templateCode;
           data.templateName = this.appSmsEmail.templateName;
           data.templateType = this.appSmsEmail.templateType;
           data.templateDescribe = this.appSmsEmail.templateDescribe;
@@ -181,6 +173,7 @@ export class DanhMucMauSmsEmailComponent extends iComponentBase implements OnIni
           // update
           if (this.appSmsEmail.id && this.appSmsEmail.id > 0 ){
               data.id = this.appSmsEmail.id;
+              data.templateCode = this.appSmsEmail.templateCode;
               data.createdBy = this.appSmsEmail.createdBy;
               data.createdDate = this.appSmsEmail.createdDate;
               data.lastModifiedBy = this.shareData.userInfo.userName;
