@@ -2,4 +2,5 @@ export { DanhMucNganHangComponent } from './components/danh-muc-ngan-hang/danh-m
 export {DanhMucGoiCuocComponent} from './components/danh-muc-goi-cuoc/danh-muc-goi-cuoc.component';
 export { DanhMucMauHoaDonComponent } from './components/danh-muc-mau-hoa-don/danh-muc-mau-hoa-don.component';
 export { DanhMucMauSmsEmailComponent } from './components/danh-muc-mau-sms-email/danh-muc-mau-sms-email.component';
+export { DanhMucGoiTaiKhoan } from './components/danh-muc-goi-tai-khoan/danh-muc-goi-tai-khoan.component';
 
