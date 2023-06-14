@@ -1,0 +1,200 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+    padding: 0;
+    //font: inherit;
+    color: #cdd1d5;
+}
+body {
+    line-height: 1.5;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+    outline: none;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+.content{
+    //background-color: #161d31;
+    background-color: transparent;
+    width: 100%;
+    margin: 0 auto;
+    //padding-top: 60px;
+    padding: 60px 30px 0;
+}
+
+.main_content{
+    margin-bottom: 15px;
+}
+.list-account-package_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.header_name{
+
+    font-size: xx-large;
+}
+.header_summary{
+    font-size: medium;
+}
+.list_payment-type{
+    margin-top: 50px;
+    font-size: medium;
+}
+.payment-type{
+
+    margin-left: 30px;
+}
+
+.payment-type:first-child{
+    margin-left: 0;
+}
+
+.label-payment{
+    margin-left: 5px;
+}
+
+.list-account-package_content{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    --gap: 40px;
+    --column: 3;
+}
+.account-package_item{
+    width: calc(100% / var(--column)  - var(--gap));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #283045;
+    /* background-color: red; */
+    margin-right: var(--gap);
+    margin-bottom: var(--gap);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.account-package_item:nth-child(3n){
+    margin-right: 0;
+}
+
+.account-package-image{
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.card-content{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.account-package-name{
+    margin-top: 15px;
+    font-size: larger;
+}
+.account-package-price{
+    margin: 10px 0;
+}
+.price{
+    display: inline-block;
+    font-size: 40px;
+    color: #736ce1;
+}
+.period{
+    font-style: unset;
+}
+.account-package-detail{
+
+}
+.detail-rule-summary{
+
+}
+.detail-rule{
+    margin-bottom: 5px;
+}
+
+.detail-rule:last-child{
+    margin-bottom: 0;
+}
+
+.detail-rule-payment-type{
+
+}
+
+.card-top{
+    margin-bottom: 25px;
+    flex: 1;
+}
+
+.btn_register_account-package{
+    background-color: transparent;
+    border: #497473 solid 1px;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 15px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    color: #497473;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.btn_register_account-package:hover{
+    background-color: #7367ef;
+    box-shadow: none;
+    border: #7367ef 1px solid;
+    color: aliceblue;
+}
+
+.footer_content{
+    background-color: #283046;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    height: 150px;
+}
+.account-package-history{
+
+}
+
+@media screen and (max-width: 1279.98px) {
+    .list-account-package_content{
+        --gap: 20px;
+        --column: 2;
+    }
+}
+
+@media screen and (max-width: 799.98px) {
+    .list-account-package_content{
+        --gap: 20px;
+        --column: 1;
+    }
+}
+
