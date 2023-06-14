@@ -80,6 +80,7 @@ import {MyHttpInterceptor} from "./modules/compoents-customer-module/Interceptor
 import {QuanTriDoiTacModule} from "./modules/quan-tri-doi-tac-module/quan-tri-doi-tac.module";
 import {QuanTriDanhMucModule} from "./modules/quan-tri-danh-muc-module/quan-tri-danh-muc.module";
 import {QuanTriCuaHangModule} from "./modules/quan-tri-cua-hang-module/quan-tri-cua-hang.module";
+import {ConfigService} from "./modules/compoents-customer-module/shared-data-services/config.service";
 
 @NgModule({
     imports: [
@@ -156,7 +157,7 @@ import {QuanTriCuaHangModule} from "./modules/quan-tri-cua-hang-module/quan-tri-
         PhotoService, ProductService, MenuService, AppBreadcrumbService, DatePipe,
         {provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
-        ShareData, CacheData, AppConfigComponent
+        ShareData, CacheData, AppConfigComponent, ConfigService
     ],
     bootstrap: [AppComponent]
 })

@@ -5,13 +5,8 @@ import {HttpClient} from '@angular/common/http';
 import {AppUser} from '../../models/user.model';
 import * as API from 'src/app/services/apiURL';
 import {DatePipe} from '@angular/common';
-import {
-    iComponentBase,
-    iServiceBase,
-    mType
-} from 'src/app/modules/compoents-customer-module/components-customer';
-// @ts-ignore
-import IPService from 'src/assets/config/IPService.json';
+import {iComponentBase, iServiceBase, mType} from 'src/app/modules/compoents-customer-module/components-customer';
+import {ConfigService} from "../../../compoents-customer-module/shared-data-services/config.service";
 
 @Component({
     selector: 'app-login',
@@ -31,14 +26,37 @@ export class LoginComponent extends iComponentBase implements OnInit {
     check: boolean;
 
     maDViQLy: any;
+
+    strIP_Service = '';
+    strIP_GateWay = '';
+    strIP_SMSEMAIL = '';
+    strVersion = '';
+    strProjectName = '';
+
     constructor(
         private router: Router,
         public http: HttpClient,
         public messageService: MessageService,
         private iServiceBase: iServiceBase,
-
-        private datePipe: DatePipe, ) {
+        private configService: ConfigService,
+        private datePipe: DatePipe,) {
         super(messageService);
+
+        this.configService.loadConfig()
+        .then(() => {
+            this.strIP_Service = this.configService.getConfig('APISERVICE');
+            this.strIP_GateWay = this.configService.getConfig('APIGATEWAY');
+            this.strIP_SMSEMAIL = this.configService.getConfig('APISMSEMAIL');
+            this.strVersion = this.configService.getConfig('Version');
+            this.strProjectName = this.configService.getConfig('PROJECT_NAME');
+
+            // Set IP các service vào localStorage để dùng
+            localStorage.setItem('APISERVICE', this.strIP_Service);
+            localStorage.setItem('APIGATEWAY', this.strIP_GateWay);
+            localStorage.setItem('APISMSEMAIL', this.strIP_SMSEMAIL);
+            localStorage.setItem('VERSION', this.strVersion);
+            localStorage.setItem('PROJECT_NAME', this.strProjectName);
+        });
     }
 
     isLogged(): Promise<boolean> {
@@ -54,7 +72,8 @@ export class LoginComponent extends iComponentBase implements OnInit {
     logout(user: AppUser) {
         localStorage.removeItem(user.username);
     }
-    checked(check: boolean){
+
+    checked(check: boolean) {
         this.check = check;
     }
 
@@ -77,23 +96,22 @@ export class LoginComponent extends iComponentBase implements OnInit {
             await this.iServiceBase.getURLService(API.PHAN_HE.USER);
         }
 
-        this.siteKey = IPService.SiteKey;
-
         this.loadInfoSys();
 
     }
 
     public loadInfoSys(): void {
-        if ((localStorage.getItem('username') != null) || (localStorage.getItem('password') !=null)){
+        if ((localStorage.getItem('username') != null) || (localStorage.getItem('password') != null)) {
             this.userName = localStorage.getItem('username');
             this.password = localStorage.getItem('password');
 
         }
 
-        if (sessionStorage.getItem('USER_NAME') != null){
+        if (sessionStorage.getItem('USER_NAME') != null) {
             this.userName = sessionStorage.getItem('USER_NAME');
         }
     }
+
     async onSubmit() {
         this.submitted = true;
 
@@ -101,12 +119,12 @@ export class LoginComponent extends iComponentBase implements OnInit {
             userName: this.userName,
             password: this.password
         };
-        if (this.check){
+        if (this.check) {
             localStorage.setItem('username', this.userName);
             localStorage.setItem('password', this.password);
-        }else{
-            localStorage.setItem('username',"");
-            localStorage.setItem('password',"");
+        } else {
+            localStorage.setItem('username', "");
+            localStorage.setItem('password', "");
         }
         //Load thông tin người dùng'
         const response = await this.iServiceBase.getDataAsyncByPostRequest(API.PHAN_HE.USER, API.API_USER.SIGNIN, parram);
@@ -114,7 +132,6 @@ export class LoginComponent extends iComponentBase implements OnInit {
             if (Storage) {
                 const versionOld = localStorage.getItem('VERSION');
                 localStorage.setItem('VERSION', versionOld);
-
 
                 // Nếu log out thì xóa cái này ở local storage đi
                 // Lưu SESSIONID
@@ -125,11 +142,13 @@ export class LoginComponent extends iComponentBase implements OnInit {
                 sessionStorage.setItem('USER_NAME', this.userName);
                 sessionStorage.setItem('TIME_LOGIN', this.datePipe.transform(new Date(), 'dd/MM/yyyy'));
             }
+
             this.router.navigate(['/Home']);
         } else {
             this.showMessage(mType.error, 'Thông báo', 'Đăng nhập không thành công. Vui lòng kiểm tra lại', 'app-login');
         }
     }
+
     onEnter(event) {
         if (event.keyCode == 13) {
             this.onSubmit();

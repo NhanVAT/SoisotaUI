@@ -3,38 +3,13 @@ import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import * as API from 'src/app/services/apiURL';
-import {LoadingService} from '../shared-data-services/loading.service';
 
 // @ts-ignore
 import IPService from '/src/assets/config/IPService.json';
 
 @Injectable()
 export class iServiceBase {
-    strIP_Service = '';
-    strIP_GateWay = '';
-    strIP_SMSEMAIL = '';
-    strVersion = '';
-    strProjectName = '';
-
-    constructor(public httpClient: HttpClient, public loadingService: LoadingService) {
-        this.strIP_Service = IPService.APISERVICE;
-        this.strIP_GateWay = IPService.APIGATEWAY;
-        this.strIP_SMSEMAIL = IPService.APISMSEMAIL;
-        this.strVersion = IPService.Version;
-        this.strProjectName = IPService.PROJECT_NAME;
-
-        // Set IP các service vào localStorage để dùng
-        localStorage.setItem('APISERVICE', this.strIP_Service);
-        localStorage.setItem('APIGATEWAY', this.strIP_GateWay);
-        localStorage.setItem('APISMSEMAIL', this.strIP_SMSEMAIL);
-        localStorage.setItem('VERSION', this.strVersion);
-        localStorage.setItem('PROJECT_NAME', this.strProjectName);
-
-    }
-
-    // Lấy Ip cấu hình ở file này
-    async getServiceList() {
-        return IPService;
+    constructor(public httpClient: HttpClient) {
     }
 
     // getServiceList() {
@@ -43,6 +18,7 @@ export class iServiceBase {
     //         .then(res => res.data)
     //         .then(data => data);
     // }
+
     getOptionsRequest(ignoreLoading?: boolean, responseType?: string) {
         const options: any = {};
         if (ignoreLoading != undefined && ignoreLoading) {
@@ -81,7 +57,6 @@ export class iServiceBase {
         const url = `${service}${api}`;
         const response = await this.httpClient.get(url, this.getOptionsRequest(ignoreLoading)).toPromise();
         document.body.style.cursor = 'default';
-
 
         return response;
     }
@@ -153,7 +128,6 @@ export class iServiceBase {
             let headers = new HttpHeaders();
             headers = headers.set('Accept', 'application/pdf');
 
-
             return this.httpClient.get(url, {headers, responseType: 'blob'});
         } catch (error) {
             document.body.style.cursor = 'default';
@@ -172,7 +146,6 @@ export class iServiceBase {
             const url = `${service}${api}`;
             let headers = new HttpHeaders();
             headers = headers.set('Accept', 'application/pdf');
-
 
             return this.httpClient.post(url, param, {headers, responseType: 'blob'});
         } catch (error) {
@@ -211,7 +184,6 @@ export class iServiceBase {
             return null;
         }
 
-
     }
 
     public getDataByPostRequest(service, api, inputData, ignoreLoading?: boolean): Observable<any> {
@@ -249,7 +221,6 @@ export class iServiceBase {
             return null;
         }
     }
-
 
     async postDataAsync(service, api, inputData, ignoreLoading?: boolean, responseType?: string): Promise<any> {
         try {
@@ -393,7 +364,6 @@ export class iServiceBase {
         service = this.getURLService(service);
 
         const url = `${service}${api}`;
-
 
         return new HttpRequest('POST', url, inputData);
     }

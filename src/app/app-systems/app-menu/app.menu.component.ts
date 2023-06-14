@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AppComponent} from '../../app.component';
-import {
-    iServiceBase,
-    ShareData
-} from 'src/app/modules/compoents-customer-module/components-customer';
+import {iServiceBase, ShareData} from 'src/app/modules/compoents-customer-module/components-customer';
 import * as API from "../../services/apiURL";
+import {ConfigService} from "../../modules/compoents-customer-module/shared-data-services/config.service";
 
 @Component({
     selector: 'app-menu',
@@ -22,8 +20,14 @@ export class AppMenuComponent implements OnInit {
     menuAll: any[];
 
     constructor(public app: AppComponent,
-                private shareData: ShareData,
-                private iServiceBase: iServiceBase,) {
+        private shareData: ShareData,
+        private iServiceBase: iServiceBase,
+        private configService: ConfigService) {
+
+        this.configService.loadConfig()
+        .then(() => {
+        });
+
         this.model = [];
         this.modelAll = [];
         this.menuAll = [];
